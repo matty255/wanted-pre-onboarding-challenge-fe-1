@@ -1,16 +1,16 @@
 import { atom } from "recoil";
 
-export const timeState = atom({
-  key: "timeState",
+export const signState = atom({
+  key: "signState",
   default: {
-    time: 0,
-    startTime: 0,
+    email: "",
+    password: "",
   },
 });
 
-export const cutTime = atom({
-  key: "cutTime",
-  default: "am",
+export const tokenState = atom({
+  key: "authState",
+  default: !!localStorage.getItem("token"),
 });
 
 export const weekdayArray = atom({

@@ -16,9 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors());
-app.get('/', (req,res) => {
-  res.send({message:'hello'});
-});
 
 app.use("/todos", todoRouter);
 app.use("/users", userRouter);

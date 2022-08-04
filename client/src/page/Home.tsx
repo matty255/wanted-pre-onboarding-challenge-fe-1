@@ -4,25 +4,21 @@ import Layout from "../components/layout/Layout";
 import { ToDoProps, ToDoList } from "../types/toDos";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getToDos, deleteToDo } from "../api/httpRequest";
-import axios from "axios";
-const Home = () => {
-  const queryClient = useQueryClient();
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.YWFhQGFhYS5jb20.xn-h9ZJf-8YRLlfZ6fou2sHi9r6VQoep5Y0J27W2bCk";
-  const { data } = useQuery<ToDoList | any>(["todos"], () => getToDos());
-  console.log(data);
+import { Navigate } from "react-router-dom";
+import List from "../components/toDo/List";
+import AddToDo from "../components/toDo/AddToDo";
 
-  const deleteMutation = useMutation((id: number) => deleteToDo(id), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(["todos"]);
-    },
-  });
+const Home = () => {
+  const { data } = useQuery<ToDoList | any>(["todos"], () => getToDos());
+  const token = !!localStorage.getItem("token")?.valueOf();
+  // console.log(data.data);
   return (
     <>
       <Layout>
         <Header />
-
-        <div>버튼</div>
+        {!token && <Navigate to="/sign" replace={true} />}
+        <AddToDo />
+        {data && <List {...data} />}
       </Layout>
     </>
   );

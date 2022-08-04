@@ -57,7 +57,7 @@
 ```bash
 > yarn
 
-> yarn dev # http://localhost:8080
+> yarn start # http://localhost:8080
 ```
 
 # 2-2) API 스펙
@@ -203,6 +203,9 @@
 ### URL
 
 - POST `/users/login`
+- Parameter
+  - email: string
+  - password: string
 
 ### 응답 예시
 
@@ -218,6 +221,9 @@
 ### URL
 
 - POST `/users/create`
+- Parameter
+  - email: string
+  - password: string
 
 ### 응답 예시
 

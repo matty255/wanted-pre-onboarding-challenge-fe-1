@@ -19,7 +19,7 @@ export const updateToDo = async (data: NewToDo, id: string) => {
   return response.data;
 };
 
-export const deleteToDo = async (id: number) => {
+export const deleteToDo = async (id: string) => {
   const response = await instance.delete(`/todos/${id}`);
   return response.data;
 };
