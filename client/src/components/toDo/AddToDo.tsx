@@ -1,8 +1,12 @@
 import React from "react";
-import { ToDoProps, ToDoList, NewToDo } from "../../types/toDos";
+import { NewToDo } from "../../types/toDos";
 import instance from "../../api/instance";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Button from "../../common/Button";
+import { useNavigate } from "react-router-dom";
+
 const AddToDo = () => {
+  const navigate = useNavigate();
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
     content: "",
@@ -24,33 +28,52 @@ const AddToDo = () => {
       onSuccess: () => {
         queryClient.invalidateQueries(["todos"]);
       },
+      onError: () => {
+        alert("로그인을 다시 해주세요");
+        localStorage.setItem("token", "");
+        navigate("/sign", { replace: true });
+      },
     }
   );
+
   const add = () => {
     todoMutation.mutateAsync(values).then((res) => console.log(res));
   };
+
   return (
     <>
-      <div className="my-10">
-        <div className="flex flex-col gap-3 w-40">
-          <form onSubmit={add}>
-            <input
-              name="title"
-              value={values.title || ""}
-              onChange={handleChange}
-              required
-            />
-            <input
-              name="content"
-              value={values.content || ""}
-              onChange={handleChange}
-              required
-            />
+      <div className="w-full py-16 bg-amber-100">
+        <div className="">
+          <form onSubmit={add} className="flex flex-col w-full">
+            <div className="flex justify-center items-center gap-10">
+              <p>제목</p>
+              <input
+                name="title"
+                value={values.title || ""}
+                onChange={handleChange}
+                className="h-12 outline mt-3 outline-amber-300"
+                required
+              />
+            </div>
+            <div className="flex justify-center items-center gap-10">
+              <p>상세</p>
+              <input
+                name="content"
+                value={values.content || ""}
+                onChange={handleChange}
+                className="h-12 outline mt-3 outline-amber-300"
+                required
+              />
+            </div>
+            <Button
+              type="submit"
+              className="bg-amber-300 mx-auto justify-center items-center mt-10"
+              onClick={add}
+            >
+              추가하기
+            </Button>
           </form>
         </div>
-        <button type="submit" onClick={add}>
-          추가하기
-        </button>
       </div>
     </>
   );

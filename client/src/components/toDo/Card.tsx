@@ -1,9 +1,7 @@
 import React from "react";
 import { ToDoProps, ToDoList, NewToDo } from "../../types/toDos";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
 import instance from "../../api/instance";
-import axios from "axios";
 
 const Card = (data: ToDoProps) => {
   const [modify, setModify] = React.useState(false);
@@ -25,7 +23,7 @@ const Card = (data: ToDoProps) => {
     }
   );
   const deleteHandler = (id: string) => {
-    alert("삭제완료");
+    console.log("삭제완료");
     deleteMutation.mutate(id);
   };
 
@@ -47,16 +45,18 @@ const Card = (data: ToDoProps) => {
   );
   const handleUpdate = () => {
     setModify((state) => !state);
-    if (values.title === "" || values.content === "") {
+    if (values.title === "") {
       values.title = data.title;
+    }
+    if (values.content === "") {
       values.content = data.content;
     }
     updateMutation.mutateAsync(values).then((res) => console.log(res));
   };
   return (
     <>
-      <div className="flex">
-        <div className="flex-col flex gap-3 mb-5">
+      <div className="flex bg-amber-400 mb-3 w-full justify-between">
+        <div className="flex-col flex gap-3 mb-5 h-24 justify-center pl-3">
           {modify ? (
             <input
               name="title"
@@ -78,13 +78,15 @@ const Card = (data: ToDoProps) => {
             <p className="text-xl"> {data.content} </p>
           )}
         </div>
-
-        {modify ? (
-          <button onClick={handleUpdate}>수정완료</button>
-        ) : (
-          <button onClick={() => setModify((state) => !state)}>수정</button>
-        )}
-        <button onClick={() => deleteHandler(data.id)}>삭제</button>
+        <div className="flex flex-col justify-center gap-3 pr-3">
+          {modify ? (
+            <button onClick={handleUpdate}>수정완료</button>
+          ) : (
+            <button onClick={() => setModify((state) => !state)}>수정</button>
+          )}
+          <button>상세</button>
+          <button onClick={() => deleteHandler(data.id)}>삭제</button>
+        </div>
       </div>
     </>
   );

@@ -13,8 +13,10 @@ const Header = () => {
   };
   return (
     <EngSkyHeader>
-      헤더
-      <button onClick={logout}>로그아웃</button>
+      <h1 className="text-3xl">.To Do list</h1>
+      <button onClick={logout} className="text-lg tracking-tight">
+        Logout
+      </button>
     </EngSkyHeader>
   );
 };
@@ -22,5 +24,6 @@ const Header = () => {
 export default Header;
 
 const EngSkyHeader = tw.header`
-bg-sky-400 h-[5.063rem] flex items-end pl-[2rem] pb-[0.1rem]
+bg-amber-400 h-24 flex justify-between items-center px-10
+border-b-4 border-amber-500
 `;

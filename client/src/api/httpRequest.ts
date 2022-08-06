@@ -9,11 +9,6 @@ export const getToDos = () =>
 export const getToDoById = (id: String) =>
   instance.get<ToDoList>(`/todos/${id}`).then((response) => response.data);
 
-export const createToDo = async (data: NewToDo) => {
-  const { data: response } = await instance.post(`/todos`, data);
-  return response.data;
-};
-
 export const updateToDo = async (data: NewToDo, id: string) => {
   const { data: response } = await instance.put(`/todos/${id}`, data);
   return response.data;

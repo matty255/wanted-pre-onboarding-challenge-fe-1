@@ -5,14 +5,15 @@ type ButtonType = {
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
+  type?: "button" | "submit" | "reset";
 };
 
 const Button = (props: ButtonType) => {
-  const init = `bg-engall-blue w-[13.75rem] h-[3.125rem] 
+  const init = ` w-32 h-12 
     rounded-md shadow-md font-[1.25rem] text-white font-karla font-semibold
     disabled:bg-gray-200`;
 
-  const { children, className, onClick, disabled } = props;
+  const { children, className, onClick, disabled, type } = props;
   const [classNameList, setClassNameList] = React.useState(init);
 
   React.useEffect(() => {
@@ -22,7 +23,12 @@ const Button = (props: ButtonType) => {
   }, []);
 
   return (
-    <button className={classNameList} onClick={onClick} disabled={disabled}>
+    <button
+      className={classNameList}
+      onClick={onClick}
+      disabled={disabled}
+      type={type}
+    >
       {children}
     </button>
   );

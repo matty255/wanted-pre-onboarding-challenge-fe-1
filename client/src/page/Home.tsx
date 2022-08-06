@@ -11,14 +11,17 @@ import AddToDo from "../components/toDo/AddToDo";
 const Home = () => {
   const { data } = useQuery<ToDoList | any>(["todos"], () => getToDos());
   const token = !!localStorage.getItem("token")?.valueOf();
-  // console.log(data.data);
+
   return (
     <>
       <Layout>
-        <Header />
         {!token && <Navigate to="/sign" replace={true} />}
-        <AddToDo />
-        {data && <List {...data} />}
+        <div className="flex flex-col p-4 items-end">
+          <AddToDo />
+        </div>
+        <div className="flex p-10 bg-amber-200">
+          {data && <List {...data} />}
+        </div>
       </Layout>
     </>
   );
