@@ -7,7 +7,7 @@ import { getToDos, deleteToDo } from "../api/httpRequest";
 import { Navigate } from "react-router-dom";
 import List from "../components/toDo/List";
 import AddToDo from "../components/toDo/AddToDo";
-
+import Detail from "../components/toDo/Detail";
 const Home = () => {
   const { data } = useQuery<ToDoList | any>(["todos"], () => getToDos());
   const token = !!localStorage.getItem("token")?.valueOf();
@@ -20,7 +20,8 @@ const Home = () => {
           <AddToDo />
         </div>
         <div className="flex p-10 bg-amber-200">
-          {data && <List {...data} />}
+          {data?.data && <List {...data} />}
+          <Detail />
         </div>
       </Layout>
     </>

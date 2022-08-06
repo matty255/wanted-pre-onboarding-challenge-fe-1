@@ -2,8 +2,9 @@ import React from "react";
 import { ToDoProps, ToDoList, NewToDo } from "../../types/toDos";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import instance from "../../api/instance";
-
+import { useNavigate } from "react-router-dom";
 const Card = (data: ToDoProps) => {
+  const navigate = useNavigate();
   const [modify, setModify] = React.useState(false);
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
@@ -84,7 +85,7 @@ const Card = (data: ToDoProps) => {
           ) : (
             <button onClick={() => setModify((state) => !state)}>수정</button>
           )}
-          <button>상세</button>
+          <button onClick={() => navigate(`/todo/${data.id}`)}>상세</button>
           <button onClick={() => deleteHandler(data.id)}>삭제</button>
         </div>
       </div>
