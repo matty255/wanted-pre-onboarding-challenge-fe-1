@@ -45,8 +45,34 @@
   - [✅] 수정되는 Todo의 내용이 목록에서도 실시간으로 반영되어야 합니다
 
 
-# 2-1) 파일 실행
+# 2-1) 파일 실행법!
+작업편의를 위해 node.js와 react.js를 한 폴더에 담아 실행 가능하게 만들었습니다.
+
 ```
+1. git clone https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1.git
+2. cd [folder name]
+3. cd client
+4. yarn install
+5. yarn start (리액트가 켜지길 기다립니다.)
+6. ctrl + c (터미널에서!)
+7. yarn build
+8. 빌드되는걸 기다립니다.
+9. cd ..
+10. cd server
+11. yarn install
+12. yarn start (노드가 켜지길 기다립니다.)
+13. ctrl + c (터미널에서!)
+14. cd ..
+15. 경로가 최상위 디렉토리인지 확인(client와 server가 보이는 그 위치!)
+16. yarn start
+
+를 하면 이제 실행이 가능하지만 만약 api서버가 이미 켜져있고 다른 곳에 있다면
+client 부분만 clone해서
+1. cd client
+2. yarn install
+3. yarn start
+
+도 가능합니다!
 ```
 
 
