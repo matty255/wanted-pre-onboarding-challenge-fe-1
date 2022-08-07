@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { signState } from "../store/global";
 import { NewUser, UserProps } from "../types/user";
-
+import { useDebounce } from "./useDebounce";
 const useForm = (callback: Function, validate: Function) => {
   const [values, setValues] = useState<NewUser>({
     email: "",
@@ -14,22 +14,29 @@ const useForm = (callback: Function, validate: Function) => {
     password: "",
     passwordConfirm: "",
   });
+  const [isError, setIsError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const debouncedKeyword = useDebounce(values, 200);
+  useEffect(() => {
+    setErrors(validate(debouncedKeyword));
+  }, [debouncedKeyword]);
 
   useEffect(() => {
-    if (
-      Object.values(errors)[0] === "" &&
-      Object.values(errors)[1] === "" &&
-      isSubmitting
-    ) {
-      callback();
+    callback();
+  }, [isSubmitting]);
+
+  useEffect(() => {
+    if (Object.values(errors)[0] === "" && Object.values(errors)[1] === "") {
+      setIsError(false);
+    } else {
+      setIsError(true);
     }
-  }, [errors]);
+  }, [debouncedKeyword, errors]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (event) event.preventDefault();
     setErrors(validate(values));
-    setIsSubmitting(true);
+    setIsSubmitting((state) => !state);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +52,7 @@ const useForm = (callback: Function, validate: Function) => {
     handleSubmit,
     values,
     errors,
+    isError,
   };
 };
 

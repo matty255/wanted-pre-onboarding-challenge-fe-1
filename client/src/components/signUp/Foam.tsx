@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import useForm from "../../hooks/useForm";
 import validate from "../../hooks/useFormValidations";
-import { Navigate, useLocation, Link } from "react-router-dom";
+import { Navigate, useLocation, Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { UserProps } from "../../types/user";
 import instance from "../../api/instance";
 const Form = () => {
   const location = useLocation();
-  const { values, errors, handleChange, handleSubmit } = useForm(
+  const navigate = useNavigate();
+  const { values, errors, handleChange, handleSubmit, isError } = useForm(
     location.pathname === "/sign"
       ? login
       : location.pathname === "/signin"
@@ -15,6 +16,7 @@ const Form = () => {
       : () => alert("알수 없는 오류가 발생했습니다. 다시 시도해주세요"),
     validate
   );
+  // console.log(isError);
   const token: string = localStorage.getItem("token") || "";
   const loginMutation = useMutation((values: UserProps) =>
     instance.post(`/users/login`, {
@@ -30,6 +32,11 @@ const Form = () => {
       .mutateAsync({ email: values.email, password: values.password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        navigate("/", { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("아이디와 비밀번호를 확인해주세요");
       });
     return <Navigate to="/" replace />;
   }
@@ -104,7 +111,8 @@ const Form = () => {
               <>
                 <button
                   type="submit"
-                  className="bg-blue-600 mt-4 p-2 px-4 rounded-md hover:bg-blue-100 active:bg-blue-600"
+                  className="bg-blue-600 mt-4 p-2 px-4 rounded-md hover:bg-blue-100 active:bg-blue-600 disabled:bg-gray-300"
+                  disabled={isError}
                 >
                   Login
                 </button>

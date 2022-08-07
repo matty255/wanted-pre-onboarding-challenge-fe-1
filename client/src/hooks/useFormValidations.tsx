@@ -13,7 +13,10 @@ export default function validate(values: NewUser) {
     errors.password = "비밀번호는 최소 8자입니다";
     if (!values.passwordConfirm) {
       errors.password = "비밀번호를 한번더 입력해주세요";
-    } else if (values.password !== values.passwordConfirm) {
+    } else if (
+      values.passwordConfirm !== "" &&
+      values.password !== values.passwordConfirm
+    ) {
       errors.passwordConfirm = "비밀번호가 일치하지 않아요!";
     }
     //   } else if (!/\d/.test(values.password)) {
