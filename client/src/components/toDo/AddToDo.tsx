@@ -41,7 +41,7 @@ const AddToDo = () => {
 
   return (
     <>
-      <div className="w-full py-16 bg-amber-100">
+      <div className="w-full py-8 bg-amber-100">
         <div className="">
           <form onSubmit={add} className="flex flex-col w-full">
             <div className="flex justify-center items-center gap-10">

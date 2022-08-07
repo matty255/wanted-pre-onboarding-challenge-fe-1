@@ -35,14 +35,14 @@ const Detail = () => {
   return (
     <>
       <div className="w-full flex flex-col">
-        디테일페이지
+        <h1 className="text-xl ml-2">디테일페이지</h1>
         {!data && <p>todo list 상세 확인</p>}
         {data !== {} && (
-          <div>
+          <div className="w-full bg-white p-4 m-2">
             <p>{data.title}</p>
             <p>{data.content}</p>
-            <p>{data.createdAt?.toString()}</p>
-            <p>{data.updatedAt?.toString()}</p>
+            {/* <p>{data.createdAt?.toString()}</p>
+            <p>{data.updatedAt?.toString()}</p> */}
           </div>
         )}
       </div>

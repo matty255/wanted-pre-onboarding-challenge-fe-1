@@ -7,12 +7,12 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Router from "./page/Routes";
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      suspense: true,
-      staleTime: 1000 * 60,
-    },
-  },
+  // defaultOptions: {
+  //   queries: {
+  //     suspense: true,
+  //     staleTime: 1000 * 60,
+  //   },
+  // },
 });
 
 const root = ReactDOM.createRoot(
