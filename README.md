@@ -1,6 +1,7 @@
 # wanted-pre-onboarding-challenge-fe-1
 
 원티드 프리온보딩 챌린지 프론트엔드
+- 열심히 
 
 # 1-1) 사전과제 진행 가이드
 
