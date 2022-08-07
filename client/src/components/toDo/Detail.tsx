@@ -46,7 +46,6 @@ const Detail = () => {
           </div>
         )}
       </div>
-      <button onClick={() => navigate(-1)}>뒤로가기</button>
     </>
   );
 };

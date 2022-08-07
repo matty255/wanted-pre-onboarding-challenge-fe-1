@@ -2,15 +2,18 @@ import React from "react";
 import tw from "tailwind-styled-components";
 // import { ReactComponent as Logo } from "../../static/image/Logo.svg";
 import { useNavigate } from "react-router-dom";
-
+import { useRecoilState } from "recoil";
+import { tokenState } from "../../store/global";
 const Header = () => {
   const navigate = useNavigate();
   const token = !!localStorage.getItem("token")?.valueOf();
-
+  const [tokens, setTokens] = useRecoilState(tokenState);
   const logout = () => {
     localStorage.setItem("token", "");
-    navigate("/sign", { replace: true });
+    setTokens("");
+    navigate("/sign");
   };
+
   return (
     <EngSkyHeader>
       <h1 className="text-3xl">.To Do list</h1>

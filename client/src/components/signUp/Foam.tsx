@@ -5,10 +5,13 @@ import { Navigate, useLocation, Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { UserProps } from "../../types/user";
 import instance from "../../api/instance";
+import { useRecoilState } from "recoil";
+import { tokenState } from "../../store/global";
 
 const Form = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [tokens, setTokens] = useRecoilState(tokenState);
   const { values, errors, handleChange, handleSubmit, isError } = useForm(
     location.pathname === "/sign"
       ? login
@@ -33,13 +36,14 @@ const Form = () => {
       .mutateAsync({ email: values.email, password: values.password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        navigate("/", { replace: true });
+        setTokens(res.data.token);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
         alert("아이디와 비밀번호를 확인해주세요");
       });
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" />;
   }
 
   function SignIn() {
@@ -47,7 +51,7 @@ const Form = () => {
       localStorage.setItem("token", res.data.token);
       alert("계정 생성 완료, 자동 로그인 되었습니다!");
     });
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" />;
   }
 
   return (

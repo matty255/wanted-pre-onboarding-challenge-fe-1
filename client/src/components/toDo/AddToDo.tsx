@@ -29,7 +29,7 @@ const AddToDo = () => {
       },
       onError: () => {
         alert("로그인을 다시 해주세요");
-        navigate("/sign", { replace: true });
+        // navigate("/sign");
         localStorage.setItem("token", "");
       },
     }

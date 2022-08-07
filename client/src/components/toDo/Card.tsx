@@ -63,7 +63,7 @@ const Card = (data: ToDoProps) => {
   };
   return (
     <>
-      <div className="flex bg-amber-400 mb-3 w-full justify-between">
+      <div className="flex bg-amber-400 mb-3 h-24 justify-between">
         <div className="flex-col flex gap-3 mb-5 h-24 justify-center pl-3">
           {modify ? (
             <input
@@ -73,7 +73,7 @@ const Card = (data: ToDoProps) => {
               required
             />
           ) : (
-            <p className="text-xl"> {data.title}</p>
+            <p className="text-xl truncate w-full"> {data.title}</p>
           )}
           {modify ? (
             <input
@@ -83,10 +83,10 @@ const Card = (data: ToDoProps) => {
               required
             />
           ) : (
-            <p className="text-xl"> {data.content} </p>
+            <p className="text-xl truncate w-32"> {data.content} </p>
           )}
         </div>
-        <div className="flex flex-col justify-center gap-3 pr-3">
+        <div className="flex flex-col justify-center gap-3 pr-3 flex-shrink-0">
           {modify ? (
             <button onClick={handleUpdate}>수정완료</button>
           ) : (

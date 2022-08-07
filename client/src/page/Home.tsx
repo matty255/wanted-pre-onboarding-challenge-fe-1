@@ -7,17 +7,18 @@ import { Navigate } from "react-router-dom";
 import List from "../components/toDo/List";
 import AddToDo from "../components/toDo/AddToDo";
 import Detail from "../components/toDo/Detail";
+import { useRecoilState } from "recoil";
+import { tokenState } from "../store/global";
 
 const Home = () => {
   const token = !!localStorage.getItem("token")?.valueOf();
-  const { data } = token
-    ? useQuery<ToDoList | any>(["todos"], () => getToDos())
-    : { data: "" };
+  const [tokens, setTokens] = useRecoilState(tokenState);
+  const { data } = useQuery<ToDoList | any>(["todos"], () => getToDos());
 
   return (
     <>
       <Layout>
-        {!token && <Navigate to="/sign" replace={true} />}
+        {tokens === "" && <Navigate to="/sign" />}
         <div className="flex flex-col p-4 items-end">
           <AddToDo />
         </div>

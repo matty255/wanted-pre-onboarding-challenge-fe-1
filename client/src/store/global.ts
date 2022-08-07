@@ -9,8 +9,8 @@ export const signState = atom({
 });
 
 export const tokenState = atom({
-  key: "authState",
-  default: !!localStorage.getItem("token"),
+  key: "tokenState",
+  default: localStorage.getItem("token"),
 });
 
 export const toDoDetail = atom<ToDoProps | any>({
