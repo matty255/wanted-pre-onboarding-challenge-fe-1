@@ -104,4 +104,8 @@ client 부분만 clone해서
 도 가능합니다!
 ```
 
+```
+아이디 : aaa@aaa.com
+비밀번호 : aaaaaaaa
+```
 
