@@ -3,8 +3,11 @@ import { ToDoProps, ToDoList, NewToDo } from "../../types/toDos";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import instance from "../../api/instance";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { toDoDetail } from "../../store/global";
 const Card = (data: ToDoProps) => {
   const navigate = useNavigate();
+  const [cleanData, setCleanData] = useRecoilState(toDoDetail);
   const [modify, setModify] = React.useState(false);
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
@@ -26,6 +29,7 @@ const Card = (data: ToDoProps) => {
   const deleteHandler = (id: string) => {
     console.log("삭제완료");
     deleteMutation.mutate(id);
+    setCleanData({});
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +56,9 @@ const Card = (data: ToDoProps) => {
     if (values.content === "") {
       values.content = data.content;
     }
-    updateMutation.mutateAsync(values).then((res) => console.log(res));
+    updateMutation
+      .mutateAsync(values)
+      .then((res) => setCleanData(res.data.data));
   };
   return (
     <>

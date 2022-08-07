@@ -15,7 +15,6 @@ const SignUp = () => {
   return (
     <>
       <Layout>
-        <Header />
         {token && <Navigate to="/" replace={true} />}
         <div>여기는 로그인창</div>
         <Form />

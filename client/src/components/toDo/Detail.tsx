@@ -1,7 +1,8 @@
 import React from "react";
 import { ToDoProps, ToDoList } from "../../types/toDos";
 import Card from "./Card";
-
+import { toDoDetail } from "../../store/global";
+import { useRecoilState } from "recoil";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getToDos, getToDoById } from "../../api/httpRequest";
@@ -10,9 +11,8 @@ const Detail = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const id = location.pathname.split("/")[2];
-  console.log(id);
+  // console.log(id);
   const queryClient = useQueryClient();
-  // const { data } = useQuery<ToDoList | any>(["todo"], () => getToDoById(id));
   const token: string = localStorage.getItem("token") || "";
   const detailMutation = useMutation(
     (id: string) =>
@@ -26,24 +26,26 @@ const Detail = () => {
     }
   );
   // console.log(data.data);
-  const [data, setData] = React.useState<ToDoProps>();
+  const [data, setData] = useRecoilState(toDoDetail);
   React.useEffect(() => {
-    detailMutation
-      .mutateAsync(id)
-      .then((response) => setData(response.data.data));
+    id !== undefined &&
+      detailMutation
+        .mutateAsync(id)
+        .then((response) => setData(response.data.data));
   }, [location]);
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
       <div className="w-full flex flex-col">
         디테일페이지
-        {data && (
+        {!data && <p>todo list 상세 확인</p>}
+        {data !== {} && (
           <div>
             <p>{data.title}</p>
             <p>{data.content}</p>
-            <p>{data.createdAt.toString()}</p>
-            <p>{data.updatedAt.toString()}</p>
+            <p>{data.createdAt?.toString()}</p>
+            <p>{data.updatedAt?.toString()}</p>
           </div>
         )}
       </div>

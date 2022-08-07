@@ -2,7 +2,7 @@ import React from "react";
 import { ToDoProps, ToDoList } from "../../types/toDos";
 import Card from "./Card";
 const List = (data: any) => {
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <div className="w-full flex flex-col">

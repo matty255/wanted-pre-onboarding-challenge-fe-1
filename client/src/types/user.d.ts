@@ -3,6 +3,12 @@ interface UserProps {
   password: string;
 }
 
+interface NewUser {
+  email: string;
+  password: string;
+  passwordConfirm?: string;
+}
+
 type UserList = UserProps[];
 
-export { UserProps, UserList };
+export { UserProps, UserList, NewUser };

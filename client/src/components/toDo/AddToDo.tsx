@@ -11,7 +11,7 @@ const AddToDo = () => {
     title: "",
     content: "",
   });
-  console.log(values);
+  // console.log(values);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
@@ -30,8 +30,8 @@ const AddToDo = () => {
       },
       onError: () => {
         alert("로그인을 다시 해주세요");
-        localStorage.setItem("token", "");
         navigate("/sign", { replace: true });
+        localStorage.setItem("token", "");
       },
     }
   );

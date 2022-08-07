@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-
+import { ToDoProps } from "../types/toDos";
 export const signState = atom({
   key: "signState",
   default: {
@@ -13,7 +13,7 @@ export const tokenState = atom({
   default: !!localStorage.getItem("token"),
 });
 
-export const weekdayArray = atom({
-  key: "weekdayArray",
-  default: [""],
+export const toDoDetail = atom<ToDoProps | any>({
+  key: "toDoDetail",
+  default: {},
 });

@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { signState } from "../store/global";
-import { UserProps } from "../types/user";
+import { NewUser, UserProps } from "../types/user";
 
 const useForm = (callback: Function, validate: Function) => {
-  const [values, setValues] = useState<UserProps>({ email: "", password: "" });
-  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [values, setValues] = useState<NewUser>({
+    email: "",
+    password: "",
+    passwordConfirm: "",
+  });
+  const [errors, setErrors] = useState<NewUser>({
+    email: "",
+    password: "",
+    passwordConfirm: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {

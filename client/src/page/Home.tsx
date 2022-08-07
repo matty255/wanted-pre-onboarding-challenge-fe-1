@@ -9,8 +9,10 @@ import List from "../components/toDo/List";
 import AddToDo from "../components/toDo/AddToDo";
 import Detail from "../components/toDo/Detail";
 const Home = () => {
-  const { data } = useQuery<ToDoList | any>(["todos"], () => getToDos());
   const token = !!localStorage.getItem("token")?.valueOf();
+  const { data } = token
+    ? useQuery<ToDoList | any>(["todos"], () => getToDos())
+    : { data: "" };
 
   return (
     <>
