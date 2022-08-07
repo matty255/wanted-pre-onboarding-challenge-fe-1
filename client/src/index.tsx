@@ -9,8 +9,8 @@ import Router from "./page/Routes";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      suspense: true,
-      staleTime: 1000 * 60,
+      // suspense: true,
+      // staleTime: 1000 * 60,
     },
   },
 });

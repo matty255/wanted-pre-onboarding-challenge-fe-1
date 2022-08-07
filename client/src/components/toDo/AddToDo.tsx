@@ -29,13 +29,14 @@ const AddToDo = () => {
       },
       onError: () => {
         alert("로그인을 다시 해주세요");
-        // navigate("/sign");
+        navigate("/sign");
         localStorage.setItem("token", "");
       },
     }
   );
 
-  const add = () => {
+  const add = (event: React.FormEvent<HTMLFormElement>) => {
+    if (event) event.preventDefault();
     todoMutation.mutateAsync(values).then((res) => console.log(res));
   };
 
@@ -67,7 +68,6 @@ const AddToDo = () => {
             <Button
               type="submit"
               className="bg-amber-300 mx-auto justify-center items-center mt-10"
-              onClick={add}
             >
               추가하기
             </Button>

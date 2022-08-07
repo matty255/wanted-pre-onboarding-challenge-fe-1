@@ -7,9 +7,9 @@ const List = (data: any) => {
     <>
       <div className=" w-2/3 flex flex-col">
         {data &&
-          data.data.map((d: ToDoProps, i: number) => (
-            <div key={`${d.id}-${i}`}>
-              <Card {...d} />
+          data.data.map((todos: ToDoProps, i: number) => (
+            <div key={`${todos.id}-${i}`}>
+              <Card {...todos} />
             </div>
           ))}
       </div>

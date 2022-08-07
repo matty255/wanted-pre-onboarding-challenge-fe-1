@@ -9,6 +9,7 @@ const Detail = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const id = location.pathname.split("/")[2];
+
   const queryClient = useQueryClient();
   const token: string = localStorage.getItem("token") || "";
   const [data, setData] = useRecoilState(toDoDetail);
