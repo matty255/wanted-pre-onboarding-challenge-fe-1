@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { signState } from "../store/global";
-import { NewUser, UserProps } from "../types/user";
+import { NewUser } from "../types/user";
 import { useDebounce } from "./useDebounce";
 const useForm = (callback: Function, validate: Function) => {
   const [values, setValues] = useState<NewUser>({
@@ -22,7 +20,9 @@ const useForm = (callback: Function, validate: Function) => {
   }, [debouncedKeyword]);
 
   useEffect(() => {
-    callback();
+    if (isSubmitting) {
+      callback();
+    }
   }, [isSubmitting]);
 
   useEffect(() => {

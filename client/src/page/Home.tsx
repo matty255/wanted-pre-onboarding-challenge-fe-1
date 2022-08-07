@@ -1,13 +1,13 @@
 import React from "react";
-import Header from "../components/layout/Header";
 import Layout from "../components/layout/Layout";
-import { ToDoProps, ToDoList } from "../types/toDos";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getToDos, deleteToDo } from "../api/httpRequest";
+import { ToDoList } from "../types/toDos";
+import { useQuery } from "@tanstack/react-query";
+import { getToDos } from "../api/httpRequest";
 import { Navigate } from "react-router-dom";
 import List from "../components/toDo/List";
 import AddToDo from "../components/toDo/AddToDo";
 import Detail from "../components/toDo/Detail";
+
 const Home = () => {
   const token = !!localStorage.getItem("token")?.valueOf();
   const { data } = token

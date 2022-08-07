@@ -11,7 +11,6 @@ const AddToDo = () => {
     title: "",
     content: "",
   });
-  // console.log(values);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist();

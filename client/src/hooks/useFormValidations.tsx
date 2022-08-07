@@ -1,4 +1,4 @@
-import { NewUser, UserProps } from "../types/user";
+import { NewUser } from "../types/user";
 
 export default function validate(values: NewUser) {
   const errors: NewUser = { email: "", password: "", passwordConfirm: "" };

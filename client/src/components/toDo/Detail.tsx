@@ -1,19 +1,18 @@
 import React from "react";
-import { ToDoProps, ToDoList } from "../../types/toDos";
-import Card from "./Card";
 import { toDoDetail } from "../../store/global";
 import { useRecoilState } from "recoil";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getToDos, getToDoById } from "../../api/httpRequest";
 import instance from "../../api/instance";
+
 const Detail = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const id = location.pathname.split("/")[2];
-  // console.log(id);
   const queryClient = useQueryClient();
   const token: string = localStorage.getItem("token") || "";
+  const [data, setData] = useRecoilState(toDoDetail);
+
   const detailMutation = useMutation(
     (id: string) =>
       instance.get(`/todos/${id}`, {
@@ -25,15 +24,13 @@ const Detail = () => {
       },
     }
   );
-  // console.log(data.data);
-  const [data, setData] = useRecoilState(toDoDetail);
+
   React.useEffect(() => {
     id !== undefined &&
       detailMutation
         .mutateAsync(id)
         .then((response) => setData(response.data.data));
   }, [location]);
-  // console.log(data);
 
   return (
     <>

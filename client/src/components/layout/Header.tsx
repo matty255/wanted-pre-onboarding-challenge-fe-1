@@ -1,12 +1,12 @@
 import React from "react";
 import tw from "tailwind-styled-components";
 // import { ReactComponent as Logo } from "../../static/image/Logo.svg";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { tokenState } from "../../store/global";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  const token = !!localStorage.getItem("token")?.valueOf();
+
   const logout = () => {
     localStorage.setItem("token", "");
     navigate("/sign", { replace: true });
@@ -14,9 +14,13 @@ const Header = () => {
   return (
     <EngSkyHeader>
       <h1 className="text-3xl">.To Do list</h1>
-      <button onClick={logout} className="text-lg tracking-tight">
-        Logout
-      </button>
+      {token ? (
+        <button onClick={logout} className="text-lg tracking-tight">
+          Logout
+        </button>
+      ) : (
+        <button>login</button>
+      )}
     </EngSkyHeader>
   );
 };

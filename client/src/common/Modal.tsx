@@ -2,17 +2,14 @@ import React, { FunctionComponent, useEffect } from "react";
 import ReactDOM from "react-dom";
 import tw from "tailwind-styled-components";
 
-import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-
-export interface ConfirmProps {
+export interface ModalProps {
   isShown: boolean;
   hide: () => void;
   modalContent: JSX.Element;
   headerText?: string;
 }
 
-export const Modal: FunctionComponent<ConfirmProps> = ({
+export const Modal: FunctionComponent<ModalProps> = ({
   isShown,
   hide,
   modalContent,

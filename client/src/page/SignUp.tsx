@@ -1,7 +1,6 @@
 import React from "react";
-import Header from "../components/layout/Header";
 import Layout from "../components/layout/Layout";
-import { useLocation, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Form from "../components/signUp/Foam";
 
 interface Login {
@@ -10,7 +9,6 @@ interface Login {
 }
 
 const SignUp = () => {
-  const location = useLocation();
   const token = !!localStorage.getItem("token")?.valueOf();
   return (
     <>

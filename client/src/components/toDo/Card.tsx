@@ -1,10 +1,11 @@
 import React from "react";
-import { ToDoProps, ToDoList, NewToDo } from "../../types/toDos";
+import { ToDoProps, NewToDo } from "../../types/toDos";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import instance from "../../api/instance";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { toDoDetail } from "../../store/global";
+
 const Card = (data: ToDoProps) => {
   const navigate = useNavigate();
   const [cleanData, setCleanData] = useRecoilState(toDoDetail);
