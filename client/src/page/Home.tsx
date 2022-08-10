@@ -1,19 +1,19 @@
 import React from "react";
 import Layout from "../components/layout/Layout";
-import { ToDoList } from "../types/toDos";
-import { useQuery } from "@tanstack/react-query";
-import { getToDos } from "../api/httpRequest";
+
 import { Navigate } from "react-router-dom";
 import List from "../components/toDo/List";
 import AddToDo from "../components/toDo/AddToDo";
 import Detail from "../components/toDo/Detail";
 import { useRecoilState } from "recoil";
 import { tokenState } from "../store/global";
+import { useGetToDos } from "../api/querys";
 
 const Home = () => {
   const token = !!localStorage.getItem("token")?.valueOf();
   const [tokens, setTokens] = useRecoilState(tokenState);
-  const { data } = useQuery<ToDoList | any>(["todos"], () => getToDos());
+  const { data } = useGetToDos();
+  // console.log(data.data);
 
   return (
     <>

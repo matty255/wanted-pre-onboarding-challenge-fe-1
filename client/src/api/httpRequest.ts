@@ -1,30 +1,20 @@
 import axios from "axios";
-import { ToDoList, ToDoProps, NewToDo } from "../types/toDos";
+import { ToDoList, ToDoProps, NewToDo, ToDoDetail } from "../types/toDos";
 import { UserProps } from "../types/user";
 import instance from "./instance";
 
-export const getToDos = () =>
-  instance.get<ToDoList>(`/todos`).then((response) => response.data);
-
-export const getToDoById = (id: String) =>
-  instance.get<ToDoList>(`/todos/${id}`).then((response) => response.data);
-
-export const updateToDo = async (data: NewToDo, id: string) => {
-  const { data: response } = await instance.put(`/todos/${id}`, data);
-  return response.data;
+export const ToDosAPI = {
+  getToDos: () => instance.get<ToDoList>(`/todos`),
+  getToDoById: (id: String) => instance.get<ToDoDetail>(`/todos/${id}`),
+  createToDo: (create: NewToDo) => instance.post(`todos`, create),
+  updateToDo: async (update: NewToDo, id: string) =>
+    await instance.put(`/todos/${id}`, update),
+  deleteToDo: async (id: string) => await instance.delete(`/todos/${id}`),
 };
 
-export const deleteToDo = async (id: string) => {
-  const response = await instance.delete(`/todos/${id}`);
-  return response.data;
-};
-
-export const loginTodo = async (data: UserProps) => {
-  const { data: response } = await instance.post(`/users/login`, data);
-  return response.data;
-};
-
-export const singUpTodo = async (data: UserProps) => {
-  const { data: response } = await instance.post(`/users/create`, data);
-  return response.data;
+export const UserAPI = {
+  loginTodo: async (data: UserProps) =>
+    await instance.post(`/users/login`, data),
+  singUpTodo: async (data: UserProps) =>
+    await instance.post(`/users/create`, data),
 };

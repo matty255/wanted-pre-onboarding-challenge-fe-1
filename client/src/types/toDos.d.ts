@@ -11,6 +11,7 @@ interface NewToDo {
   content: string;
 }
 
-type ToDoList = ToDoProps[];
+type ToDoList = { data: ToDoProps[] };
+type ToDoDetail = { data: ToDoProps };
 
-export { ToDoProps, ToDoList, NewToDo };
+export { ToDoProps, ToDoList, NewToDo, ToDoDetail };

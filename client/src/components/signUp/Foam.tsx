@@ -7,10 +7,12 @@ import { UserProps } from "../../types/user";
 import instance from "../../api/instance";
 import { useRecoilState } from "recoil";
 import { tokenState } from "../../store/global";
-
+import { useLogin } from "../../api/auths";
+import { UserAPI } from "../../api/httpRequest";
 const Form = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const loginQuery = useLogin();
   const [tokens, setTokens] = useRecoilState(tokenState);
   const { values, errors, handleChange, handleSubmit, isError } = useForm(
     location.pathname === "/sign"
@@ -22,17 +24,9 @@ const Form = () => {
   );
 
   const token: string = localStorage.getItem("token") || "";
-  const loginMutation = useMutation((values: UserProps) =>
-    instance.post(`/users/login`, {
-      email: values.email,
-      password: values.password,
-    })
-  );
-  const signInMutation = useMutation((values: UserProps) =>
-    instance.post(`/users/create`, values)
-  );
+
   function login() {
-    loginMutation
+    loginQuery
       .mutateAsync({ email: values.email, password: values.password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
@@ -47,7 +41,7 @@ const Form = () => {
   }
 
   function SignIn() {
-    signInMutation.mutateAsync(values).then((res) => {
+    UserAPI.singUpTodo(values).then((res) => {
       localStorage.setItem("token", res.data.token);
       alert("계정 생성 완료, 자동 로그인 되었습니다!");
     });

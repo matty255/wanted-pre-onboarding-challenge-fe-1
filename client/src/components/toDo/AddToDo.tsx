@@ -1,10 +1,8 @@
 import React from "react";
 import { NewToDo } from "../../types/toDos";
-import instance from "../../api/instance";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Button from "../../common/Button";
 import { useNavigate } from "react-router-dom";
-
+import { useCreateTodo } from "../../api/querys";
 const AddToDo = () => {
   const navigate = useNavigate();
   const [values, setValues] = React.useState<NewToDo>({
@@ -20,24 +18,11 @@ const AddToDo = () => {
     }));
   };
 
-  const queryClient = useQueryClient();
-  const todoMutation = useMutation(
-    (values: NewToDo) => instance.post(`/todos`, values),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["todos"]);
-      },
-      onError: () => {
-        alert("로그인을 다시 해주세요");
-        navigate("/sign");
-        localStorage.setItem("token", "");
-      },
-    }
-  );
+  const create = useCreateTodo();
 
   const add = (event: React.FormEvent<HTMLFormElement>) => {
     if (event) event.preventDefault();
-    todoMutation.mutateAsync(values).then((res) => console.log(res));
+    create.mutateAsync(values).then((res) => console.log(res));
   };
 
   return (

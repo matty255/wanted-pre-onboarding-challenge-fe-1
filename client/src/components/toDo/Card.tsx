@@ -1,10 +1,9 @@
 import React from "react";
 import { ToDoProps, NewToDo } from "../../types/toDos";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import instance from "../../api/instance";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { toDoDetail } from "../../store/global";
+import { getUpdateToDo, getDeleteToDo } from "../../api/querys";
 
 const Card = (data: ToDoProps) => {
   const navigate = useNavigate();
@@ -14,23 +13,15 @@ const Card = (data: ToDoProps) => {
     title: "",
     content: "",
   });
-  const queryClient = useQueryClient();
+
+  const update = getUpdateToDo(data.id);
+  const deleteToDo = getDeleteToDo(data.id);
   const token: string = localStorage.getItem("token") || "";
-  const deleteMutation = useMutation(
-    (id: string) =>
-      instance.delete(`/todos/${id}`, {
-        headers: { Authorization: token },
-      }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["todos"]);
-      },
-    }
-  );
-  const deleteHandler = (id: string) => {
+
+  const deleteHandler = () => {
     console.log("삭제완료");
-    deleteMutation.mutate(id);
-    setCleanData({});
+    deleteToDo.mutateAsync();
+    setCleanData(null);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,25 +32,17 @@ const Card = (data: ToDoProps) => {
     }));
   };
 
-  const updateMutation = useMutation(
-    (values: NewToDo) => instance.put(`/todos/${data.id}`, values),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["todos"]);
-      },
-    }
-  );
-  const handleUpdate = () => {
+  const handleUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setModify((state) => !state);
+
     if (values.title === "") {
       values.title = data.title;
     }
     if (values.content === "") {
       values.content = data.content;
     }
-    updateMutation
-      .mutateAsync(values)
-      .then((res) => setCleanData(res.data.data));
+    update.mutateAsync(values).then((res) => setCleanData(res.data));
   };
   return (
     <>
@@ -93,7 +76,7 @@ const Card = (data: ToDoProps) => {
             <button onClick={() => setModify((state) => !state)}>수정</button>
           )}
           <button onClick={() => navigate(`/todo/${data.id}`)}>상세</button>
-          <button onClick={() => deleteHandler(data.id)}>삭제</button>
+          <button onClick={() => deleteHandler()}>삭제</button>
         </div>
       </div>
     </>
