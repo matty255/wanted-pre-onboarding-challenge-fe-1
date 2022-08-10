@@ -1,7 +1,10 @@
 # wanted-pre-onboarding-challenge-fe-1
 
 원티드 프리온보딩 챌린지 프론트엔드
-- 열심히 리팩토링하겠습니다!
+- 열심히 리팩토링하는중
+
+- 과제 1주차 (1/2)
+- [리팩토링 과정 회고록 1](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80)
 
 # 1-1) 사전과제 진행 가이드
 
