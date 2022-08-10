@@ -7,11 +7,11 @@ import AddToDo from "../components/toDo/AddToDo";
 import Detail from "../components/toDo/Detail";
 import { useRecoilState } from "recoil";
 import { tokenState } from "../store/global";
-import { useGetToDos } from "../api/querys";
+import { getToDos } from "../api/querys";
 
 const Home = () => {
   const [tokens, setTokens] = useRecoilState(tokenState);
-  const { data } = useGetToDos();
+  const { data } = getToDos();
 
   return (
     <>

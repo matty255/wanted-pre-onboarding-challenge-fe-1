@@ -2,7 +2,7 @@ import React from "react";
 import { NewToDo } from "../../types/toDos";
 import Button from "../../common/Button";
 import { useNavigate } from "react-router-dom";
-import { useCreateTodo } from "../../api/querys";
+import { createTodo } from "../../api/querys";
 const AddToDo = () => {
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
@@ -17,11 +17,16 @@ const AddToDo = () => {
     }));
   };
 
-  const create = useCreateTodo();
+  const create = createTodo();
 
   const add = (event: React.FormEvent<HTMLFormElement>) => {
     if (event) event.preventDefault();
-    create.mutateAsync(values).then((res) => console.log(res));
+    create.mutateAsync(values);
+    setValues({
+      title: "",
+      content: "",
+    });
+    alert("등록 완료!");
   };
 
   return (

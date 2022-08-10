@@ -3,7 +3,7 @@ import { ToDoProps, NewToDo } from "../../types/toDos";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { toDoDetail } from "../../store/global";
-import { getUpdateToDo, getDeleteToDo } from "../../api/querys";
+import { updateToDo, deleteToDo } from "../../api/querys";
 
 const Card = (data: ToDoProps) => {
   const navigate = useNavigate();
@@ -14,12 +14,12 @@ const Card = (data: ToDoProps) => {
     content: "",
   });
 
-  const update = getUpdateToDo(data.id);
-  const deleteToDo = getDeleteToDo(data.id);
+  const update = updateToDo(data.id);
+  const deleteById = deleteToDo(data.id);
 
   const deleteHandler = () => {
     console.log("삭제완료");
-    deleteToDo.mutateAsync();
+    deleteById.mutateAsync();
     setCleanData(null);
   };
 
