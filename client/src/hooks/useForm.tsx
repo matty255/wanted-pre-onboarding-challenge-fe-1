@@ -34,7 +34,7 @@ const useForm = (callback: Function, validate: Function) => {
   }, [debouncedKeyword, errors]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (event) event.preventDefault();
+    // if (event) event.preventDefault();
     setErrors(validate(values));
     setIsSubmitting((state) => !state);
   };

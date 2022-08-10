@@ -2,9 +2,6 @@ import React from "react";
 import useForm from "../../hooks/useForm";
 import validate from "../../hooks/useFormValidations";
 import { Navigate, useLocation, Link, useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { UserProps } from "../../types/user";
-import instance from "../../api/instance";
 import { useRecoilState } from "recoil";
 import { tokenState } from "../../store/global";
 import { useLogin } from "../../api/auths";
@@ -14,6 +11,7 @@ const Form = () => {
   const navigate = useNavigate();
   const loginQuery = useLogin();
   const [tokens, setTokens] = useRecoilState(tokenState);
+
   const { values, errors, handleChange, handleSubmit, isError } = useForm(
     location.pathname === "/sign"
       ? login
@@ -27,7 +25,7 @@ const Form = () => {
 
   function login() {
     loginQuery
-      .mutateAsync({ email: values.email, password: values.password })
+      .mutateAsync(values)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         setTokens(res.data.token);
@@ -41,11 +39,15 @@ const Form = () => {
   }
 
   function SignIn() {
-    UserAPI.singUpTodo(values).then((res) => {
-      localStorage.setItem("token", res.data.token);
-      alert("계정 생성 완료, 자동 로그인 되었습니다!");
-    });
-    return <Navigate to="/" />;
+    if (!isError) {
+      UserAPI.singUpTodo(values).then((res) => {
+        localStorage.setItem("token", res.data.token);
+        alert("계정 생성 완료, 자동 로그인 되었습니다!");
+        navigate("/");
+      });
+    } else {
+      return alert("비밀번호를 확인해주세요");
+    }
   }
 
   return (
@@ -74,7 +76,7 @@ const Form = () => {
               <label className="label">Password</label>
               <div className="control">
                 <input
-                  className="text-red-500"
+                  className={errors.password && "text-red-500"}
                   type="password"
                   name="password"
                   onChange={handleChange}
@@ -92,7 +94,7 @@ const Form = () => {
                 <label className="label">Password Confirm</label>
                 <div className="control">
                   <input
-                    className="text-red-500"
+                    className={errors.passwordConfirm && "text-red-500"}
                     type="password"
                     name="passwordConfirm"
                     onChange={handleChange}
@@ -124,12 +126,20 @@ const Form = () => {
               </>
             )}
             {location.pathname === "/signin" && (
-              <button
-                type="submit"
-                className="bg-blue-600 mt-4 p-2 px-4 rounded-md hover:bg-blue-100 active:bg-blue-600"
-              >
-                가입하기
-              </button>
+              <>
+                <button
+                  type="submit"
+                  className="bg-blue-600 mt-4 p-2 px-4 rounded-md hover:bg-blue-100 active:bg-blue-600"
+                >
+                  가입하기
+                </button>
+                <Link
+                  to="/sign"
+                  className="bg-blue-600 mt-4 p-2 px-4 rounded-md hover:bg-blue-100 active:bg-blue-600 ml-3"
+                >
+                  돌아가기
+                </Link>
+              </>
             )}
           </form>
         </div>

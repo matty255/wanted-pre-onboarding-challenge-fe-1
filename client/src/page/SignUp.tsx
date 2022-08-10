@@ -10,7 +10,6 @@ interface Login {
 }
 
 const SignUp = () => {
-  const token = !!localStorage.getItem("token")?.valueOf();
   const [tokens, setTokens] = useRecoilState(tokenState);
   return (
     <>

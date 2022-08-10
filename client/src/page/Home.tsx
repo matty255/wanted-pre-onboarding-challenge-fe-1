@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/layout/Layout";
 
 import { Navigate } from "react-router-dom";
@@ -10,10 +10,8 @@ import { tokenState } from "../store/global";
 import { useGetToDos } from "../api/querys";
 
 const Home = () => {
-  const token = !!localStorage.getItem("token")?.valueOf();
   const [tokens, setTokens] = useRecoilState(tokenState);
   const { data } = useGetToDos();
-  // console.log(data.data);
 
   return (
     <>

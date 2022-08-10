@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import { toDoDetail } from "../../store/global";
 import { useRecoilState } from "recoil";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getToDoById } from "../../api/querys";
 const Detail = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const id = location.pathname.split("/")[2];
-  const token: string = localStorage.getItem("token") || "";
   const [detail, setDetail] = useRecoilState(toDoDetail);
-  // console.log(detail);
 
   const detailToDo = getToDoById();
   useEffect(() => {

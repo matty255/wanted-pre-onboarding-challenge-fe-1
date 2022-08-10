@@ -16,7 +16,6 @@ const Card = (data: ToDoProps) => {
 
   const update = getUpdateToDo(data.id);
   const deleteToDo = getDeleteToDo(data.id);
-  const token: string = localStorage.getItem("token") || "";
 
   const deleteHandler = () => {
     console.log("삭제완료");

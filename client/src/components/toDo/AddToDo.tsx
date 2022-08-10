@@ -4,7 +4,6 @@ import Button from "../../common/Button";
 import { useNavigate } from "react-router-dom";
 import { useCreateTodo } from "../../api/querys";
 const AddToDo = () => {
-  const navigate = useNavigate();
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
     content: "",
