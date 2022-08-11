@@ -96,7 +96,8 @@
 13. ctrl + c (터미널에서!)
 14. cd ..
 15. 경로가 최상위 디렉토리인지 확인(client와 server가 보이는 그 위치!)
-16. yarn start
+16. 최상위 디렉토리에서 yarn install
+17. 같은 디렉토리에서 yarn start!
 
 를 하면 이제 실행이 가능하지만 만약 api서버가 이미 켜져있고 다른 곳에 있다면
 client 부분만 clone해서
