@@ -55,7 +55,7 @@ const Card = (data: ToDoProps) => {
               required
             />
           ) : (
-            <p className="text-xl truncate w-full"> {data.title}</p>
+            <p className="text-xl truncate w-44"> {data.title}</p>
           )}
           {modify ? (
             <input

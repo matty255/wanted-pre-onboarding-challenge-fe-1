@@ -45,6 +45,7 @@ const AddToDo = () => {
                 value={values.title || ""}
                 onChange={handleChange}
                 className="h-12 outline mt-3 outline-amber-300"
+                tw="w-[70vh]"
                 required
               />
             </div>
@@ -55,6 +56,7 @@ const AddToDo = () => {
                 value={values.content || ""}
                 onChange={handleChange}
                 className="h-12 outline mt-3 outline-amber-300"
+                tw="w-[70vh]"
                 required
               />
             </div>

@@ -15,9 +15,11 @@ const Detail = () => {
   }, [location]);
   return (
     <>
-      <div className="w-full flex flex-col">
+      <div className="flex flex-col fixed top-[30%]">
         <h1 className="text-xl ml-2">디테일페이지</h1>
-        {!detail && <p>todo list 상세 확인</p>}
+        {!detail && (
+          <div className="w-full bg-white p-4 m-2">todo list 상세 확인</div>
+        )}
         {detail?.data && (
           <div className="w-full bg-white p-4 m-2">
             <p>{detail?.data.title}</p>

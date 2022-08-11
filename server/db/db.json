@@ -1,20 +1,6 @@
 {
   "todos": [
     {
-      "title": "커피를 마시고 싶은 날",
-      "content": "그럴때는 커피를 마신다.",
-      "id": "D1ksuy3AW4nQvYRGSRBzq",
-      "createdAt": "2022-08-11T09:36:25.276Z",
-      "updatedAt": "2022-08-11T09:36:25.276Z"
-    },
-    {
-      "title": "adfsdflfkjsdf",
-      "content": "sdfsdfafdfsd 라라",
-      "id": "y0D-ASAI0Fwc87fx82MS4",
-      "createdAt": "2022-08-11T10:10:49.946Z",
-      "updatedAt": "2022-08-11T10:10:49.946Z"
-    },
-    {
       "title": "하루에 한번 자바스크립트 읽기",
       "content": "현재 19장! 수정도 잘되네",
       "id": "Z03Jw5GDptJiBp9UN0JMO",
@@ -27,6 +13,13 @@
       "id": "cyGecKXjgj0nzX-bLnct2",
       "createdAt": "2022-08-11T10:47:56.039Z",
       "updatedAt": "2022-08-11T10:47:56.039Z"
+    },
+    {
+      "title": "오늘도 나는 커피를 마신다",
+      "content": "커피를 마신다. ",
+      "id": "EBeeTikHlq9Re5fSWLn8F",
+      "createdAt": "2022-08-11T12:21:43.037Z",
+      "updatedAt": "2022-08-11T12:21:43.037Z"
     }
   ],
   "users": [

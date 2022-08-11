@@ -6,6 +6,9 @@ import { useRecoilState } from "recoil";
 import { tokenState } from "../../store/global";
 import { useLogin } from "../../api/auths";
 import { UserAPI } from "../../api/httpRequest";
+import { Input } from "../../common/Input";
+import { Button } from "../../common/Button";
+import Label from "../../common/Label";
 const Form = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -51,94 +54,99 @@ const Form = () => {
   }
 
   return (
-    <div className="bg-white m-10">
+    <div className="bg-white m-24">
       {token && <Navigate to="/" />}
-      <div className="bg-blue-300 p-10">
+      <div className="bg-amber-300 p-10">
         <div className="">
-          <h1>로그인하기</h1>
+          {location.pathname === "/signin" ? (
+            <h1>회원가입하기</h1>
+          ) : (
+            <h1>로그인하기</h1>
+          )}
+
           <form onSubmit={handleSubmit} noValidate>
-            <div className="">
-              <label className="label">Email Address</label>
-              <div className="control">
-                <input
+            <Label
+              title="Email Address"
+              isError={errors.email !== ""}
+              errorMessage={errors.email}
+              content={
+                <Input
+                  tw="w-full"
                   autoComplete="off"
-                  className={errors.email && "text-red-500"}
+                  className={errors.email && "text-red-500 w-full"}
                   type="email"
                   name="email"
                   onChange={handleChange}
                   value={values.email || ""}
                   required
                 />
-                {errors.email && <p className="">{errors.email}</p>}
-              </div>
-            </div>
-            <div className="">
-              <label className="label">Password</label>
-              <div className="control">
-                <input
+              }
+            />
+            <Label
+              title="Password"
+              isError={errors.password !== ""}
+              errorMessage={errors.password}
+              content={
+                <Input
+                  tw="w-full"
+                  autoComplete="on"
                   className={errors.password && "text-red-500"}
                   type="password"
                   name="password"
                   onChange={handleChange}
                   value={values.password || ""}
-                  autoComplete="currentPassword"
                   required
                 />
-              </div>
-              {errors.password && (
-                <p className="text-red-500">{errors.password}</p>
-              )}
-            </div>
+              }
+            />
+
             {location.pathname === "/signin" && (
-              <div className="">
-                <label className="label">Password Confirm</label>
-                <div className="control">
-                  <input
+              <Label
+                title="Password Confirm"
+                isError={errors.passwordConfirm !== ""}
+                errorMessage={errors.passwordConfirm || ""}
+                content={
+                  <Input
+                    tw="w-full"
+                    autoComplete="on"
                     className={errors.passwordConfirm && "text-red-500"}
                     type="password"
                     name="passwordConfirm"
                     onChange={handleChange}
                     value={values.passwordConfirm || ""}
-                    autoComplete="currentPassword"
                     required
                   />
-                </div>
-                {errors.passwordConfirm && (
-                  <p className="text-red-500">{errors.passwordConfirm}</p>
-                )}
-              </div>
+                }
+              />
             )}
             {location.pathname === "/sign" && (
               <>
-                <button
+                <Button
                   type="submit"
-                  className="bg-blue-600 mt-4 p-2 px-4 rounded-md hover:bg-blue-100 active:bg-blue-600 disabled:bg-gray-300"
+                  className="disabled:bg-gray-300 "
                   disabled={isError}
+                  variant="primary"
                 >
                   Login
-                </button>
-                <Link
-                  to="/signin"
-                  className="bg-blue-600 mt-4 p-2 px-4 rounded-md hover:bg-blue-100 active:bg-blue-600 ml-3"
-                >
-                  가입하기
-                </Link>
+                </Button>
+                <Button variant="secondary">
+                  <Link to="/signin">가입하기</Link>
+                </Button>
               </>
             )}
             {location.pathname === "/signin" && (
               <>
-                <button
+                <Button
                   type="submit"
-                  className="bg-blue-600 mt-4 p-2 px-4 rounded-md hover:bg-blue-100 active:bg-blue-600"
+                  className="disabled:bg-gray-300"
+                  disabled={isError}
+                  variant="primary"
                 >
                   가입하기
-                </button>
-                <Link
-                  to="/sign"
-                  className="bg-blue-600 mt-4 p-2 px-4 rounded-md hover:bg-blue-100 active:bg-blue-600 ml-3"
-                >
-                  돌아가기
-                </Link>
+                </Button>
+                <Button variant="secondary">
+                  <Link to="/sign">돌아가기</Link>
+                </Button>
               </>
             )}
           </form>
