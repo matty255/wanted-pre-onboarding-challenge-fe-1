@@ -1,7 +1,9 @@
 import React from "react";
+/** @jsxImportSource @emotion/react */
+import tw from "twin.macro";
 import { LayoutProps } from "../../types/types";
-import tw from "tailwind-styled-components";
 import Header from "./Header";
+
 const Layout = ({ children }: LayoutProps) => {
   return (
     <GlobalLayout>

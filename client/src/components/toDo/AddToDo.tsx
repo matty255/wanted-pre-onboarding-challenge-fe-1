@@ -1,14 +1,18 @@
 import React from "react";
+/** @jsxImportSource @emotion/react */
+import tw from "twin.macro";
 import { NewToDo } from "../../types/toDos";
-import Button from "../../common/Button";
+import { Button } from "../../common/Button";
 import { useNavigate } from "react-router-dom";
 import { createTodo } from "../../api/querys";
+import { Input } from "../../common/Input";
+
 const AddToDo = () => {
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
     content: "",
   });
-
+  const YellowButton = tw(Button)`border-yellow-500 border-4 text-amber-600`;
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
     setValues((values) => ({
@@ -36,7 +40,7 @@ const AddToDo = () => {
           <form onSubmit={add} className="flex flex-col w-full">
             <div className="flex justify-center items-center gap-10">
               <p>제목</p>
-              <input
+              <Input
                 name="title"
                 value={values.title || ""}
                 onChange={handleChange}
@@ -46,7 +50,7 @@ const AddToDo = () => {
             </div>
             <div className="flex justify-center items-center gap-10">
               <p>상세</p>
-              <input
+              <Input
                 name="content"
                 value={values.content || ""}
                 onChange={handleChange}
@@ -54,12 +58,12 @@ const AddToDo = () => {
                 required
               />
             </div>
-            <Button
+            <YellowButton
               type="submit"
               className="bg-amber-300 mx-auto justify-center items-center mt-10"
             >
               추가하기
-            </Button>
+            </YellowButton>
           </form>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect } from "react";
 import ReactDOM from "react-dom";
-import tw from "tailwind-styled-components";
+/** @jsxImportSource @emotion/react */
+import tw, { css, styled, theme } from "twin.macro";
 
 export interface ModalProps {
   isShown: boolean;

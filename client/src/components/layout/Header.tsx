@@ -1,9 +1,10 @@
 import React from "react";
-import tw from "tailwind-styled-components";
-// import { ReactComponent as Logo } from "../../static/image/Logo.svg";
+/** @jsxImportSource @emotion/react */
+import tw from "twin.macro";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { tokenState } from "../../store/global";
+
 const Header = () => {
   const navigate = useNavigate();
   const token = !!localStorage.getItem("token")?.valueOf();
@@ -15,7 +16,10 @@ const Header = () => {
   };
 
   return (
-    <EngSkyHeader>
+    <YellowHeader
+      className="bg-amber-400 h-24 flex justify-between items-center px-10
+    border-b-4 border-amber-500"
+    >
       <h1 className="text-3xl">.To Do list</h1>
       {token ? (
         <button onClick={logout} className="text-lg tracking-tight">
@@ -24,13 +28,13 @@ const Header = () => {
       ) : (
         <button>login</button>
       )}
-    </EngSkyHeader>
+    </YellowHeader>
   );
 };
 
 export default Header;
 
-const EngSkyHeader = tw.header`
+const YellowHeader = tw.header`
 bg-amber-400 h-24 flex justify-between items-center px-10
-border-b-4 border-amber-500
+    border-b-4 border-amber-500
 `;

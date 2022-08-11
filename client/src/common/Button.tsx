@@ -1,37 +1,29 @@
 import React from "react";
+/** @jsxImportSource @emotion/react */
+import tw, { css, styled, theme } from "twin.macro";
 
-type ButtonType = {
-  children: React.ReactNode | React.ReactNode[];
-  className?: string;
-  onClick?: () => void;
-  disabled?: boolean;
-  type?: "button" | "submit" | "reset";
-};
+interface ButtonProps {
+  variant?: "primary" | "secondary";
+  isSmall?: boolean;
+}
 
-const Button = (props: ButtonType) => {
-  const init = ` w-32 h-12 
-    rounded-md shadow-md font-[1.25rem] text-white font-karla font-semibold
-    `;
+export const Button = styled.button(({ variant, isSmall }: ButtonProps) => [
+  tw`px-8 py-2 rounded focus:outline-none transform duration-75`,
+  tw`hocus:(scale-105 text-yellow-400)`,
 
-  const { children, className, onClick, disabled, type } = props;
-  const [classNameList, setClassNameList] = React.useState(init);
+  variant === "primary" && tw`bg-black text-white border-black`,
 
-  React.useEffect(() => {
-    if (className) {
-      setClassNameList(classNameList.concat(` ${className}`));
-    }
-  }, []);
+  variant === "secondary" && [
+    css`
+      box-shadow: 0 0.1em 0 0 rgba(0, 0, 0, 0.25);
+    `,
+    tw`border-2 border-yellow-600`,
+  ],
 
-  return (
-    <button
-      className={classNameList}
-      onClick={onClick}
-      disabled={disabled}
-      type={type}
-    >
-      {children}
-    </button>
-  );
-};
+  isSmall ? tw`text-sm` : tw`text-lg`,
 
-export default Button;
+  // The theme import can supply values from your tailwind.config.js
+  css`
+    color: ${theme`colors.white`};
+  `,
+]);
