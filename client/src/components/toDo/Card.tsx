@@ -9,15 +9,17 @@ import { updateToDo, deleteToDo } from "../../api/querys";
 import { Button } from "../../common/Button";
 import { Text } from "../../common/Text";
 import { Input, TextArea } from "../../common/Input";
+
 const Card = (data: ToDoProps) => {
   const navigate = useNavigate();
   const [cleanData, setCleanData] = useRecoilState(toDoDetail);
   const [modify, setModify] = React.useState(false);
+  const [focus, setFocus] = React.useState(true);
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
     content: "",
   });
-
+  const modifyRef = React.useRef<HTMLInputElement>(null);
   const update = updateToDo(data.id);
   const deleteById = deleteToDo(data.id);
 
@@ -39,8 +41,8 @@ const Card = (data: ToDoProps) => {
     }));
   };
 
-  const handleUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const submits = () => {
+    setFocus(true);
     setModify((state) => !state);
 
     if (values.title === "") {
@@ -52,19 +54,27 @@ const Card = (data: ToDoProps) => {
     update.mutateAsync(values).then((res) => setCleanData(res.data));
   };
 
+  const handleUpdate = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    submits();
+  };
+
   const onEnterPress = (event: React.KeyboardEvent) => {
     if (event.keyCode === 13 && event.shiftKey === false) {
-      setModify((state) => !state);
-
-      if (values.title === "") {
-        values.title = data.title;
-      }
-      if (values.content === "") {
-        values.content = data.content;
-      }
-      update.mutateAsync(values).then((res) => setCleanData(res.data));
+      event.preventDefault();
+      submits();
     }
   };
+
+  React.useEffect(() => {
+    if (modify) {
+      if (modifyRef.current && focus) {
+        modifyRef.current.focus();
+        setFocus(false);
+      }
+    }
+  });
+
   return (
     <CardBox>
       <div className="w-5/6 px-4 flex flex-col mt-5 ">
@@ -73,6 +83,7 @@ const Card = (data: ToDoProps) => {
             variant="edit"
             name="title"
             tw="text-2xl"
+            ref={modifyRef}
             value={values.title || data.title}
             onChange={handleChange}
             onKeyDown={onEnterPress}

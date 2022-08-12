@@ -24,8 +24,7 @@ const AddToDo = () => {
 
   const create = createTodo();
 
-  const addToDo = (event: React.FormEvent<HTMLFormElement>) => {
-    if (event) event.preventDefault();
+  const Submits = () => {
     create.mutateAsync(values);
     setValues({
       title: "",
@@ -34,15 +33,16 @@ const AddToDo = () => {
     alert("등록 완료!");
   };
 
+  const addToDo = (event: React.FormEvent<HTMLFormElement>) => {
+    if (event) event.preventDefault();
+    create.mutateAsync(values);
+    Submits();
+  };
+
   const onEnterPress = (event: React.KeyboardEvent) => {
     if (event.keyCode === 13 && event.shiftKey === false) {
       event.preventDefault();
-      create.mutateAsync(values);
-      setValues({
-        title: "",
-        content: "",
-      });
-      alert("등록 완료!");
+      Submits();
     }
   };
 

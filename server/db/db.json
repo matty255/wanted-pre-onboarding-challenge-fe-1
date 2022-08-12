@@ -1,7 +1,7 @@
 {
   "todos": [
     {
-      "title": "하루에 한번 자바스크립트 읽기",
+      "title": "하루에 한번 자바스크립트 딥다이브 읽기",
       "content": "현재 19장! 수정도",
       "id": "Z03Jw5GDptJiBp9UN0JMO",
       "createdAt": "2022-08-11T10:40:26.503Z",
@@ -29,11 +29,18 @@
       "updatedAt": "2022-08-12T03:59:30.539Z"
     },
     {
-      "title": "이렇게 쓰고",
-      "content": "탭을 하고 또하고",
+      "title": "이렇게 쓰고 또쓰고 오토포커스를 잡고",
+      "content": "탭을 하고 하고 탭을 하고 또하고",
       "id": "hnM3xHeFExUUbuVvAKqu9",
       "createdAt": "2022-08-12T08:41:59.740Z",
       "updatedAt": "2022-08-12T08:41:59.740Z"
+    },
+    {
+      "title": "할일을 추가하기!!!",
+      "content": "피카 피카",
+      "id": "x0I3neUy9im4Af-qxS1Ts",
+      "createdAt": "2022-08-12T09:59:11.011Z",
+      "updatedAt": "2022-08-12T09:59:11.011Z"
     }
   ],
   "users": [
