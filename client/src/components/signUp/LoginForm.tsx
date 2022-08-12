@@ -2,7 +2,6 @@ import React from "react";
 import useForm from "../../hooks/useForm";
 import validate from "../../hooks/useFormValidations";
 import { useLocation, Link, useNavigate } from "react-router-dom";
-import { UserAPI } from "../../api/httpRequest";
 import { Input } from "../../common/Input";
 import { Button } from "../../common/Button";
 import Label from "../../common/Label";
@@ -16,6 +15,12 @@ const Form = () => {
   const [loading, setLoading] = useRecoilState(loadingState);
   const isLoginPage = pathname === "/";
   const isSignInPage = pathname === "/signin";
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, [loading]);
 
   const { values, errors, handleChange, handleSubmit, isError } = useForm(
     isLoginPage

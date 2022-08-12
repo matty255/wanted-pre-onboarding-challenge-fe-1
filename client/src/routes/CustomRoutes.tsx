@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Home from "../page/Home";
 import SignUp from "../page/SignUp";
+import NotFound404 from "../page/NotFound404";
 
 const CustomRoutes = () => {
   const token = !!localStorage.getItem("token")?.valueOf();
@@ -39,6 +40,7 @@ const CustomRoutes = () => {
       {["/", "/signin"].map((path) => {
         return <Route path={path} element={<SignUp />} key={path} />;
       })}
+      <Route path="/*" element={<NotFound404 />} />
     </Routes>
   );
 };

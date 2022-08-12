@@ -7,11 +7,12 @@ import { createTodo } from "../../api/querys";
 import { Input } from "../../common/Input";
 
 const AddToDo = () => {
+  const YellowButton = tw(Button)`border-yellow-500 border-4 text-amber-600`;
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
     content: "",
   });
-  const YellowButton = tw(Button)`border-yellow-500 border-4 text-amber-600`;
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
     setValues((values) => ({
@@ -22,7 +23,7 @@ const AddToDo = () => {
 
   const create = createTodo();
 
-  const add = (event: React.FormEvent<HTMLFormElement>) => {
+  const addToDo = (event: React.FormEvent<HTMLFormElement>) => {
     if (event) event.preventDefault();
     create.mutateAsync(values);
     setValues({
@@ -36,7 +37,7 @@ const AddToDo = () => {
     <>
       <div className="w-full py-8 bg-amber-100">
         <div className="">
-          <form onSubmit={add} className="flex flex-col w-full">
+          <form onSubmit={addToDo} className="flex flex-col w-full">
             <div className="flex justify-center items-center gap-10">
               <p>제목</p>
               <Input
