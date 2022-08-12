@@ -3,13 +3,13 @@ import Layout from "../components/layout/Layout";
 import List from "../components/toDo/List";
 import AddToDo from "../components/toDo/CreateToDoFoam";
 import Detail from "../components/toDo/DetailPage";
-
 import { getToDos } from "../api/querys";
+import { ToDoInit } from "../static/constant/ToDoInit";
 
 const Home = () => {
   const token = localStorage.getItem("token");
 
-  const { data } = token ? getToDos() : { data: { data: "" } };
+  const { data } = token ? getToDos() : ToDoInit;
   return (
     <>
       <Layout>
