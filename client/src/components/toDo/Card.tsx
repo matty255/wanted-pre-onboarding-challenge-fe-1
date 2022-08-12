@@ -8,7 +8,7 @@ import { toDoDetail } from "../../store/global";
 import { updateToDo, deleteToDo } from "../../api/querys";
 import { Button } from "../../common/Button";
 import { Text } from "../../common/Text";
-
+import { Input, TextArea } from "../../common/Input";
 const Card = (data: ToDoProps) => {
   const navigate = useNavigate();
   const [cleanData, setCleanData] = useRecoilState(toDoDetail);
@@ -27,7 +27,11 @@ const Card = (data: ToDoProps) => {
     setCleanData(null);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     event.persist();
     setValues((values) => ({
       ...values,
@@ -47,26 +51,46 @@ const Card = (data: ToDoProps) => {
     }
     update.mutateAsync(values).then((res) => setCleanData(res.data));
   };
+
+  const onEnterPress = (event: React.KeyboardEvent) => {
+    if (event.keyCode === 13 && event.shiftKey === false) {
+      setModify((state) => !state);
+
+      if (values.title === "") {
+        values.title = data.title;
+      }
+      if (values.content === "") {
+        values.content = data.content;
+      }
+      update.mutateAsync(values).then((res) => setCleanData(res.data));
+    }
+  };
   return (
     <CardBox>
-      <div className="w-full px-4">
+      <div className="w-5/6 px-4 flex flex-col mt-5 ">
         {modify ? (
-          <input
+          <Input
+            variant="edit"
             name="title"
+            tw="text-2xl"
             value={values.title || data.title}
             onChange={handleChange}
+            onKeyDown={onEnterPress}
             required
           />
         ) : (
-          <Text variant="title" className="mt-5 truncate">
+          <Text variant="title" className="truncate">
             {data.title}
           </Text>
         )}
         {modify ? (
-          <input
+          <TextArea
             name="content"
+            variant="edit"
+            tw="text-xl h-28"
             value={values.content || data.content}
             onChange={handleChange}
+            onKeyDown={onEnterPress}
             required
           />
         ) : (
