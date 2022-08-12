@@ -1,4 +1,6 @@
 import React from "react";
+/** @jsxImportSource @emotion/react */
+import tw from "twin.macro";
 import useForm from "../../hooks/useForm";
 import validate from "../../hooks/useFormValidations";
 import { Navigate, useLocation, Link, useNavigate } from "react-router-dom";
@@ -9,6 +11,8 @@ import { UserAPI } from "../../api/httpRequest";
 import { Input } from "../../common/Input";
 import { Button } from "../../common/Button";
 import Label from "../../common/Label";
+import { Box } from "../../common/Box";
+
 const Form = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,7 +20,7 @@ const Form = () => {
   const [tokens, setTokens] = useRecoilState(tokenState);
 
   const { values, errors, handleChange, handleSubmit, isError } = useForm(
-    location.pathname === "/sign"
+    location.pathname === "/"
       ? login
       : location.pathname === "/signin"
       ? SignIn
@@ -24,15 +28,13 @@ const Form = () => {
     validate
   );
 
-  const token: string = localStorage.getItem("token") || "";
-
   function login() {
     loginQuery
       .mutateAsync(values)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         setTokens(res.data.token);
-        navigate("/");
+        navigate("/todo");
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +48,7 @@ const Form = () => {
       UserAPI.singUpTodo(values).then((res) => {
         localStorage.setItem("token", res.data.token);
         alert("계정 생성 완료, 자동 로그인 되었습니다!");
-        navigate("/");
+        navigate("/todo");
       });
     } else {
       return alert("비밀번호를 확인해주세요");
@@ -54,9 +56,8 @@ const Form = () => {
   }
 
   return (
-    <div className="bg-white m-24">
-      {token && <Navigate to="/" />}
-      <div className="bg-amber-300 p-10">
+    <div className="bg-white h-full">
+      <Box>
         <div className="">
           {location.pathname === "/signin" ? (
             <h1>회원가입하기</h1>
@@ -119,7 +120,7 @@ const Form = () => {
                 }
               />
             )}
-            {location.pathname === "/sign" && (
+            {location.pathname === "/" && (
               <>
                 <Button
                   type="submit"
@@ -129,7 +130,7 @@ const Form = () => {
                 >
                   Login
                 </Button>
-                <Button variant="secondary">
+                <Button variant="secondary" type="button">
                   <Link to="/signin">가입하기</Link>
                 </Button>
               </>
@@ -144,14 +145,14 @@ const Form = () => {
                 >
                   가입하기
                 </Button>
-                <Button variant="secondary">
-                  <Link to="/sign">돌아가기</Link>
+                <Button variant="secondary" type="button">
+                  <Link to="/">돌아가기</Link>
                 </Button>
               </>
             )}
           </form>
         </div>
-      </div>
+      </Box>
     </div>
   );
 };

@@ -12,7 +12,7 @@ const Header = () => {
   const logout = () => {
     localStorage.setItem("token", "");
     setTokens("");
-    navigate("/sign");
+    navigate("/");
   };
 
   return (

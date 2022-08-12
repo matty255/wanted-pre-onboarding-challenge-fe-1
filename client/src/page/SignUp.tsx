@@ -10,12 +10,9 @@ interface Login {
 }
 
 const SignUp = () => {
-  const [tokens, setTokens] = useRecoilState(tokenState);
   return (
     <>
       <Layout>
-        {tokens !== "" && <Navigate to="/" />}
-        <div>여기는 로그인창</div>
         <Form />
       </Layout>
     </>

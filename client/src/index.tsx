@@ -5,7 +5,7 @@ import "./tailwind.generated.css";
 import { GlobalStyles } from "twin.macro";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Router from "./page/Routes";
+import Router from "./routes/Routes";
 
 const queryClient = new QueryClient({
   defaultOptions: {

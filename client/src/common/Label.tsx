@@ -12,7 +12,7 @@ interface LabelProps {
 const Label = (props: LabelProps) => {
   return (
     <>
-      <div className="">
+      <div className="h-24">
         <label>{props.title}</label>
         <div>{props.content}</div>
         {props.isError && <p className="text-red-500">{props.errorMessage}</p>}

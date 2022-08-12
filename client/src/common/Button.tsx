@@ -9,7 +9,7 @@ interface ButtonProps {
 
 export const Button = styled.button(({ variant, isSmall }: ButtonProps) => [
   tw`px-8 py-2 rounded focus:outline-none transform duration-75`,
-  tw`hocus:(scale-105 text-yellow-400)`,
+  tw`hocus:(scale-105) disabled:(scale-100)`,
 
   variant === "primary" && tw`bg-amber-600 text-white border-black`,
 
