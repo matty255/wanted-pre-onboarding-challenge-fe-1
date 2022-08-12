@@ -17,10 +17,10 @@ const CustomRoutes = () => {
 
   const auth = React.useCallback(
     (token: boolean) => {
-      if (token === true && pathname !== "/todo") {
+      if (token === true && ["/", "/signin"].includes(pathname)) {
         return navigate("/todo");
       }
-      if (token === false && ["/todo", "/todo/:id"].includes(pathname)) {
+      if (token === false && ["/todo"].includes(pathname)) {
         return navigate("/");
       }
     },

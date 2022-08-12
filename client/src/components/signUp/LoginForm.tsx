@@ -1,64 +1,53 @@
 import React from "react";
-/** @jsxImportSource @emotion/react */
-import tw from "twin.macro";
 import useForm from "../../hooks/useForm";
 import validate from "../../hooks/useFormValidations";
-import { Navigate, useLocation, Link, useNavigate } from "react-router-dom";
-import { useLogin } from "../../api/auths";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { UserAPI } from "../../api/httpRequest";
 import { Input } from "../../common/Input";
 import { Button } from "../../common/Button";
 import Label from "../../common/Label";
 import { Box } from "../../common/Box";
-
+import { useLogin, useSignIn } from "../../hooks/useSigns";
+import { useRecoilState } from "recoil";
+import { loadingState } from "../../store/global";
 const Form = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const loginQuery = useLogin();
+  const { pathname } = useLocation();
+  const [loading, setLoading] = useRecoilState(loadingState);
+  const isLoginPage = pathname === "/";
+  const isSignInPage = pathname === "/signin";
 
   const { values, errors, handleChange, handleSubmit, isError } = useForm(
-    location.pathname === "/"
+    isLoginPage
       ? login
-      : location.pathname === "/signin"
+      : isSignInPage
       ? SignIn
       : () => alert("알수 없는 오류가 발생했습니다. 다시 시도해주세요"),
     validate
   );
 
   function login() {
-    loginQuery
-      .mutateAsync(values)
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        navigate("/todo");
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("아이디와 비밀번호를 확인해주세요");
-      });
+    useLogin(values);
+    setLoading(true);
+    setTimeout(() => {
+      navigate("/todo");
+    }, 300);
   }
 
   function SignIn() {
-    if (!isError) {
-      UserAPI.singUpTodo(values).then((res) => {
-        localStorage.setItem("token", res.data.token);
-        alert("계정 생성 완료, 자동 로그인 되었습니다!");
-        navigate("/todo");
-      });
-    } else {
-      return alert("비밀번호를 확인해주세요");
-    }
+    useSignIn(values);
+    setLoading(true);
+    setTimeout(() => {
+      navigate("/todo");
+    }, 300);
   }
 
   return (
     <div className="bg-white h-full">
+      {loading && <div className="fixed top-0">로딩중</div>}
       <Box>
         <div className="">
-          {location.pathname === "/signin" ? (
-            <h1>회원가입하기</h1>
-          ) : (
-            <h1>로그인하기</h1>
-          )}
+          {isSignInPage ? <h1>회원가입하기</h1> : <h1>로그인하기</h1>}
 
           <form onSubmit={handleSubmit} noValidate>
             <Label
@@ -96,7 +85,7 @@ const Form = () => {
               }
             />
 
-            {location.pathname === "/signin" && (
+            {isSignInPage && (
               <Label
                 title="Password Confirm"
                 isError={errors.passwordConfirm !== ""}
@@ -115,7 +104,7 @@ const Form = () => {
                 }
               />
             )}
-            {location.pathname === "/" && (
+            {isLoginPage && (
               <>
                 <Button
                   type="submit"
@@ -130,7 +119,7 @@ const Form = () => {
                 </Button>
               </>
             )}
-            {location.pathname === "/signin" && (
+            {isSignInPage && (
               <>
                 <Button
                   type="submit"

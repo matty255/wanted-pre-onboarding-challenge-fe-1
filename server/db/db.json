@@ -50,6 +50,13 @@
       "id": "s3FbRoQYObvgRCYx3ggIU",
       "createdAt": "2022-08-12T04:11:09.615Z",
       "updatedAt": "2022-08-12T04:11:09.615Z"
+    },
+    {
+      "email": "1@a.com",
+      "password": "aaaaaaaa",
+      "id": "Hrv8X_7aIF08NlrBdHCsm",
+      "createdAt": "2022-08-12T05:08:29.489Z",
+      "updatedAt": "2022-08-12T05:08:29.489Z"
     }
   ]
 }

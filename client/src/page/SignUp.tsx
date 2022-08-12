@@ -1,12 +1,12 @@
 import React from "react";
 import Layout from "../components/layout/Layout";
-import Form from "../components/signUp/Foam";
+import LoginForm from "../components/signUp/LoginForm";
 
 const SignUp = () => {
   return (
     <>
       <Layout>
-        <Form />
+        <LoginForm />
       </Layout>
     </>
   );

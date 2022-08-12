@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import Layout from "../components/layout/Layout";
 import List from "../components/toDo/List";
-import AddToDo from "../components/toDo/AddToDo";
-import Detail from "../components/toDo/Detail";
+import AddToDo from "../components/toDo/CreateToDoFoam";
+import Detail from "../components/toDo/DetailPage";
 
 import { getToDos } from "../api/querys";
 

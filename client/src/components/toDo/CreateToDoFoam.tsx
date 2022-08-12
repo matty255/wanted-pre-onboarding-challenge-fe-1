@@ -3,7 +3,6 @@ import React from "react";
 import tw from "twin.macro";
 import { NewToDo } from "../../types/toDos";
 import { Button } from "../../common/Button";
-import { useNavigate } from "react-router-dom";
 import { createTodo } from "../../api/querys";
 import { Input } from "../../common/Input";
 
