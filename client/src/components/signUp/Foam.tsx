@@ -4,8 +4,6 @@ import tw from "twin.macro";
 import useForm from "../../hooks/useForm";
 import validate from "../../hooks/useFormValidations";
 import { Navigate, useLocation, Link, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { tokenState } from "../../store/global";
 import { useLogin } from "../../api/auths";
 import { UserAPI } from "../../api/httpRequest";
 import { Input } from "../../common/Input";
@@ -17,7 +15,6 @@ const Form = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const loginQuery = useLogin();
-  const [tokens, setTokens] = useRecoilState(tokenState);
 
   const { values, errors, handleChange, handleSubmit, isError } = useForm(
     location.pathname === "/"
@@ -33,14 +30,12 @@ const Form = () => {
       .mutateAsync(values)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        setTokens(res.data.token);
         navigate("/todo");
       })
       .catch((error) => {
         console.log(error);
         alert("아이디와 비밀번호를 확인해주세요");
       });
-    return <Navigate to="/" />;
   }
 
   function SignIn() {

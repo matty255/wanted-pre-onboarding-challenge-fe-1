@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { NewUser } from "../types/user";
 import { useDebounce } from "./useDebounce";
+import { useLocation } from "react-router-dom";
+
 const useForm = (callback: Function, validate: Function) => {
+  const { pathname } = useLocation();
   const [values, setValues] = useState<NewUser>({
     email: "",
     password: "",
@@ -26,15 +29,24 @@ const useForm = (callback: Function, validate: Function) => {
   }, [isSubmitting]);
 
   useEffect(() => {
-    if (Object.values(errors)[0] === "" && Object.values(errors)[1] === "") {
+    if (
+      pathname === "/" &&
+      Object.values(errors)[0] === "" &&
+      Object.values(errors)[1] === ""
+    ) {
+      setIsError(false);
+    } else if (
+      Object.values(errors)[0] === "" &&
+      Object.values(errors)[1] === "" &&
+      Object.values(errors)[2] === ""
+    ) {
       setIsError(false);
     } else {
       setIsError(true);
     }
   }, [debouncedKeyword, errors]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    // if (event) event.preventDefault();
+  const handleSubmit = () => {
     setErrors(validate(values));
     setIsSubmitting((state) => !state);
   };

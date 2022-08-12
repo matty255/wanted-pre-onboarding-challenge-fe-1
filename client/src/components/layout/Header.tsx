@@ -3,15 +3,12 @@ import React from "react";
 import tw from "twin.macro";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { tokenState } from "../../store/global";
 
 const Header = () => {
   const navigate = useNavigate();
   const token = !!localStorage.getItem("token")?.valueOf();
-  const [tokens, setTokens] = useRecoilState(tokenState);
   const logout = () => {
     localStorage.setItem("token", "");
-    setTokens("");
     navigate("/");
   };
 

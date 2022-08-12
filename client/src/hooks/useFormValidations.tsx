@@ -15,7 +15,6 @@ export default function validate(values: NewUser) {
   if (!values.passwordConfirm) {
     errors.passwordConfirm = "비밀번호를 한번더 입력해주세요";
   } else if (values.password !== values.passwordConfirm) {
-    console.log(values.password);
     errors.passwordConfirm = "비밀번호가 일치하지 않아요!";
   }
 

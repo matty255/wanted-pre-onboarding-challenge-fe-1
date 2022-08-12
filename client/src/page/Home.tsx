@@ -1,31 +1,26 @@
 import React, { useEffect } from "react";
 import Layout from "../components/layout/Layout";
-
-import { useNavigate, Navigate, useLocation } from "react-router-dom";
 import List from "../components/toDo/List";
 import AddToDo from "../components/toDo/AddToDo";
 import Detail from "../components/toDo/Detail";
-import { useRecoilState } from "recoil";
-import { tokenState } from "../store/global";
+
 import { getToDos } from "../api/querys";
 
 const Home = () => {
-  const [tokens, setTokens] = useRecoilState(tokenState);
+  const token = localStorage.getItem("token");
 
-  const { data } = tokens ? getToDos() : { data: { data: "" } };
+  const { data } = token ? getToDos() : { data: { data: "" } };
   return (
     <>
-      {tokens !== "" && (
-        <Layout>
-          <div className="flex flex-col p-4 items-end">
-            <AddToDo />
-          </div>
-          <div className="flex p-10 bg-amber-200">
-            {data?.data && <List {...data} />}
-            <Detail />
-          </div>
-        </Layout>
-      )}
+      <Layout>
+        <div className="flex flex-col p-4 items-end">
+          <AddToDo />
+        </div>
+        <div className="flex p-10 bg-amber-200">
+          {data?.data && <List {...data} />}
+          <Detail />
+        </div>
+      </Layout>
     </>
   );
 };

@@ -8,11 +8,6 @@ export const signState = atom({
   },
 });
 
-export const tokenState = atom({
-  key: "tokenState",
-  default: localStorage.getItem("token"),
-});
-
 export const toDoDetail = atom<ToDoDetail | null>({
   key: "toDoDetail",
   default: null,

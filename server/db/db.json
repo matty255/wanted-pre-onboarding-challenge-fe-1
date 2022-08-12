@@ -2,7 +2,7 @@
   "todos": [
     {
       "title": "하루에 한번 자바스크립트 읽기",
-      "content": "현재 19장! 수정도 잘되네1",
+      "content": "현재 19장! 수정도 잘되네",
       "id": "Z03Jw5GDptJiBp9UN0JMO",
       "createdAt": "2022-08-11T10:40:26.503Z",
       "updatedAt": "2022-08-11T10:40:26.503Z"
@@ -22,18 +22,11 @@
       "updatedAt": "2022-08-11T12:21:43.037Z"
     },
     {
-      "title": "asd",
-      "content": "asdasd",
-      "id": "Y94XRcT4BRZ9_uu51rxvl",
-      "createdAt": "2022-08-12T03:52:13.490Z",
-      "updatedAt": "2022-08-12T03:52:13.490Z"
-    },
-    {
-      "title": "aa",
-      "content": "aaaa",
-      "id": "LNMLXICwjjpE50AvzXtVF",
-      "createdAt": "2022-08-12T03:54:46.957Z",
-      "updatedAt": "2022-08-12T03:54:46.957Z"
+      "title": "일정 추가",
+      "content": "라우터에 커스텀달기",
+      "id": "21E7MQI6tKSYYw7F9jc6i",
+      "createdAt": "2022-08-12T03:59:30.539Z",
+      "updatedAt": "2022-08-12T03:59:30.539Z"
     }
   ],
   "users": [
@@ -43,6 +36,20 @@
       "id": "7a-AGyVBQXYHq3stIsZD1",
       "createdAt": "2022-08-11T09:36:05.523Z",
       "updatedAt": "2022-08-11T09:36:05.523Z"
+    },
+    {
+      "email": "aa@aa.com",
+      "password": "aaaaaaaa",
+      "id": "8zim3A5-q-fEAVXg9qA2A",
+      "createdAt": "2022-08-12T04:07:25.679Z",
+      "updatedAt": "2022-08-12T04:07:25.679Z"
+    },
+    {
+      "email": "1@1.com",
+      "password": "11111111",
+      "id": "s3FbRoQYObvgRCYx3ggIU",
+      "createdAt": "2022-08-12T04:11:09.615Z",
+      "updatedAt": "2022-08-12T04:11:09.615Z"
     }
   ]
 }
