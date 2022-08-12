@@ -23,24 +23,17 @@ const Form = () => {
   }, [loading]);
 
   const { values, errors, handleChange, handleSubmit, isError } = useForm(
-    isLoginPage
-      ? login
-      : isSignInPage
-      ? SignIn
-      : () => alert("알수 없는 오류가 발생했습니다. 다시 시도해주세요"),
+    login,
     validate
   );
 
   function login() {
-    useLogin(values);
-    setLoading(true);
-    setTimeout(() => {
-      navigate("/todo");
-    }, 300);
-  }
-
-  function SignIn() {
-    useSignIn(values);
+    if (isLoginPage) {
+      useLogin(values);
+    }
+    if (isSignInPage) {
+      useSignIn(values);
+    }
     setLoading(true);
     setTimeout(() => {
       navigate("/todo");
