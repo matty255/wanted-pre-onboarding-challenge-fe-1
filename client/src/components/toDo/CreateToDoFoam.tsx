@@ -1,19 +1,20 @@
 import React from "react";
-/** @jsxImportSource @emotion/react */
-import tw from "twin.macro";
 import { NewToDo } from "../../types/toDos";
-import { Button } from "../../common/Button";
 import { createTodo } from "../../api/querys";
-import { Input } from "../../common/Input";
+import { Input, TextArea } from "../../common/Input";
 import Label from "../../common/Label";
+
 const AddToDo = () => {
-  const YellowButton = tw(Button)`bg-amber-300 shadow-md`;
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
     content: "",
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     event.persist();
     setValues((values) => ({
       ...values,
@@ -31,6 +32,18 @@ const AddToDo = () => {
       content: "",
     });
     alert("등록 완료!");
+  };
+
+  const onEnterPress = (event: React.KeyboardEvent) => {
+    if (event.keyCode === 13 && event.shiftKey === false) {
+      event.preventDefault();
+      create.mutateAsync(values);
+      setValues({
+        title: "",
+        content: "",
+      });
+      alert("등록 완료!");
+    }
   };
 
   return (
@@ -53,20 +66,21 @@ const AddToDo = () => {
       <Label
         title="상세설명"
         content={
-          <Input
+          <TextArea
             tw=""
             variant="submit"
             name="content"
             value={values.content || ""}
             onChange={handleChange}
+            onKeyDown={onEnterPress}
             required
           />
         }
       />
 
-      <YellowButton type="submit" className="hidden">
+      <button type="submit" className="hidden">
         추가하기
-      </YellowButton>
+      </button>
     </form>
   );
 };

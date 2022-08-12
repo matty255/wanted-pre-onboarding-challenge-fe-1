@@ -17,7 +17,7 @@ const Detail = () => {
   return (
     <>
       <div className="w-1/2">
-        <Text className="ml-3">디테일페이지</Text>
+        <Text className="ml-3">What To Do!</Text>
         {!detail && (
           <div className="w-full bg-white p-4 m-2">todo list 상세 확인</div>
         )}

@@ -2,7 +2,6 @@ import React from "react";
 /** @jsxImportSource @emotion/react */
 import tw from "twin.macro";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
 import { Text } from "../../common/Text";
 const Header = () => {
   const navigate = useNavigate();
@@ -14,9 +13,14 @@ const Header = () => {
 
   return (
     <YellowHeader>
-      <Text variant="logo">To Do list</Text>
+      <Text variant="logo" tw="text-white">
+        To Do list
+      </Text>
       {token ? (
-        <button onClick={logout} className="text-lg tracking-tight">
+        <button
+          onClick={logout}
+          className="text-lg tracking-tight font-bold text-white"
+        >
           Logout
         </button>
       ) : (

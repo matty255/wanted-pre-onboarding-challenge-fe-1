@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <>
       <Layout>
-        <div className="flex mx-auto items-start justify-center p-10 sticky top-0 bg-gradient-to-b from-amber-200">
+        <div className="flex mx-auto items-start justify-center p-10 sticky top-0 bg-amber-300 z-50">
           <AddToDo />
           <Detail />
         </div>

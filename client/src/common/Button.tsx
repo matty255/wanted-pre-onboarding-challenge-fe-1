@@ -20,7 +20,7 @@ export const Button = styled.button(({ variant, isSmall }: ButtonProps) => [
     tw`ml-3 bg-orange-200`,
   ],
 
-  isSmall ? tw`text-sm` : tw`text-lg`,
+  isSmall ? tw`text-sm bg-yellow-400` : tw`text-lg`,
 
   // The theme import can supply values from your tailwind.config.js
   css`
