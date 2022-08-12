@@ -10,6 +10,7 @@ import { useRecoilState } from "recoil";
 import { loadingState } from "../../store/global";
 import { Text } from "../../common/Text";
 import { UserAPI } from "../../api/httpRequest";
+import Spinner from "../../common/Spinner";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ const Form = () => {
 
   return (
     <div className="h-screen w-full fixed pt-24 bg-yellow">
-      {loading && <div className="fixed top-0">로딩중</div>}
+      {loading && <Spinner />}
       <Box>
         <div className="">
           {isSignInPage ? (
