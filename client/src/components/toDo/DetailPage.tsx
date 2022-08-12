@@ -3,6 +3,7 @@ import { toDoDetail } from "../../store/global";
 import { useRecoilState } from "recoil";
 import { useLocation } from "react-router-dom";
 import { getToDoById } from "../../api/querys";
+import { Text } from "../../common/Text";
 const Detail = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -15,15 +16,15 @@ const Detail = () => {
   }, [location]);
   return (
     <>
-      <div className="flex flex-col fixed top-[30%]">
-        <h1 className="text-xl ml-2">디테일페이지</h1>
+      <div className="w-1/2">
+        <Text className="ml-3">디테일페이지</Text>
         {!detail && (
           <div className="w-full bg-white p-4 m-2">todo list 상세 확인</div>
         )}
         {detail?.data && (
           <div className="w-full bg-white p-4 m-2">
-            <p>{detail?.data.title}</p>
-            <p>{detail?.data.content}</p>
+            <Text variant="title">{detail?.data.title}</Text>
+            <Text variant="text">{detail?.data.content}</Text>
             {/* <p>{data.createdAt?.toString()}</p>
             <p>{data.updatedAt?.toString()}</p> */}
           </div>

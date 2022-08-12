@@ -13,13 +13,11 @@ const Home = () => {
   return (
     <>
       <Layout>
-        <div className="flex flex-col p-4 items-end">
+        <div className="flex mx-auto items-start justify-center p-10 sticky top-0 bg-gradient-to-b from-amber-200">
           <AddToDo />
-        </div>
-        <div className="flex p-10 bg-amber-200">
-          {data?.data && <List {...data} />}
           <Detail />
         </div>
+        <div className="flex p-10">{data?.data && <List {...data} />}</div>
       </Layout>
     </>
   );

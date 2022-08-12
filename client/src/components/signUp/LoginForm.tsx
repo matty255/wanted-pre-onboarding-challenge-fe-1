@@ -6,9 +6,11 @@ import { Input } from "../../common/Input";
 import { Button } from "../../common/Button";
 import Label from "../../common/Label";
 import { Box } from "../../common/Box";
-import { useLogin, useSignIn } from "../../hooks/useSigns";
 import { useRecoilState } from "recoil";
 import { loadingState } from "../../store/global";
+import { Text } from "../../common/Text";
+import { UserAPI } from "../../api/httpRequest";
+
 const Form = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -29,10 +31,20 @@ const Form = () => {
 
   function login() {
     if (isLoginPage) {
-      useLogin(values);
+      UserAPI.loginTodo(values)
+        .then((res) => {
+          localStorage.setItem("token", res.data.token);
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("아이디와 비밀번호를 확인해주세요");
+        });
     }
     if (isSignInPage) {
-      useSignIn(values);
+      UserAPI.singUpTodo(values).then((res) => {
+        localStorage.setItem("token", res.data.token);
+        alert("계정 생성 완료, 자동 로그인 되었습니다!");
+      });
     }
     setLoading(true);
     setTimeout(() => {
@@ -41,20 +53,24 @@ const Form = () => {
   }
 
   return (
-    <div className="bg-white h-full">
+    <div className="h-screen w-full fixed pt-24 bg-yellow">
       {loading && <div className="fixed top-0">로딩중</div>}
       <Box>
         <div className="">
-          {isSignInPage ? <h1>회원가입하기</h1> : <h1>로그인하기</h1>}
+          {isSignInPage ? (
+            <Text variant="title">Sign up</Text>
+          ) : (
+            <Text variant="title">Login</Text>
+          )}
 
           <form onSubmit={handleSubmit} noValidate>
             <Label
-              title="Email Address"
+              title="Email"
               isError={errors.email !== ""}
               errorMessage={errors.email}
               content={
                 <Input
-                  tw="w-full"
+                  variant="validate"
                   autoComplete="off"
                   className={errors.email && "text-red-500 w-full"}
                   type="email"
@@ -71,7 +87,7 @@ const Form = () => {
               errorMessage={errors.password}
               content={
                 <Input
-                  tw="w-full"
+                  variant="validate"
                   autoComplete="on"
                   className={errors.password && "text-red-500"}
                   type="password"
@@ -90,7 +106,7 @@ const Form = () => {
                 errorMessage={errors.passwordConfirm || ""}
                 content={
                   <Input
-                    tw="w-full"
+                    variant="validate"
                     autoComplete="on"
                     className={errors.passwordConfirm && "text-red-500"}
                     type="password"

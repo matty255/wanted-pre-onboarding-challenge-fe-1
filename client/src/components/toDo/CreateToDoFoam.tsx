@@ -5,9 +5,9 @@ import { NewToDo } from "../../types/toDos";
 import { Button } from "../../common/Button";
 import { createTodo } from "../../api/querys";
 import { Input } from "../../common/Input";
-
+import Label from "../../common/Label";
 const AddToDo = () => {
-  const YellowButton = tw(Button)`border-yellow-500 border-4 text-amber-600`;
+  const YellowButton = tw(Button)`bg-amber-300 shadow-md`;
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
     content: "",
@@ -34,42 +34,40 @@ const AddToDo = () => {
   };
 
   return (
-    <>
-      <div className="w-full py-8 bg-amber-100">
-        <div className="">
-          <form onSubmit={addToDo} className="flex flex-col w-full">
-            <div className="flex justify-center items-center gap-10">
-              <p>제목</p>
-              <Input
-                name="title"
-                value={values.title || ""}
-                onChange={handleChange}
-                className="h-12 outline mt-3 outline-amber-300"
-                tw="w-[70vh]"
-                required
-              />
-            </div>
-            <div className="flex justify-center items-center gap-10">
-              <p>상세</p>
-              <Input
-                name="content"
-                value={values.content || ""}
-                onChange={handleChange}
-                className="h-12 outline mt-3 outline-amber-300"
-                tw="w-[70vh]"
-                required
-              />
-            </div>
-            <YellowButton
-              type="submit"
-              className="bg-amber-300 mx-auto justify-center items-center mt-10"
-            >
-              추가하기
-            </YellowButton>
-          </form>
-        </div>
-      </div>
-    </>
+    <form
+      onSubmit={addToDo}
+      className="mx-auto flex justify-center items-stretch flex-col shrink-0 w-1/2"
+    >
+      <Label
+        title="할 일"
+        content={
+          <Input
+            variant="submit"
+            name="title"
+            value={values.title || ""}
+            onChange={handleChange}
+            required
+          />
+        }
+      />
+      <Label
+        title="상세설명"
+        content={
+          <Input
+            tw=""
+            variant="submit"
+            name="content"
+            value={values.content || ""}
+            onChange={handleChange}
+            required
+          />
+        }
+      />
+
+      <YellowButton type="submit" className="hidden">
+        추가하기
+      </YellowButton>
+    </form>
   );
 };
 

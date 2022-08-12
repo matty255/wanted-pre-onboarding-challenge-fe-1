@@ -3,7 +3,7 @@ import React from "react";
 import tw from "twin.macro";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-
+import { Text } from "../../common/Text";
 const Header = () => {
   const navigate = useNavigate();
   const token = !!localStorage.getItem("token")?.valueOf();
@@ -13,17 +13,14 @@ const Header = () => {
   };
 
   return (
-    <YellowHeader
-      className="bg-amber-400 h-24 flex justify-between items-center px-10
-    border-b-4 border-amber-500"
-    >
-      <h1 className="text-3xl">.To Do list</h1>
+    <YellowHeader>
+      <Text variant="logo">To Do list</Text>
       {token ? (
         <button onClick={logout} className="text-lg tracking-tight">
           Logout
         </button>
       ) : (
-        <button>login</button>
+        <Text>@matty255</Text>
       )}
     </YellowHeader>
   );
@@ -32,6 +29,5 @@ const Header = () => {
 export default Header;
 
 const YellowHeader = tw.header`
-bg-amber-400 h-24 flex justify-between items-center px-10
-    border-b-4 border-amber-500
+bg-amber-300 h-20 flex justify-between items-center px-10 
 `;
