@@ -1,14 +1,12 @@
 import React from "react";
 /** @jsxImportSource @emotion/react */
-import tw, { css, styled, theme } from "twin.macro";
+import tw from "twin.macro";
 import { ToDoProps, NewToDo } from "../../types/toDos";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { toDoDetail } from "../../store/global";
 import { updateToDo, deleteToDo } from "../../api/querys";
-import { Button } from "../../common/Button";
-import { Text } from "../../common/Text";
-import { Input, TextArea } from "../../common/Input";
+import * as el from "../../common";
 
 const Card = (data: ToDoProps) => {
   const navigate = useNavigate();
@@ -79,7 +77,7 @@ const Card = (data: ToDoProps) => {
     <CardBox>
       <div className="w-5/6 px-4 flex flex-col mt-5 ">
         {modify ? (
-          <Input
+          <el.Input
             variant="edit"
             name="title"
             tw="text-2xl"
@@ -90,12 +88,12 @@ const Card = (data: ToDoProps) => {
             required
           />
         ) : (
-          <Text variant="title" className="truncate">
+          <el.Text variant="title" className="truncate">
             {data.title}
-          </Text>
+          </el.Text>
         )}
         {modify ? (
-          <TextArea
+          <el.TextArea
             name="content"
             variant="edit"
             tw="text-xl h-28"
@@ -105,28 +103,31 @@ const Card = (data: ToDoProps) => {
             required
           />
         ) : (
-          <Text variant="text" className="truncate">
+          <el.Text variant="text" className="truncate">
             {data.content}
-          </Text>
+          </el.Text>
         )}
       </div>
 
       <div className="flex-col flex-shrink-0 gap-4 justify-center mr-3 hidden md:flex">
         {modify ? (
-          <Button isSmall={true} onClick={handleUpdate}>
+          <el.Button isSmall={true} onClick={handleUpdate}>
             수정완료
-          </Button>
+          </el.Button>
         ) : (
-          <Button isSmall={true} onClick={() => setModify((state) => !state)}>
+          <el.Button
+            isSmall={true}
+            onClick={() => setModify((state) => !state)}
+          >
             수정
-          </Button>
+          </el.Button>
         )}
-        <Button isSmall={true} onClick={() => navigate(`/todo/${data.id}`)}>
+        <el.Button isSmall={true} onClick={() => navigate(`/todo/${data.id}`)}>
           상세
-        </Button>
-        <Button isSmall={true} onClick={() => deleteHandler()}>
+        </el.Button>
+        <el.Button isSmall={true} onClick={() => deleteHandler()}>
           삭제
-        </Button>
+        </el.Button>
       </div>
 
       <div className="md:hidden flex justify-center gap-10 mb-2">

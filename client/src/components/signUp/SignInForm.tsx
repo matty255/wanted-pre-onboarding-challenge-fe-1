@@ -1,8 +1,8 @@
 import React from "react";
 import * as el from "../../common";
-import { LoginProps } from "../../types/user";
+import { SignInProps } from "../../types/user";
 
-const LoginForm = ({ handleChange, values, errors }: LoginProps) => {
+const SignInForm = ({ handleChange, values, errors }: SignInProps) => {
   return (
     <>
       <el.Label
@@ -39,7 +39,27 @@ const LoginForm = ({ handleChange, values, errors }: LoginProps) => {
           />
         }
       />
+      {"passwordConfirm" in values && "passwordConfirm" in errors && (
+        <el.Label
+          title="Password Confirm"
+          isError={errors.passwordConfirm !== ""}
+          errorMessage={errors.passwordConfirm || ""}
+          content={
+            <el.Input
+              variant="validate"
+              autoComplete="on"
+              className={errors.passwordConfirm && "text-red-500"}
+              type="password"
+              name="passwordConfirm"
+              onChange={handleChange}
+              value={values.passwordConfirm || ""}
+              required
+            />
+          }
+        />
+      )}
     </>
   );
 };
-export default LoginForm;
+
+export default SignInForm;

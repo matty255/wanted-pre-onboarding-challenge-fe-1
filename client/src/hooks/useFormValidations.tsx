@@ -1,7 +1,12 @@
-import { NewUser } from "../types/user";
+import React from "react";
+import { UserProps, NewUser } from "../types/user";
 
-export default function validate(values: NewUser) {
-  const errors: NewUser = { email: "", password: "", passwordConfirm: "" };
+export default function validate(
+  values: UserProps | NewUser,
+  init: UserProps | NewUser
+) {
+  const errors = Object.assign({}, init);
+
   if (!values.email) {
     errors.email = "이메일을 입력해주세요";
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
@@ -12,9 +17,17 @@ export default function validate(values: NewUser) {
   } else if (values.password.length < 8) {
     errors.password = "비밀번호는 최소 8자입니다";
   }
-  if (!values.passwordConfirm) {
+  if (
+    "passwordConfirm" in values &&
+    "passwordConfirm" in errors &&
+    !values.passwordConfirm
+  ) {
     errors.passwordConfirm = "비밀번호를 한번더 입력해주세요";
-  } else if (values.password !== values.passwordConfirm) {
+  } else if (
+    "passwordConfirm" in values &&
+    "passwordConfirm" in errors &&
+    values.password !== values.passwordConfirm
+  ) {
     errors.passwordConfirm = "비밀번호가 일치하지 않아요!";
   }
 

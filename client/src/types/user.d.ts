@@ -1,14 +1,26 @@
+import React from "react";
+
 interface UserProps {
   email: string;
   password: string;
 }
 
-interface NewUser {
-  email: string;
-  password: string;
-  passwordConfirm?: string;
+interface NewUser extends UserProps {
+  passwordConfirm: string;
 }
 
 type UserList = UserProps[];
 
-export { UserProps, UserList, NewUser };
+interface LoginProps {
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  values: UserProps;
+  errors: UserProps;
+}
+
+interface SignInProps {
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  errors: NewUser;
+  values: NewUser;
+}
+
+export { UserProps, UserList, NewUser, LoginProps, SignInProps };
