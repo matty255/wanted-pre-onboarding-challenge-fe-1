@@ -21,10 +21,10 @@ const AddToDo = () => {
     }));
   };
 
-  const create = createTodo();
+  const { mutateAsync, isLoading, isError, error } = createTodo();
 
   const Submits = () => {
-    create.mutateAsync(values);
+    mutateAsync(values);
     setValues({
       title: "",
       content: "",
@@ -34,7 +34,7 @@ const AddToDo = () => {
 
   const addToDo = (event: React.FormEvent<HTMLFormElement>) => {
     if (event) event.preventDefault();
-    create.mutateAsync(values);
+    mutateAsync(values);
     Submits();
   };
 
@@ -46,41 +46,44 @@ const AddToDo = () => {
   };
 
   return (
-    <form
-      onSubmit={addToDo}
-      className="mx-auto flex justify-center items-stretch flex-col shrink-0 w-1/2"
-    >
-      <el.Label
-        title="할 일"
-        content={
-          <el.Input
-            variant="submit"
-            name="title"
-            value={values.title || ""}
-            onChange={handleChange}
-            required
-          />
-        }
-      />
-      <el.Label
-        title="상세설명"
-        content={
-          <el.TextArea
-            tw=""
-            variant="submit"
-            name="content"
-            value={values.content || ""}
-            onChange={handleChange}
-            onKeyDown={onEnterPress}
-            required
-          />
-        }
-      />
+    <>
+      <form
+        onSubmit={addToDo}
+        className="mx-auto flex justify-center items-stretch flex-col shrink-0 w-1/2"
+      >
+        <el.Label
+          title="할 일"
+          content={
+            <el.Input
+              variant="submit"
+              name="title"
+              value={values.title || ""}
+              onChange={handleChange}
+              required
+            />
+          }
+        />
+        <el.Label
+          title="상세설명"
+          content={
+            <el.TextArea
+              tw=""
+              variant="submit"
+              name="content"
+              value={values.content || ""}
+              onChange={handleChange}
+              onKeyDown={onEnterPress}
+              required
+            />
+          }
+        />
 
-      <button type="submit" className="hidden">
-        추가하기
-      </button>
-    </form>
+        <button type="submit" className="hidden">
+          추가하기
+        </button>
+      </form>
+      {isLoading && <el.Spinner />}
+    </>
   );
 };
 

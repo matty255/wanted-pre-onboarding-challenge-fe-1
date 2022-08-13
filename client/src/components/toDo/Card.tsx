@@ -18,7 +18,7 @@ const Card = (data: ToDoProps) => {
     content: "",
   });
   const modifyRef = React.useRef<HTMLInputElement>(null);
-  const update = updateToDo(data.id);
+  const { mutateAsync, isLoading, isError, error } = updateToDo(data.id);
   const deleteById = deleteToDo(data.id);
 
   const deleteHandler = () => {
@@ -49,7 +49,7 @@ const Card = (data: ToDoProps) => {
     if (values.content === "") {
       values.content = data.content;
     }
-    update.mutateAsync(values).then((res) => setCleanData(res.data));
+    mutateAsync(values).then((res) => setCleanData(res.data));
   };
 
   const handleUpdate = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -156,6 +156,7 @@ const Card = (data: ToDoProps) => {
           삭제
         </button>
       </div>
+      {isLoading && <el.Spinner />}
     </CardBox>
   );
 };
