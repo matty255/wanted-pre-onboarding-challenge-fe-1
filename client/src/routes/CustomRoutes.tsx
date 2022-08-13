@@ -10,14 +10,15 @@ import {
 import Home from "../page/Home";
 import SignUp from "../page/SignUp";
 import NotFound404 from "../page/NotFound404";
+import { Storage } from "../api/storage";
 
 const CustomRoutes = () => {
-  const token = !!localStorage.getItem("token")?.valueOf();
+  const token = Storage.has({ key: "token", persist: false });
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const auth = React.useCallback(
-    (token: boolean) => {
+    (token: boolean | undefined) => {
       if (token === true && ["/", "/signin"].includes(pathname)) {
         return navigate("/todo");
       }
