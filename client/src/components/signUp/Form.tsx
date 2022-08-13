@@ -3,59 +3,49 @@ import useForm from "../../hooks/useForm";
 import validate from "../../hooks/useFormValidations";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import * as el from "../../common";
-import { useRecoilState } from "recoil";
-import { loadingState } from "../../store/global";
 import { UserAPI } from "../../api/httpRequest";
 import { UserLoginInit, NewUserInit } from "../../static/constant/AuthInit";
-
+import { useMutation } from "@tanstack/react-query";
 import LoginForm from "./LoginForm";
 import SignInForm from "./SignInForm";
-
+import { UserProps, NewUser } from "../../types/user";
+import { AxiosError } from "axios";
 const Form = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [loading, setLoading] = useRecoilState(loadingState);
   const isLoginPage = pathname === "/";
   const isSignInPage = pathname === "/signin";
 
   const init = isLoginPage ? UserLoginInit : NewUserInit;
-  React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, [loading]);
 
   const { values, errors, handleChange, handleSubmit, isError } = useForm(
     login,
     validate,
     init
   );
+  const { mutateAsync, isLoading } = useMutation(
+    (values: UserProps | NewUser) =>
+      isLoginPage ? UserAPI.loginTodo(values) : UserAPI.singUpTodo(values),
+    {
+      onSuccess: () => navigate("/todo"),
+      onError: (error: AxiosError) => {
+        if (error !== undefined && error instanceof AxiosError) {
+          console.log(Object.values(error?.response?.data)[0]);
+        }
+      },
+    }
+  );
 
   function login() {
-    if (isLoginPage && "email" in values) {
-      UserAPI.loginTodo(values)
-        .then((res) => {
-          alert("로그인 성공!");
-        })
-        .catch((error) => {
-          console.log(error);
-          alert("아이디와 비밀번호를 확인해주세요");
-        });
-    }
-    if (isSignInPage && "passwordConfirm" in values) {
-      UserAPI.singUpTodo(values).then((res) => {
-        alert("계정 생성 완료, 자동 로그인 되었습니다!");
-      });
-    }
-    setLoading(true);
-    setTimeout(() => {
-      navigate("/todo");
-    }, 300);
+    mutateAsync(values);
+    isLoginPage
+      ? alert("로그인 성공!")
+      : alert("계정이 생성되었습니다, 자동으로 로그인합니다!");
   }
 
   return (
     <div className="h-screen w-full fixed pt-24 bg-yellow">
-      {loading && <el.Spinner />}
+      {isLoading && <el.Spinner />}
       <el.Box>
         <div className="">
           {isSignInPage ? (
