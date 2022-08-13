@@ -9,7 +9,7 @@
     },
     {
       "title": "css를 하자...! css를 하자",
-      "content": "css가 생명 졸리다",
+      "content": "아 css가 생명 졸리다 이렇게 길게 쓰고 탭엔터를 해도 되고 엔터를 해도 되고",
       "id": "cyGecKXjgj0nzX-bLnct2",
       "createdAt": "2022-08-11T10:47:56.039Z",
       "updatedAt": "2022-08-11T10:47:56.039Z"
@@ -34,13 +34,6 @@
       "id": "hnM3xHeFExUUbuVvAKqu9",
       "createdAt": "2022-08-12T08:41:59.740Z",
       "updatedAt": "2022-08-12T08:41:59.740Z"
-    },
-    {
-      "title": "할일을 추가하기!!!",
-      "content": "피카 피카",
-      "id": "x0I3neUy9im4Af-qxS1Ts",
-      "createdAt": "2022-08-12T09:59:11.011Z",
-      "updatedAt": "2022-08-12T09:59:11.011Z"
     }
   ],
   "users": [
@@ -78,6 +71,13 @@
       "id": "qCCMUF_dAQwyWg_WIN-4L",
       "createdAt": "2022-08-12T06:40:31.562Z",
       "updatedAt": "2022-08-12T06:40:31.562Z"
+    },
+    {
+      "email": "aw@a.com",
+      "password": "qqqqqqqq",
+      "id": "xeS_7rWM6HjtR6AuG4COo",
+      "createdAt": "2022-08-13T07:03:33.675Z",
+      "updatedAt": "2022-08-13T07:03:33.675Z"
     }
   ]
 }

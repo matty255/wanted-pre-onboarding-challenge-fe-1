@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import { useLocation } from "react-router-dom";
 import { getToDoById } from "../../api/querys";
 import { Text } from "../../common/Text";
+
 const Detail = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];

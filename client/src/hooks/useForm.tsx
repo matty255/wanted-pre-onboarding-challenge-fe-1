@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { NewUser } from "../types/user";
+import { NewUser, UserProps } from "../types/user";
 import { useDebounce } from "./useDebounce";
 import { useLocation } from "react-router-dom";
 
-const useForm = (callback: Function, validate: Function) => {
+const useForm = (
+  callback: Function,
+  validate: Function,
+  init: UserProps | NewUser
+) => {
   const { pathname } = useLocation();
-  const [values, setValues] = useState<NewUser>({
-    email: "",
-    password: "",
-    passwordConfirm: "",
-  });
-  const [errors, setErrors] = useState<NewUser>({
-    email: "",
-    password: "",
-    passwordConfirm: "",
-  });
+  const [values, setValues] = useState(init);
+  const [errors, setErrors] = useState(init);
   const [isError, setIsError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const debouncedKeyword = useDebounce(values, 200);
+  console.log(values);
   useEffect(() => {
-    setErrors(validate(debouncedKeyword));
+    setErrors(validate(debouncedKeyword, init));
   }, [debouncedKeyword]);
 
   useEffect(() => {
@@ -29,17 +26,15 @@ const useForm = (callback: Function, validate: Function) => {
   }, [isSubmitting]);
 
   useEffect(() => {
-    if (
-      pathname === "/" &&
-      Object.values(errors)[0] === "" &&
-      Object.values(errors)[1] === ""
-    ) {
-      setIsError(false);
-    } else if (
-      Object.values(errors)[0] === "" &&
-      Object.values(errors)[1] === "" &&
-      Object.values(errors)[2] === ""
-    ) {
+    setValues(init);
+  }, [pathname]);
+
+  const errorList = Object.entries(errors).filter(
+    ([key, value]) => value === ""
+  );
+
+  useEffect(() => {
+    if (errorList.length === Object.entries(values).length) {
       setIsError(false);
     } else {
       setIsError(true);

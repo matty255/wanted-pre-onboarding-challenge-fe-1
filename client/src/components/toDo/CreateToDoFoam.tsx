@@ -1,8 +1,7 @@
 import React from "react";
 import { NewToDo } from "../../types/toDos";
 import { createTodo } from "../../api/querys";
-import { Input, TextArea } from "../../common/Input";
-import Label from "../../common/Label";
+import * as el from "../../common";
 
 const AddToDo = () => {
   const [values, setValues] = React.useState<NewToDo>({
@@ -51,10 +50,10 @@ const AddToDo = () => {
       onSubmit={addToDo}
       className="mx-auto flex justify-center items-stretch flex-col shrink-0 w-1/2"
     >
-      <Label
+      <el.Label
         title="할 일"
         content={
-          <Input
+          <el.Input
             variant="submit"
             name="title"
             value={values.title || ""}
@@ -63,10 +62,10 @@ const AddToDo = () => {
           />
         }
       />
-      <Label
+      <el.Label
         title="상세설명"
         content={
-          <TextArea
+          <el.TextArea
             tw=""
             variant="submit"
             name="content"

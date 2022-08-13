@@ -1,5 +1,5 @@
 import React from "react";
-import { ScheduleList } from "../../types/schedule";
+import { UserProps } from "./user";
 
 declare module "*.jpg";
 declare module "*.png";
