@@ -7,6 +7,7 @@ export type storageProps = {
 export type storageInnerProps = {
   set: ({ key, persist, value }: storageProps) => void;
   get: ({ key, persist }: storageProps) => string | undefined | null;
+  has: ({ key, persist }: storageProps) => boolean | undefined;
 };
 
 export const Storage: storageInnerProps = {
@@ -24,6 +25,14 @@ export const Storage: storageInnerProps = {
     }
     if (persist === false) {
       return localStorage.getItem(key);
+    }
+  },
+  has: ({ key, persist }: storageProps) => {
+    if (persist === true) {
+      return !!sessionStorage.getItem(key)?.valueOf();
+    }
+    if (persist === false) {
+      return !!localStorage.getItem(key)?.valueOf();
     }
   },
 };

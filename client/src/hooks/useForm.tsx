@@ -14,7 +14,7 @@ const useForm = (
   const [isError, setIsError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const debouncedKeyword = useDebounce(values, 200);
-  console.log(values);
+
   useEffect(() => {
     setErrors(validate(debouncedKeyword, init));
   }, [debouncedKeyword]);

@@ -3,11 +3,12 @@ import React from "react";
 import tw from "twin.macro";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../../common/Text";
+import { Storage } from "../../api/storage";
 const Header = () => {
   const navigate = useNavigate();
-  const token = !!localStorage.getItem("token")?.valueOf();
+  const token = Storage.has({ key: "token", persist: false });
   const logout = () => {
-    localStorage.setItem("token", "");
+    Storage.set({ key: "token", persist: false, value: "" });
     navigate("/");
   };
 
