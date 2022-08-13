@@ -78,6 +78,13 @@
       "id": "xeS_7rWM6HjtR6AuG4COo",
       "createdAt": "2022-08-13T07:03:33.675Z",
       "updatedAt": "2022-08-13T07:03:33.675Z"
+    },
+    {
+      "email": "ew@we.com",
+      "password": "qweqweqwe",
+      "id": "7vcVyjAQIF4xTuprQ_mn1",
+      "createdAt": "2022-08-13T08:59:32.843Z",
+      "updatedAt": "2022-08-13T08:59:32.843Z"
     }
   ]
 }
