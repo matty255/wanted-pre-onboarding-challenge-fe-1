@@ -35,7 +35,7 @@ const Form = () => {
     if (isLoginPage && "email" in values) {
       UserAPI.loginTodo(values)
         .then((res) => {
-          localStorage.setItem("token", res.data.token);
+          alert("로그인 성공!");
         })
         .catch((error) => {
           console.log(error);
@@ -44,7 +44,6 @@ const Form = () => {
     }
     if (isSignInPage && "passwordConfirm" in values) {
       UserAPI.singUpTodo(values).then((res) => {
-        localStorage.setItem("token", res.data.token);
         alert("계정 생성 완료, 자동 로그인 되었습니다!");
       });
     }
