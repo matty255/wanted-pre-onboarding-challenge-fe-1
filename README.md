@@ -5,7 +5,8 @@
 
 - 과제 1주차
 - [리팩토링 과정 회고록 1](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80)
-- [리팩토링 과정 회고록 2](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80-1%EC%A3%BC%EC%B0%A8-%EA%B3%BC%EC%A0%9C-22) - 진행중
+- [리팩토링 과정 회고록 2 + 리액트쿼리 공부](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80-1%EC%A3%BC%EC%B0%A8-%EA%B3%BC%EC%A0%9C-22)
+- [리덕스 구현체 만들기](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80-1%EC%A3%BC%EC%B0%A8-%EC%84%A0%ED%83%9D%EA%B3%BC%EC%A0%9C) - 진행중
 
 # 1) 클라이언트 구현 과제 안내
 
