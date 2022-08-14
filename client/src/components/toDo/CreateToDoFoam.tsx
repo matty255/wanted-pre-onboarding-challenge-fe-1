@@ -20,16 +20,21 @@ const AddToDo = () => {
       [event.target.name]: event.target.value,
     }));
   };
-
+  const modifyRef = React.useRef<HTMLInputElement>(null);
   const { mutateAsync, isLoading, isError, error } = createTodo();
 
   const Submits = () => {
+    if (isError && modifyRef.current) {
+      return modifyRef?.current.focus();
+    }
     mutateAsync(values);
     setValues({
       title: "",
       content: "",
     });
-    alert("등록 완료!");
+    if (!isError) {
+      alert("등록 완료!");
+    }
   };
 
   const addToDo = (event: React.FormEvent<HTMLFormElement>) => {
@@ -59,6 +64,7 @@ const AddToDo = () => {
               name="title"
               value={values.title || ""}
               onChange={handleChange}
+              ref={modifyRef}
               required
             />
           }
@@ -78,7 +84,7 @@ const AddToDo = () => {
           }
         />
 
-        <button type="submit" className="hidden">
+        <button type="submit" className="invisible">
           추가하기
         </button>
       </form>

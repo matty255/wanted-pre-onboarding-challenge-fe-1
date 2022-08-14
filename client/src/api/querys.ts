@@ -5,8 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 
 export function getToDos() {
-  return useQuery(["todos"], () =>
-    ToDosAPI.getToDos().then((response) => response.data)
+  return useQuery(
+    ["todos"],
+    () => ToDosAPI.getToDos().then((response) => response.data),
+    {
+      useErrorBoundary: (error: AxiosError) =>
+        error instanceof AxiosError &&
+        error.response?.status !== undefined &&
+        error.response.status >= 500,
+    }
   );
 }
 
