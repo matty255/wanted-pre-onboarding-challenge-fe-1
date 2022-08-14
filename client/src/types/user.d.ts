@@ -23,4 +23,6 @@ interface SignInProps {
   values: NewUser;
 }
 
-export { UserProps, UserList, NewUser, LoginProps, SignInProps };
+type User = UserProps | NewUser;
+
+export { UserProps, UserList, NewUser, LoginProps, SignInProps, User };

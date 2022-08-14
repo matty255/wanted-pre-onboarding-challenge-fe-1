@@ -1,11 +1,8 @@
 import React from "react";
-import { UserProps, NewUser } from "../types/user";
+import { User } from "../types/user";
 import * as validate from "./validations";
 
-export default function useFormValidations(
-  values: UserProps | NewUser,
-  init: UserProps | NewUser
-) {
+export default function useFormValidations(values: User, init: User): User {
   const errors = Object.assign({}, init);
 
   errors.email = validate.email(values, errors);

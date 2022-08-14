@@ -8,8 +8,9 @@ import { UserLoginInit, NewUserInit } from "../../static/constant/AuthInit";
 import { useMutation } from "@tanstack/react-query";
 import LoginForm from "./LoginForm";
 import SignInForm from "./SignInForm";
-import { UserProps, NewUser } from "../../types/user";
+import { User } from "../../types/user";
 import { AxiosError } from "axios";
+
 const Form = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -24,13 +25,13 @@ const Form = () => {
     init
   );
   const { mutateAsync, isLoading } = useMutation(
-    (values: UserProps | NewUser) =>
+    (values: User) =>
       isLoginPage ? UserAPI.loginTodo(values) : UserAPI.singUpTodo(values),
     {
       onSuccess: () => navigate("/todo"),
       onError: (error: AxiosError) => {
         if (error !== undefined && error instanceof AxiosError) {
-          console.log(Object.values(error?.response?.data)[0]);
+          alert(Object.values(error?.response?.data)[0]);
         }
       },
     }

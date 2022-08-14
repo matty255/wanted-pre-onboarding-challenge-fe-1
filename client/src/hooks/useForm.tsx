@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { NewUser, UserProps } from "../types/user";
+import { User } from "../types/user";
 import { useDebounce } from "./useDebounce";
 import { useLocation } from "react-router-dom";
 
-const useForm = (
-  callback: Function,
-  validate: Function,
-  init: UserProps | NewUser
-) => {
+const useForm = (callback: Function, validate: Function, init: User) => {
   const { pathname } = useLocation();
   const [values, setValues] = useState(init);
   const [errors, setErrors] = useState(init);
