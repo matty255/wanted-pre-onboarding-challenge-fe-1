@@ -35,7 +35,10 @@ export function createTodo() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation((create: NewToDo) => ToDosAPI.createToDo(create), {
-    onSuccess: () => queryClient.invalidateQueries(["todos"]),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
+      alert("등록 완료!");
+    },
     onError: (error: AxiosError) => {
       if (error !== undefined && error instanceof AxiosError) {
         alert(Object.values(error?.response?.data)[0]);
