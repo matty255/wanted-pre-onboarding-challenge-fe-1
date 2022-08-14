@@ -24,22 +24,19 @@ const AddToDo = () => {
   const { mutateAsync, isLoading, isError, error } = createTodo();
 
   const Submits = () => {
-    if (isError && modifyRef.current) {
+    if (values.title === "" && modifyRef.current) {
       return modifyRef?.current.focus();
     }
-    mutateAsync(values);
     setValues({
       title: "",
       content: "",
     });
-    if (!isError) {
-      alert("등록 완료!");
-    }
+    mutateAsync(values);
   };
 
   const addToDo = (event: React.FormEvent<HTMLFormElement>) => {
     if (event) event.preventDefault();
-    mutateAsync(values);
+
     Submits();
   };
 

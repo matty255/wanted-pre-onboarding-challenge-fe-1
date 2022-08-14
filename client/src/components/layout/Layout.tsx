@@ -3,12 +3,13 @@ import React from "react";
 import tw from "twin.macro";
 import { LayoutProps } from "../../types/types";
 import Header from "./Header";
-
+import TopButton from "./TopButton";
 const Layout = ({ children }: LayoutProps) => {
   return (
     <GlobalLayout>
       <Header />
       {children}
+      <TopButton />
     </GlobalLayout>
   );
 };
