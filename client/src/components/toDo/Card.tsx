@@ -75,7 +75,7 @@ const Card = (data: ToDoProps) => {
 
   return (
     <CardBox>
-      <div className="w-5/6 px-4 flex flex-col mt-5 ">
+      <div className="md:w-5/6 px-4 flex flex-col mt-5">
         {modify ? (
           <el.Input
             variant="edit"
@@ -88,7 +88,7 @@ const Card = (data: ToDoProps) => {
             required
           />
         ) : (
-          <el.Text variant="title" className="truncate">
+          <el.Text variant="title" className="truncate dark:text-white">
             {data.title}
           </el.Text>
         )}
@@ -96,14 +96,14 @@ const Card = (data: ToDoProps) => {
           <el.TextArea
             name="content"
             variant="edit"
-            tw="text-xl h-28"
+            tw="text-xl h-16 md:h-24"
             value={values.content || data.content}
             onChange={handleChange}
             onKeyDown={onEnterPress}
             required
           />
         ) : (
-          <el.Text variant="text" className="truncate">
+          <el.Text variant="text" className="truncate dark:text-gray-300">
             {data.content}
           </el.Text>
         )}
@@ -132,35 +132,37 @@ const Card = (data: ToDoProps) => {
 
       <div className="md:hidden flex justify-center gap-10 mb-2">
         {modify ? (
-          <button className="bg-white p-2 md:hidden" onClick={handleUpdate}>
+          <button
+            className="bg-white p-2 md:hidden dark:bg-gray-900"
+            onClick={handleUpdate}
+          >
             수정완료
           </button>
         ) : (
           <button
-            className="bg-white p-2 md:hidden"
+            className="bg-white p-2 md:hidden dark:bg-gray-900"
             onClick={() => setModify((state) => !state)}
           >
             수정
           </button>
         )}
         <button
-          className="bg-white p-2 md:hidden"
+          className="bg-white p-2 md:hidden dark:bg-gray-900"
           onClick={() => navigate(`/todo/${data.id}`)}
         >
           상세
         </button>
         <button
-          className="bg-white p-2 md:hidden"
+          className="bg-white p-2 md:hidden dark:bg-gray-900"
           onClick={() => deleteHandler()}
         >
           삭제
         </button>
       </div>
-      {isLoading && <el.Spinner />}
     </CardBox>
   );
 };
 
 export default Card;
 
-const CardBox = tw.div`flex shadow-md bg-white mb-10 h-44 justify-between  flex-col md:flex-row`;
+const CardBox = tw.div`flex shadow-md bg-white mb-10 h-44 justify-between  flex-col md:flex-row dark:bg-gray-700 dark:text-white`;

@@ -45,7 +45,7 @@ const Form = () => {
   }
 
   return (
-    <div className="h-screen w-full fixed pt-24 bg-yellow">
+    <div className="h-screen w-full fixed pt-24 bg-yellow max-w-7xl">
       {isLoading && <el.Spinner />}
       <el.Box>
         <div className="">

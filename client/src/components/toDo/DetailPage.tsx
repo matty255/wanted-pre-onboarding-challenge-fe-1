@@ -20,12 +20,12 @@ const Detail = () => {
   return (
     <>
       <div className="w-1/2">
-        <el.Text className="ml-3">What To Do!</el.Text>
+        <el.Text className="ml-3 dark:text-white">What To Do!</el.Text>
         {!detail && (
           <div className="w-full bg-white p-4 m-2">todo list 상세 확인</div>
         )}
         {detail?.data && (
-          <div className="w-full bg-white p-4 m-2">
+          <div className="w-full bg-white p-4 m-2 overflow-y-scroll h-32">
             <el.Text variant="title">{detail?.data.title}</el.Text>
             <el.Text variant="text">{detail?.data.content}</el.Text>
             <p>
@@ -44,7 +44,6 @@ const Detail = () => {
           </div>
         )}
       </div>
-      {isLoading && <el.Spinner />}
     </>
   );
 };

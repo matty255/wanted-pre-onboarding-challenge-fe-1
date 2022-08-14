@@ -4,4 +4,5 @@ import { Input, TextArea } from "./Input";
 import Label from "./Label";
 import Spinner from "./Spinner";
 import { Text } from "./Text";
-export { Box, Button, Label, Spinner, Text, Input, TextArea };
+import { HiddenBox } from "./HiddenBox";
+export { Box, Button, Label, Spinner, Text, Input, TextArea, HiddenBox };
