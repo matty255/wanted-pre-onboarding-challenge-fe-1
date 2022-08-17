@@ -3,7 +3,7 @@ import { NewToDo } from "../../types/toDos";
 import { useCreateTodo } from "../../api/querys";
 import * as el from "../../common";
 
-const AddToDo = () => {
+const CreateToDoForm = () => {
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
     content: "",
@@ -90,4 +90,4 @@ const AddToDo = () => {
   );
 };
 
-export default AddToDo;
+export default CreateToDoForm;
