@@ -35,7 +35,7 @@ const CustomRoutes = () => {
 
   return (
     <Routes>
-      {["/todo", "/todo/:id"].map((path) => {
+      {["/todo", ":id"].map((path) => {
         return <Route path={path} element={<Home />} key={path} />;
       })}
       {["/", "/signin"].map((path) => {

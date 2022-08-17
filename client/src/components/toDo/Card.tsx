@@ -2,10 +2,10 @@ import React from "react";
 /** @jsxImportSource @emotion/react */
 import tw from "twin.macro";
 import { ToDoProps, NewToDo } from "../../types/toDos";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { toDoDetail } from "../../store/global";
-import { updateToDo, deleteToDo } from "../../api/querys";
+import { useUpdateToDo, useDeleteToDo } from "../../api/querys";
 import * as el from "../../common";
 
 const Card = (data: ToDoProps) => {
@@ -18,13 +18,12 @@ const Card = (data: ToDoProps) => {
     content: "",
   });
   const modifyRef = React.useRef<HTMLInputElement>(null);
-  const { mutateAsync, isLoading, isError, error } = updateToDo(data.id);
-  const deleteById = deleteToDo(data.id);
-
+  const { mutateAsync, isLoading, isError, error } = useUpdateToDo(data.id);
+  const deleteById = useDeleteToDo(data.id);
+  const [searchParams, setSearchParams] = useSearchParams();
   const deleteHandler = () => {
     console.log("삭제완료");
     deleteById.mutateAsync();
-    setCleanData(null);
   };
 
   const handleChange = (
@@ -49,7 +48,10 @@ const Card = (data: ToDoProps) => {
     if (values.content === "") {
       values.content = data.content;
     }
-    mutateAsync(values).then((res) => setCleanData(res.data));
+
+    mutateAsync(values).then((res) =>
+      setSearchParams({ id: res.data.data.id })
+    );
   };
 
   const handleUpdate = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -122,7 +124,10 @@ const Card = (data: ToDoProps) => {
             수정
           </el.Button>
         )}
-        <el.Button isSmall={true} onClick={() => navigate(`/todo/${data.id}`)}>
+        <el.Button
+          isSmall={true}
+          onClick={() => navigate(`/todo/?id=${data.id}`)}
+        >
           상세
         </el.Button>
         <el.Button isSmall={true} onClick={() => deleteHandler()}>
@@ -148,7 +153,9 @@ const Card = (data: ToDoProps) => {
         )}
         <button
           className="bg-white p-2 md:hidden dark:bg-gray-900"
-          onClick={() => navigate(`/todo/${data.id}`)}
+          onClick={() =>
+            navigate(`/todo/${data.id}`, { state: { id: data.id } })
+          }
         >
           상세
         </button>

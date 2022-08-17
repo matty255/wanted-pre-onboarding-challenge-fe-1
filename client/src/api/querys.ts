@@ -1,14 +1,24 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
-import { ToDoList, ToDoProps, NewToDo } from "../types/toDos";
+import { ToDoList, ToDoProps, ToDoDetail, NewToDo } from "../types/toDos";
 import { ToDosAPI } from "./httpRequest";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
+import React from "react";
 
-export function getToDos() {
+const Keys = {
+  all: ["todos"] as const,
+  details: () => [...Keys.all, "detail"] as const,
+  detail: (id: string) => [...Keys.details(), id] as const,
+};
+
+export function useGetToDos() {
   return useQuery(
-    ["todos"],
+    Keys.all,
     () => ToDosAPI.getToDos().then((response) => response.data),
     {
+      onSuccess: () => {
+        console.log("로딩 완료");
+      },
       useErrorBoundary: (error: AxiosError) =>
         error instanceof AxiosError &&
         error.response?.status !== undefined &&
@@ -17,61 +27,57 @@ export function getToDos() {
   );
 }
 
-export function getToDoById() {
+export function useGetToDoById(id: string) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  return useMutation((id: string) => ToDosAPI.getToDoById(id), {
-    onSuccess: () => queryClient.invalidateQueries(["todo"]),
+
+  return useQuery(Keys.detail(id), () => ToDosAPI.getToDoById(id), {
+    retry: 1,
+    useErrorBoundary: false,
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries(Keys.detail(id));
+    // },
     onError: (error: AxiosError) => {
       if (error !== undefined && error instanceof AxiosError) {
-        alert(Object.values(error?.response?.data)[0]);
+        queryClient.invalidateQueries(Keys.detail(id));
         navigate("/todo");
       }
     },
   });
 }
 
-export function createTodo() {
-  const navigate = useNavigate();
+export function useCreateTodo() {
   const queryClient = useQueryClient();
   return useMutation((create: NewToDo) => ToDosAPI.createToDo(create), {
     onSuccess: () => {
-      queryClient.invalidateQueries(["todos"]);
+      queryClient.invalidateQueries(Keys.all);
       alert("등록 완료!");
     },
-    onError: (error: AxiosError) => {
-      if (error !== undefined && error instanceof AxiosError) {
-        alert(Object.values(error?.response?.data)[0]);
-        navigate("/todo");
-      }
-    },
+    useErrorBoundary: (error: AxiosError) =>
+      error instanceof AxiosError &&
+      error.response?.status !== undefined &&
+      error.response.status >= 500,
   });
 }
 
-export function updateToDo(id: string) {
-  const navigate = useNavigate();
+export function useUpdateToDo(id: string) {
   const queryClient = useQueryClient();
   return useMutation((update: NewToDo) => ToDosAPI.updateToDo(update, id), {
-    onSuccess: () => queryClient.invalidateQueries(["todos"]),
-    onError: (error: AxiosError) => {
-      if (error !== undefined && error instanceof AxiosError) {
-        alert(Object.values(error?.response?.data)[0]);
-        navigate("/todo");
-      }
-    },
+    onSuccess: () => queryClient.invalidateQueries(Keys.all),
+    useErrorBoundary: (error: AxiosError) =>
+      error instanceof AxiosError &&
+      error.response?.status !== undefined &&
+      error.response.status >= 500,
   });
 }
 
-export function deleteToDo(id: string) {
-  const navigate = useNavigate();
+export function useDeleteToDo(id: string) {
   const queryClient = useQueryClient();
   return useMutation(() => ToDosAPI.deleteToDo(id), {
-    onSuccess: () => queryClient.invalidateQueries(["todos"]),
-    onError: (error: AxiosError) => {
-      if (error !== undefined && error instanceof AxiosError) {
-        alert(Object.values(error?.response?.data)[0]);
-        navigate("/todo");
-      }
-    },
+    onSuccess: () => queryClient.invalidateQueries(Keys.all),
+    useErrorBoundary: (error: AxiosError) =>
+      error instanceof AxiosError &&
+      error.response?.status !== undefined &&
+      error.response.status >= 500,
   });
 }
