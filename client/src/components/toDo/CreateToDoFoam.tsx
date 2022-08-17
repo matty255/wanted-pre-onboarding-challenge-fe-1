@@ -1,6 +1,6 @@
 import React from "react";
 import { NewToDo } from "../../types/toDos";
-import { createTodo } from "../../api/querys";
+import { useCreateTodo } from "../../api/querys";
 import * as el from "../../common";
 
 const AddToDo = () => {
@@ -21,7 +21,7 @@ const AddToDo = () => {
     }));
   };
   const modifyRef = React.useRef<HTMLInputElement>(null);
-  const { mutateAsync, isLoading, isError, error } = createTodo();
+  const { mutateAsync, isLoading, isError, error } = useCreateTodo();
 
   const Submits = () => {
     if (values.title === "" && modifyRef.current) {
