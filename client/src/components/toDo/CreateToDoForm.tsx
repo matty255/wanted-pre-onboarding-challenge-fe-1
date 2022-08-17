@@ -21,7 +21,7 @@ const CreateToDoForm = () => {
     }));
   };
   const modifyRef = React.useRef<HTMLInputElement>(null);
-  const { mutateAsync, isLoading, isError, error } = useCreateTodo();
+  const { mutateAsync, isLoading } = useCreateTodo();
 
   const Submits = () => {
     if (values.title === "" && modifyRef.current) {
@@ -36,13 +36,13 @@ const CreateToDoForm = () => {
 
   const addToDo = (event: React.FormEvent<HTMLFormElement>) => {
     if (event) event.preventDefault();
-
     Submits();
   };
 
   const onEnterPress = (event: React.KeyboardEvent) => {
     if (event.keyCode === 13 && event.shiftKey === false) {
-      event.preventDefault();
+      if (event) event.preventDefault();
+      if (values.content === "") return;
       Submits();
     }
   };

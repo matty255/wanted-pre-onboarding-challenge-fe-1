@@ -28,20 +28,22 @@ const Form = () => {
     (values: User) =>
       isLoginPage ? UserAPI.loginTodo(values) : UserAPI.singUpTodo(values),
     {
-      onSuccess: () => navigate("/todo"),
-      onError: (error: AxiosError) => {
-        if (error !== undefined && error instanceof AxiosError) {
-          alert(Object.values(error?.response?.data)[0]);
-        }
+      onSuccess: () => {
+        navigate("/todo");
       },
+      useErrorBoundary: (error: AxiosError) =>
+        error instanceof AxiosError && error.response?.status !== undefined,
+
+      // onError: (error: AxiosError) => {
+      //   if (error !== undefined && error instanceof AxiosError) {
+      //     console.log(Object.values(error?.response?.data)[0]);
+      //   }
+      // },
     }
   );
 
   function login() {
     mutateAsync(values);
-    isLoginPage
-      ? alert("로그인 성공!")
-      : alert("계정이 생성되었습니다, 자동으로 로그인합니다!");
   }
 
   return (

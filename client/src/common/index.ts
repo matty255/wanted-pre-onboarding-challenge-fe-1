@@ -5,4 +5,15 @@ import Label from "./Label";
 import Spinner from "./Spinner";
 import { Text } from "./Text";
 import { HiddenBox } from "./HiddenBox";
-export { Box, Button, Label, Spinner, Text, Input, TextArea, HiddenBox };
+import ModalContent from "./ModalContent";
+export {
+  Box,
+  Button,
+  Label,
+  Spinner,
+  Text,
+  Input,
+  TextArea,
+  HiddenBox,
+  ModalContent,
+};

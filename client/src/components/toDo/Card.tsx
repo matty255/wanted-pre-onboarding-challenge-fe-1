@@ -7,6 +7,8 @@ import { useRecoilState } from "recoil";
 import { toDoDetail } from "../../store/global";
 import { useUpdateToDo, useDeleteToDo } from "../../api/querys";
 import * as el from "../../common";
+import { useModal } from "../../hooks/useModal";
+import { Modal } from "../../common/Modal";
 
 const Card = (data: ToDoProps) => {
   const navigate = useNavigate();
@@ -18,13 +20,14 @@ const Card = (data: ToDoProps) => {
     content: "",
   });
   const modifyRef = React.useRef<HTMLInputElement>(null);
-  const { mutateAsync, isLoading, isError, error } = useUpdateToDo(data.id);
+  const { mutateAsync } = useUpdateToDo(data.id);
   const deleteById = useDeleteToDo(data.id);
   const [searchParams, setSearchParams] = useSearchParams();
-  const deleteHandler = () => {
-    console.log("삭제완료");
-    deleteById.mutateAsync();
-  };
+  const { isShown, toggle } = useModal();
+
+  const content = (
+    <div className="h-24 pt-10 font-bold text-lg">정말 삭제하시겠습니까?</div>
+  );
 
   const handleChange = (
     event:
@@ -76,97 +79,107 @@ const Card = (data: ToDoProps) => {
   });
 
   return (
-    <CardBox>
-      <div className="md:w-5/6 px-4 flex flex-col mt-5">
-        {modify ? (
-          <el.Input
-            variant="edit"
-            name="title"
-            tw="text-2xl"
-            ref={modifyRef}
-            value={values.title || data.title}
-            onChange={handleChange}
-            onKeyDown={onEnterPress}
-            required
-          />
-        ) : (
-          <el.Text variant="title" className="truncate dark:text-white">
-            {data.title}
-          </el.Text>
-        )}
-        {modify ? (
-          <el.TextArea
-            name="content"
-            variant="edit"
-            tw="text-xl h-16 md:h-24"
-            value={values.content || data.content}
-            onChange={handleChange}
-            onKeyDown={onEnterPress}
-            required
-          />
-        ) : (
-          <el.Text variant="text" className="truncate dark:text-gray-300">
-            {data.content}
-          </el.Text>
-        )}
-      </div>
+    <>
+      <Modal
+        isShown={isShown}
+        hide={toggle}
+        modalContent={content}
+        contentText={"삭제"}
+        callback={() => deleteById.mutateAsync()}
+      />
 
-      <div className="flex-col flex-shrink-0 gap-4 justify-center mr-3 hidden md:flex">
-        {modify ? (
-          <el.Button isSmall={true} onClick={handleUpdate}>
-            수정완료
-          </el.Button>
-        ) : (
+      <CardBox>
+        <div className="md:w-5/6 px-4 flex flex-col mt-5">
+          {modify ? (
+            <el.Input
+              variant="edit"
+              name="title"
+              tw="text-2xl"
+              ref={modifyRef}
+              value={values.title || data.title}
+              onChange={handleChange}
+              onKeyDown={onEnterPress}
+              required
+            />
+          ) : (
+            <el.Text variant="title" className="truncate dark:text-white">
+              {data.title}
+            </el.Text>
+          )}
+          {modify ? (
+            <el.TextArea
+              name="content"
+              variant="edit"
+              tw="text-xl h-16 md:h-24"
+              value={values.content || data.content}
+              onChange={handleChange}
+              onKeyDown={onEnterPress}
+              required
+            />
+          ) : (
+            <el.Text variant="text" className="truncate dark:text-gray-300">
+              {data.content}
+            </el.Text>
+          )}
+        </div>
+
+        <div className="flex-col flex-shrink-0 gap-4 justify-center mr-3 hidden md:flex">
+          {modify ? (
+            <el.Button isSmall={true} onClick={handleUpdate}>
+              수정완료
+            </el.Button>
+          ) : (
+            <el.Button
+              isSmall={true}
+              onClick={() => setModify((state) => !state)}
+            >
+              수정
+            </el.Button>
+          )}
           <el.Button
             isSmall={true}
-            onClick={() => setModify((state) => !state)}
+            onClick={() => navigate(`/todo/?id=${data.id}`)}
           >
-            수정
+            상세
           </el.Button>
-        )}
-        <el.Button
-          isSmall={true}
-          onClick={() => navigate(`/todo/?id=${data.id}`)}
-        >
-          상세
-        </el.Button>
-        <el.Button isSmall={true} onClick={() => deleteHandler()}>
-          삭제
-        </el.Button>
-      </div>
+          <el.Button isSmall={true} onClick={() => toggle()}>
+            삭제
+          </el.Button>
+        </div>
 
-      <div className="md:hidden flex justify-center gap-10 mb-2">
-        {modify ? (
+        <div className="md:hidden flex justify-center gap-10 mb-2">
+          {modify ? (
+            <button
+              className="bg-white p-2 md:hidden dark:bg-gray-900"
+              onClick={handleUpdate}
+            >
+              수정완료
+            </button>
+          ) : (
+            <button
+              className="bg-white p-2 md:hidden dark:bg-gray-900"
+              onClick={() => setModify((state) => !state)}
+            >
+              수정
+            </button>
+          )}
           <button
             className="bg-white p-2 md:hidden dark:bg-gray-900"
-            onClick={handleUpdate}
+            onClick={() =>
+              navigate(`/todo/${data.id}`, { state: { id: data.id } })
+            }
           >
-            수정완료
+            상세
           </button>
-        ) : (
           <button
             className="bg-white p-2 md:hidden dark:bg-gray-900"
-            onClick={() => setModify((state) => !state)}
+            onClick={() => toggle()}
           >
-            수정
+            삭제
           </button>
-        )}
-        <button
-          className="bg-white p-2 md:hidden dark:bg-gray-900"
-          onClick={() =>
-            navigate(`/todo/${data.id}`, { state: { id: data.id } })
-          }
-        >
-          상세
-        </button>
-        <button
-          className="bg-white p-2 md:hidden dark:bg-gray-900"
-          onClick={() => deleteHandler()}
-        >
-          삭제
-        </button>
-      </div>
-    </CardBox>
+        </div>
+      </CardBox>
+    </>
   );
 };
 

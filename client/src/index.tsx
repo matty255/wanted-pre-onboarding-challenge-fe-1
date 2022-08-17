@@ -20,12 +20,14 @@ const queryClient = new QueryClient({
     queries: {
       suspense: true,
       staleTime: 1000 * 60,
+      useErrorBoundary: true,
     },
   },
   queryCache: new QueryCache({
     onError: (error) => {
       if (error !== undefined && error instanceof AxiosError) {
-        console.log(Object.values(error?.response?.data)[0]);
+        // console.log(Object.values(error?.response?.data)[0]);
+        // console.log("aa");
         useParams.delete("id");
       }
     },
