@@ -28,7 +28,10 @@ const Form = () => {
     (values: User) =>
       isLoginPage ? UserAPI.loginTodo(values) : UserAPI.singUpTodo(values),
     {
-      onSuccess: () => navigate("/todo"),
+      onSuccess: () => {
+        navigate("/todo");
+        isLoginPage ? alert("login 성공") : alert("회원가입 성공");
+      },
       onError: (error: AxiosError) => {
         if (error !== undefined && error instanceof AxiosError) {
           alert(Object.values(error?.response?.data)[0]);
@@ -39,9 +42,6 @@ const Form = () => {
 
   function login() {
     mutateAsync(values);
-    isLoginPage
-      ? alert("로그인 성공!")
-      : alert("계정이 생성되었습니다, 자동으로 로그인합니다!");
   }
 
   return (

@@ -53,7 +53,7 @@ const DetailPage = () => {
 
         <div className="w-full bg-white p-4 m-2 overflow-y-scroll h-32">
           {isFetching ? (
-            <el.Text variant="text">삭제중...</el.Text>
+            <el.Text variant="text">처리중...</el.Text>
           ) : (
             <>
               <el.Text variant="title">{data?.data.data.title}</el.Text>
