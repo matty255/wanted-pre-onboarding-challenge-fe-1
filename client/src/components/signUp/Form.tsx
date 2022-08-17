@@ -30,13 +30,15 @@ const Form = () => {
     {
       onSuccess: () => {
         navigate("/todo");
-        isLoginPage ? alert("login 성공") : alert("회원가입 성공");
       },
-      onError: (error: AxiosError) => {
-        if (error !== undefined && error instanceof AxiosError) {
-          alert(Object.values(error?.response?.data)[0]);
-        }
-      },
+      useErrorBoundary: (error: AxiosError) =>
+        error instanceof AxiosError && error.response?.status !== undefined,
+
+      // onError: (error: AxiosError) => {
+      //   if (error !== undefined && error instanceof AxiosError) {
+      //     console.log(Object.values(error?.response?.data)[0]);
+      //   }
+      // },
     }
   );
 

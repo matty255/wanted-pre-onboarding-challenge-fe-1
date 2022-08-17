@@ -20,9 +20,7 @@ export function useGetToDos() {
         // console.log("로딩 완료");
       },
       useErrorBoundary: (error: AxiosError) =>
-        error instanceof AxiosError &&
-        error.response?.status !== undefined &&
-        error.response.status >= 500,
+        error instanceof AxiosError && error.response?.status !== undefined,
     }
   );
 }
@@ -51,12 +49,10 @@ export function useCreateTodo() {
   return useMutation((create: NewToDo) => ToDosAPI.createToDo(create), {
     onSuccess: () => {
       queryClient.invalidateQueries(Keys.all);
-      alert("등록 완료!");
+      // alert("등록 완료!");
     },
     useErrorBoundary: (error: AxiosError) =>
-      error instanceof AxiosError &&
-      error.response?.status !== undefined &&
-      error.response.status >= 500,
+      error instanceof AxiosError && error.response?.status !== undefined,
   });
 }
 
@@ -65,9 +61,7 @@ export function useUpdateToDo(id: string) {
   return useMutation((update: NewToDo) => ToDosAPI.updateToDo(update, id), {
     onSuccess: () => queryClient.invalidateQueries(Keys.all),
     useErrorBoundary: (error: AxiosError) =>
-      error instanceof AxiosError &&
-      error.response?.status !== undefined &&
-      error.response.status >= 500,
+      error instanceof AxiosError && error.response?.status !== undefined,
   });
 }
 
@@ -76,8 +70,6 @@ export function useDeleteToDo(id: string) {
   return useMutation(() => ToDosAPI.deleteToDo(id), {
     onSuccess: () => queryClient.invalidateQueries(Keys.all),
     useErrorBoundary: (error: AxiosError) =>
-      error instanceof AxiosError &&
-      error.response?.status !== undefined &&
-      error.response.status >= 500,
+      error instanceof AxiosError && error.response?.status !== undefined,
   });
 }

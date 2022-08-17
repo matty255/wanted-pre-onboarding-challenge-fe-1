@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export interface ModalProps {
   isShown: boolean;
   hide: () => void;
-  modalContent: JSX.Element;
+  modalContent: React.ReactNode;
   headerText?: string;
   contentText?: string;
   callback?: () => void;
@@ -37,10 +37,10 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
                 {contentText}
               </button>
               <button
-                onClick={hide}
+                onClick={contentText === "확인" ? callback : hide}
                 className="bg-white  mx-auto flex items-center justify-center font-bold text-center w-44 max-w-md"
               >
-                취소
+                {contentText === "확인" ? "닫기" : "취소"}
               </button>
             </div>
           </Content>

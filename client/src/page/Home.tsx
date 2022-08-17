@@ -8,6 +8,8 @@ import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import { useThrottle } from "../hooks/useThrottle";
 import { ReactComponent as Arrow } from "../static/image/arrow.svg";
 import { ErrorBoundary } from "react-error-boundary";
+import { useModal } from "../hooks/useModal";
+import { Modal } from "../common/Modal";
 
 const List = React.lazy(() => import("../components/toDo/List"));
 const CreateToDoForm = React.lazy(
@@ -33,43 +35,64 @@ const Home = () => {
     };
   }, []);
 
+  const { isShown, toggle } = useModal();
+  React.useEffect(() => {
+    toggle();
+  }, [QueryErrorResetBoundary]);
+
   return (
     <>
       <Layout>
-        <QueryErrorResetBoundary>
-          {({ reset }) => (
-            <ErrorBoundary
-              onReset={reset}
-              fallbackRender={({ resetErrorBoundary }) => (
-                <el.Spinner onClick={() => resetErrorBoundary()} />
-              )}
-            >
-              <el.HiddenBox close={close}>
-                <React.Suspense fallback={<el.Spinner />}>
+        <React.Suspense fallback={<el.Spinner />}>
+          <QueryErrorResetBoundary>
+            {({ reset }) => (
+              <ErrorBoundary
+                onReset={reset}
+                fallbackRender={({ error, resetErrorBoundary }) => (
+                  <Modal
+                    isShown={isShown}
+                    hide={toggle}
+                    modalContent={<el.ModalContent content={error} />}
+                    contentText={"확인"}
+                    callback={() => resetErrorBoundary()}
+                  />
+                )}
+              >
+                <el.HiddenBox close={close}>
                   <div className="flex flex-row w-full">
                     <CreateToDoForm />
                     <DetailPage />
                   </div>
-                </React.Suspense>
 
-                <button
-                  className="mt-5 -mb-10 flex justify-center items-center mx-auto w-8 hover:fill-yellow-300 active:fill-yellow-500 active:scale-110"
-                  onClick={() =>
-                    window.scrollY > 120 && setClose((state) => !state)
-                  }
-                >
-                  <Arrow />
-                </button>
-              </el.HiddenBox>
-
-              <React.Suspense fallback={<el.Spinner />}>
+                  <button
+                    className="mt-5 -mb-10 flex justify-center items-center mx-auto w-8 hover:fill-yellow-300 active:fill-yellow-500 active:scale-110"
+                    onClick={() =>
+                      window.scrollY > 120 && setClose((state) => !state)
+                    }
+                  >
+                    <Arrow />
+                  </button>
+                </el.HiddenBox>
+              </ErrorBoundary>
+            )}
+          </QueryErrorResetBoundary>
+        </React.Suspense>
+        <React.Suspense fallback={<el.Spinner />}>
+          <QueryErrorResetBoundary>
+            {({ reset }) => (
+              <ErrorBoundary
+                onReset={reset}
+                fallbackRender={({ resetErrorBoundary }) => (
+                  <el.Spinner onClick={() => resetErrorBoundary()} />
+                )}
+              >
                 <div className="flex p-10">
                   {data?.data && <List {...data} />}
                 </div>
-              </React.Suspense>
-            </ErrorBoundary>
-          )}
-        </QueryErrorResetBoundary>
+              </ErrorBoundary>
+            )}
+          </QueryErrorResetBoundary>
+        </React.Suspense>
       </Layout>
     </>
   );
