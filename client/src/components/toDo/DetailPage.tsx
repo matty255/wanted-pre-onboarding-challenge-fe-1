@@ -15,6 +15,7 @@ const DetailPage = () => {
   const idState = searchParams.get("id") || "";
   const [id, setId] = React.useState("");
   const { data, isFetching, isLoading } = useGetToDoById(id);
+
   React.useEffect(() => {
     setId(idState);
   }, [data, search]);

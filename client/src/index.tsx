@@ -19,7 +19,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       suspense: true,
-      staleTime: Infinity,
+      staleTime: 1000 * 60,
     },
   },
   queryCache: new QueryCache({

@@ -2,8 +2,6 @@ import React from "react";
 /** @jsxImportSource @emotion/react */
 import tw, { styled } from "twin.macro";
 import Layout from "../components/layout/Layout";
-import AddToDo from "../components/toDo/CreateToDoFoam";
-import Detail from "../components/toDo/DetailPage";
 import { useGetToDos } from "../api/querys";
 import * as el from "../common";
 import { QueryErrorResetBoundary } from "@tanstack/react-query";
@@ -12,6 +10,10 @@ import { ReactComponent as Arrow } from "../static/image/arrow.svg";
 import { ErrorBoundary } from "react-error-boundary";
 
 const List = React.lazy(() => import("../components/toDo/List"));
+const CreateToDoForm = React.lazy(
+  () => import("../components/toDo/CreateToDoForm")
+);
+const DetailPage = React.lazy(() => import("../components/toDo/DetailPage"));
 
 const Home = () => {
   const { data } = useGetToDos();
@@ -43,10 +45,12 @@ const Home = () => {
               )}
             >
               <el.HiddenBox close={close}>
-                <div className="flex flex-row w-full">
-                  <AddToDo />
-                  <Detail />
-                </div>
+                <React.Suspense fallback={<el.Spinner />}>
+                  <div className="flex flex-row w-full">
+                    <CreateToDoForm />
+                    <DetailPage />
+                  </div>
+                </React.Suspense>
 
                 <button
                   className="mt-5 -mb-10 flex justify-center items-center mx-auto w-8 hover:fill-yellow-300 active:fill-yellow-500 active:scale-110"
