@@ -10,14 +10,17 @@ import LoginForm from "./LoginForm";
 import SignInForm from "./SignInForm";
 import { User } from "../../types/user";
 import { AxiosError } from "axios";
+import { useModal } from "../../hooks/useModal";
+import { Modal } from "../../common/Modal";
 
 const Form = () => {
+  const { isShown, toggle } = useModal();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const isLoginPage = pathname === "/";
   const isSignInPage = pathname === "/signin";
-
   const init = isLoginPage ? UserLoginInit : NewUserInit;
+  const [message, setMessage] = React.useState(true);
 
   const { values, errors, handleChange, handleSubmit, isError } = useForm(
     login,
@@ -29,16 +32,11 @@ const Form = () => {
       isLoginPage ? UserAPI.loginTodo(values) : UserAPI.singUpTodo(values),
     {
       onSuccess: () => {
-        navigate("/todo");
+        isLoginPage ? setMessage(true) : setMessage(false);
+        toggle();
       },
       useErrorBoundary: (error: AxiosError) =>
         error instanceof AxiosError && error.response?.status !== undefined,
-
-      // onError: (error: AxiosError) => {
-      //   if (error !== undefined && error instanceof AxiosError) {
-      //     console.log(Object.values(error?.response?.data)[0]);
-      //   }
-      // },
     }
   );
 
@@ -49,6 +47,13 @@ const Form = () => {
   return (
     <div className="h-screen w-full fixed pt-24 bg-yellow max-w-7xl">
       {isLoading && <el.Spinner />}
+      <Modal
+        isShown={isShown}
+        hide={toggle}
+        modalContent={<el.ModalContent confirm={message} />}
+        contentText={"확인"}
+        callback={() => navigate("/todo")}
+      />
       <el.Box>
         <div className="">
           {isSignInPage ? (

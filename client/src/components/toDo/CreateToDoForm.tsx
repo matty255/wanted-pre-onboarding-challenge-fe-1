@@ -20,12 +20,12 @@ const CreateToDoForm = () => {
       [event.target.name]: event.target.value,
     }));
   };
-  const modifyRef = React.useRef<HTMLInputElement>(null);
+  const createRef = React.useRef<HTMLInputElement>(null);
   const { mutateAsync, isLoading } = useCreateTodo();
 
   const Submits = () => {
-    if (values.title === "" && modifyRef.current) {
-      return modifyRef?.current.focus();
+    if (values.title === "" && createRef.current) {
+      return createRef?.current.focus();
     }
     setValues({
       title: "",
@@ -61,7 +61,7 @@ const CreateToDoForm = () => {
               name="title"
               value={values.title || ""}
               onChange={handleChange}
-              ref={modifyRef}
+              ref={createRef}
               required
             />
           }

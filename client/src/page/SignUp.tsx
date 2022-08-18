@@ -7,11 +7,13 @@ import * as el from "../common";
 import { useModal } from "../hooks/useModal";
 import { Modal } from "../common/Modal";
 import { AxiosError } from "axios";
+
 const SignUp = () => {
   const { isShown, toggle } = useModal();
   React.useEffect(() => {
     toggle();
   }, [QueryErrorResetBoundary]);
+
   return (
     <>
       <Layout>
