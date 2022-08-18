@@ -20,7 +20,7 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
   modalContent,
   headerText,
   callback,
-  contentText = "삭제",
+  contentText = "확인",
 }) => {
   const Modal = (
     <React.Fragment>
@@ -29,7 +29,7 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
         <StyledModal>
           <Content>
             {modalContent}
-            <div className="flex flex-row divide-x ">
+            <div className="flex flex-row divide-x">
               <button
                 className="bg-white  mx-auto flex items-center justify-center font-bold text-center w-44 max-w-md"
                 onClick={callback}

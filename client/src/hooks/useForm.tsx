@@ -16,7 +16,7 @@ const useForm = (callback: Function, validate: Function, init: User) => {
   }, [debouncedKeyword]);
 
   useEffect(() => {
-    if (isSubmitting) {
+    if (isSubmitting && !isError) {
       callback();
     }
   }, [isSubmitting]);
@@ -40,7 +40,7 @@ const useForm = (callback: Function, validate: Function, init: User) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (event) event.preventDefault();
     setErrors(validate(values));
-    setIsSubmitting((state) => !state);
+    setIsSubmitting(true);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
