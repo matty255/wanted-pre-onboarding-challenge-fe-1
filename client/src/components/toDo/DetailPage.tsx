@@ -7,10 +7,11 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import { useGetToDoById } from "../../api/querys";
 import * as el from "../../common";
 import { formatDistanceToNow } from "date-fns";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const DetailPage = () => {
   const { search } = useLocation();
-
+  const matches = useMediaQuery("(min-width: 768px)");
   const [searchParams, setSearchParams] = useSearchParams();
   const idState = searchParams.get("id") || "";
   const [id, setId] = React.useState("");
@@ -22,14 +23,14 @@ const DetailPage = () => {
 
   return (
     <>
-      <div className="w-1/2">
+      <div className={matches ? "w-1/2" : "w-full"}>
         <DateBox>
           <el.Text className="text-lg md:text-2xl ml-3 dark:text-white self-end">
             What To Do!
           </el.Text>
 
           <div className="flex flex-col items-end dark:text-white">
-            <el.Text className="text-sm">
+            <el.Text className="text-xs md:text-sm inline-flex">
               created :{" "}
               {!isFetching && data && idState && id
                 ? formatDistanceToNow(new Date(data?.data.data.createdAt), {
@@ -39,7 +40,7 @@ const DetailPage = () => {
                 : "생성한 날짜"}
             </el.Text>
 
-            <el.Text className="text-sm">
+            <el.Text className="text-xs md:text-sm inline-flex">
               updated :{" "}
               {!isFetching && data && idState && id
                 ? formatDistanceToNow(new Date(data?.data.data.updatedAt), {

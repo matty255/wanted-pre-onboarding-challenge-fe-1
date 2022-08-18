@@ -9,13 +9,14 @@ interface LabelProps {
   title: string;
   isError?: boolean;
   errorMessage?: string;
+  isTextArea?: boolean;
 }
 
 const Label = (props: LabelProps) => {
   const { pathname } = useLocation();
   return (
     <>
-      <div className="h-24">
+      <div className={!props.isTextArea ? "h-24" : "h-[8.2rem]"}>
         <label>
           <Text variant="text" tw="dark:text-white dark:shadow-inner w-fit">
             {props.title}

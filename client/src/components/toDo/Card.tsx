@@ -165,9 +165,7 @@ const Card = (data: ToDoProps) => {
           )}
           <button
             className="bg-white p-2 md:hidden dark:bg-gray-900"
-            onClick={() =>
-              navigate(`/todo/${data.id}`, { state: { id: data.id } })
-            }
+            onClick={() => navigate(`/todo/?id=${data.id}`)}
           >
             상세
           </button>

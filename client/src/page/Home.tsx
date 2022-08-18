@@ -10,16 +10,16 @@ import { ReactComponent as Arrow } from "../static/image/arrow.svg";
 import { ErrorBoundary } from "react-error-boundary";
 import { useModal } from "../hooks/useModal";
 import { Modal } from "../common/Modal";
-
-const List = React.lazy(() => import("../components/toDo/List"));
-const CreateToDoForm = React.lazy(
-  () => import("../components/toDo/CreateToDoForm")
-);
-const DetailPage = React.lazy(() => import("../components/toDo/DetailPage"));
+import { useMediaQuery } from "../hooks/useMediaQuery";
+import List from "../components/toDo/List";
+import CreateToDoForm from "../components/toDo/CreateToDoForm";
+import DetailPage from "../components/toDo/DetailPage";
 
 const Home = () => {
   const { data } = useGetToDos();
   const [close, setClose] = React.useState(false);
+  const [openCreateToDo, setOpenCreateToDo] = React.useState(false);
+  const matches = useMediaQuery("(min-width: 768px)");
 
   const handleTopSideBar = () => {
     if (window.scrollY < 120) {
@@ -43,56 +43,65 @@ const Home = () => {
   return (
     <>
       <Layout>
-        <React.Suspense fallback={<el.Spinner />}>
-          <QueryErrorResetBoundary>
-            {({ reset }) => (
-              <ErrorBoundary
-                onReset={reset}
-                fallbackRender={({ error, resetErrorBoundary }) => (
-                  <Modal
-                    isShown={isShown}
-                    hide={toggle}
-                    modalContent={<el.ModalContent content={error} />}
-                    contentText={"확인"}
-                    callback={() => resetErrorBoundary()}
-                  />
-                )}
-              >
-                <el.HiddenBox close={close}>
-                  <div className="flex flex-row w-full">
-                    <CreateToDoForm />
-                    <DetailPage />
-                  </div>
-
-                  <button
-                    className="mt-5 -mb-10 flex justify-center items-center mx-auto w-8 hover:fill-yellow-300 active:fill-yellow-500 active:scale-110"
-                    onClick={() =>
-                      window.scrollY > 120 && setClose((state) => !state)
-                    }
-                  >
-                    <Arrow />
-                  </button>
-                </el.HiddenBox>
-              </ErrorBoundary>
-            )}
-          </QueryErrorResetBoundary>
-        </React.Suspense>
-        <React.Suspense fallback={<el.Spinner />}>
-          <QueryErrorResetBoundary>
-            {({ reset }) => (
-              <ErrorBoundary
-                onReset={reset}
-                fallbackRender={({ resetErrorBoundary }) => (
-                  <el.Spinner onClick={() => resetErrorBoundary()} />
-                )}
-              >
-                <div className="flex p-10">
-                  {data?.data && <List {...data} />}
+        <QueryErrorResetBoundary>
+          {({ reset }) => (
+            <ErrorBoundary
+              onReset={reset}
+              fallbackRender={({ error, resetErrorBoundary }) => (
+                <Modal
+                  isShown={isShown}
+                  hide={toggle}
+                  modalContent={<el.ModalContent content={error} />}
+                  contentText={"확인"}
+                  callback={() => resetErrorBoundary()}
+                />
+              )}
+            >
+              <el.HiddenBox close={close}>
+                <button
+                  type="button"
+                  className="absolute bottom-1 left-2 md:hidden hover:text-gray-600 text-white font-bold border rounded-md px-2"
+                  onClick={() => setOpenCreateToDo((state) => !state)}
+                >
+                  {openCreateToDo ? "make to Do" : "detail to Do"}
+                </button>
+                <div className="flex flex-row w-full">
+                  {matches && (
+                    <>
+                      <CreateToDoForm />
+                      <DetailPage />
+                    </>
+                  )}
+                  {!matches && !openCreateToDo && <DetailPage />}
+                  {!matches && openCreateToDo && <CreateToDoForm />}
                 </div>
-              </ErrorBoundary>
-            )}
-          </QueryErrorResetBoundary>
-        </React.Suspense>
+
+                <button
+                  className="mt-5 -mb-10 flex justify-center items-center mx-auto w-8 hover:fill-yellow-300 active:fill-yellow-500 active:scale-110"
+                  onClick={() =>
+                    window.scrollY > 120 && setClose((state) => !state)
+                  }
+                >
+                  <Arrow />
+                </button>
+              </el.HiddenBox>
+            </ErrorBoundary>
+          )}
+        </QueryErrorResetBoundary>
+        <QueryErrorResetBoundary>
+          {({ reset }) => (
+            <ErrorBoundary
+              onReset={reset}
+              fallbackRender={({ resetErrorBoundary }) => (
+                <el.Spinner onClick={() => resetErrorBoundary()} />
+              )}
+            >
+              <div className="flex p-10">
+                {data?.data && <List {...data} />}
+              </div>
+            </ErrorBoundary>
+          )}
+        </QueryErrorResetBoundary>
       </Layout>
     </>
   );

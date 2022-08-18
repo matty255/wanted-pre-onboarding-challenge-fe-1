@@ -8,8 +8,8 @@ interface LabelProps {
 
 const ModalContent = (content: LabelProps, confirm: boolean) => {
   const message = confirm
-    ? "로그인에 성공했습니다."
-    : "회원가입에 성공했습니다. 자동으로 로그인합니다.";
+    ? "회원가입에 성공했습니다. 자동으로 로그인합니다."
+    : "오류가 발생했습니다.";
   const [errorMessage, setErrorMessage] = React.useState<any>();
 
   React.useEffect(() => {

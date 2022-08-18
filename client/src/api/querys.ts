@@ -49,7 +49,6 @@ export function useCreateTodo() {
   return useMutation((create: NewToDo) => ToDosAPI.createToDo(create), {
     onSuccess: () => {
       queryClient.invalidateQueries(Keys.all);
-      // alert("등록 완료!");
     },
     useErrorBoundary: (error: AxiosError) =>
       error instanceof AxiosError && error.response?.status !== undefined,

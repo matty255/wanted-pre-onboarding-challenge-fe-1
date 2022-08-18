@@ -31,14 +31,18 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
             {modalContent}
             <div className="flex flex-row divide-x">
               <button
-                className="bg-white  mx-auto flex items-center justify-center font-bold text-center w-44 max-w-md"
+                className={
+                  contentText === "삭제"
+                    ? "text-red-500 mx-auto flex items-center justify-center font-bold text-center w-44 max-w-md hover:bg-red-300"
+                    : "bg-white mx-auto flex items-center justify-center font-bold text-center w-44 max-w-md hover:text-yellow-800"
+                }
                 onClick={callback}
               >
                 {contentText}
               </button>
               <button
                 onClick={contentText === "확인" ? callback : hide}
-                className="bg-white  mx-auto flex items-center justify-center font-bold text-center w-44 max-w-md"
+                className="bg-white  mx-auto flex items-center justify-center font-bold text-center w-44 max-w-md hover:text-yellow-400"
               >
                 {contentText === "확인" ? "닫기" : "취소"}
               </button>
