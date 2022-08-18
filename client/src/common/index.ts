@@ -6,6 +6,7 @@ import Spinner from "./Spinner";
 import { Text } from "./Text";
 import { HiddenBox } from "./HiddenBox";
 import ModalContent from "./ModalContent";
+import Skeleton from "./Skeleton";
 export {
   Box,
   Button,
@@ -16,4 +17,5 @@ export {
   TextArea,
   HiddenBox,
   ModalContent,
+  Skeleton,
 };

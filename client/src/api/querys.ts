@@ -16,9 +16,7 @@ export function useGetToDos() {
     Keys.all,
     () => ToDosAPI.getToDos().then((response) => response.data),
     {
-      onSuccess: () => {
-        // console.log("로딩 완료");
-      },
+      onSuccess: () => {},
       useErrorBoundary: (error: AxiosError) =>
         error instanceof AxiosError && error.response?.status !== undefined,
     }
