@@ -26,8 +26,6 @@ const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error) => {
       if (error !== undefined && error instanceof AxiosError) {
-        // console.log(Object.values(error?.response?.data)[0]);
-        // console.log("aa");
         useParams.delete("id");
       }
     },

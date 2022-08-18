@@ -2,12 +2,21 @@ import React from "react";
 import { NewToDo } from "../../types/toDos";
 import { useCreateTodo } from "../../api/querys";
 import * as el from "../../common";
-
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { usePreventLeave } from "../../hooks/usePreventLeave";
 const CreateToDoForm = () => {
+  const matches = useMediaQuery("(min-width: 768px)");
   const [values, setValues] = React.useState<NewToDo>({
     title: "",
     content: "",
   });
+  const { enablePrevent, disablePrevent } = usePreventLeave();
+  React.useEffect(() => {
+    enablePrevent();
+    return () => {
+      disablePrevent();
+    };
+  }, []);
 
   const handleChange = (
     event:
@@ -51,7 +60,11 @@ const CreateToDoForm = () => {
     <>
       <form
         onSubmit={addToDo}
-        className="mx-auto flex justify-center items-stretch flex-col shrink-0 w-1/2"
+        className={
+          matches
+            ? "w-1/2 mx-auto flex justify-center items-stretch flex-col shrink-0"
+            : "w-[90rem]"
+        }
       >
         <el.Label
           title="할 일"
@@ -59,6 +72,7 @@ const CreateToDoForm = () => {
             <el.Input
               variant="submit"
               name="title"
+              placeholder="타이틀을 입력하고 엔터를 누르세요"
               value={values.title || ""}
               onChange={handleChange}
               ref={createRef}
@@ -68,11 +82,14 @@ const CreateToDoForm = () => {
         />
         <el.Label
           title="상세설명"
+          isTextArea={true}
           content={
             <el.TextArea
-              tw=""
+              placeholder="컨텐츠를 입력하고 엔터를 누르세요"
               variant="submit"
               name="content"
+              cols={30}
+              rows={5}
               value={values.content || ""}
               onChange={handleChange}
               onKeyDown={onEnterPress}

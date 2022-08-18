@@ -32,8 +32,7 @@ const Form = () => {
       isLoginPage ? UserAPI.loginTodo(values) : UserAPI.singUpTodo(values),
     {
       onSuccess: () => {
-        isLoginPage ? setMessage(true) : setMessage(false);
-        toggle();
+        isSignInPage ? toggle() : navigate("/todo");
       },
       useErrorBoundary: (error: AxiosError) =>
         error instanceof AxiosError && error.response?.status !== undefined,
