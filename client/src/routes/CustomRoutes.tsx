@@ -7,13 +7,11 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
-// import Home from "../page/Home";
-// import SignUp from "../page/SignUp";
+import Home from "../page/Home";
 import NotFound404 from "../page/NotFound404";
 import { Storage } from "../api/storage";
 import * as el from "../common";
 
-const Home = React.lazy(() => import("../page/Home"));
 const SignUp = React.lazy(() => import("../page/SignUp"));
 
 const CustomRoutes = () => {
@@ -40,17 +38,7 @@ const CustomRoutes = () => {
   return (
     <Routes>
       {["/todo", ":id"].map((path) => {
-        return (
-          <Route
-            path={path}
-            element={
-              <React.Suspense fallback={<el.Spinner />}>
-                <Home />
-              </React.Suspense>
-            }
-            key={path}
-          />
-        );
+        return <Route path={path} element={<Home />} key={path} />;
       })}
       {["/", "/signin"].map((path) => {
         return (

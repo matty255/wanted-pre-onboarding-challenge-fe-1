@@ -11,10 +11,10 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useModal } from "../hooks/useModal";
 import { Modal } from "../common/Modal";
 import { useMediaQuery } from "../hooks/useMediaQuery";
-import List from "../components/toDo/List";
+// import List from "../components/toDo/List";
 import CreateToDoForm from "../components/toDo/CreateToDoForm";
 import DetailPage from "../components/toDo/DetailPage";
-
+const List = React.lazy(() => import("../components/toDo/List"));
 const Home = () => {
   const { data } = useGetToDos();
   const [close, setClose] = React.useState(false);
@@ -97,7 +97,11 @@ const Home = () => {
               )}
             >
               <div className="flex p-10">
-                {data?.data && <List {...data} />}
+                {data?.data && (
+                  <React.Suspense fallback={<el.Spinner />}>
+                    <List {...data} />
+                  </React.Suspense>
+                )}
               </div>
             </ErrorBoundary>
           )}
