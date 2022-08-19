@@ -312,6 +312,12 @@ before
 - 처음 소환하는 페이지는 느리게, 두번째로 소환하는 페이지는 바로 소환되는걸 볼수 있습니다.
 ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/89088205/185607322-cf0bcada-323e-47ec-b76a-2071e10ecc2c.gif)
 
+### 패칭시 메시지 띄워주기
+- 느린 3G 설정에서 실험
+- 삭제를 누르면 삭제모달이 뜨고, 삭제를 누르면 삭제와 동시에 패칭됩니다.
+- 패칭시에 뒤에 처리중... 메시지가 뜨는것을 볼수 있습니다.
+![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/89088205/185608326-9ebcf299-4c37-4bc7-9412-9e4283ae6999.gif)
+
 
 ## 2. layout : 관련이슈는 여기 [[1 - 첫 리팩토링]](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/issues/1) / [[2 - layout]](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/issues/13)
 
