@@ -281,7 +281,7 @@ before
 
 # 코드 설명
 
-## 1. api
+## 1. api : 관련이슈는 여기 - [[1 - 첫 리팩토링]](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/issues/1) / [[2 - api]](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/issues/10)
 
 ### token 담는 부분을 interceptor 처리하고 instance를 분리하여 한 곳에서만 관리하게 했습니다.
 
@@ -307,7 +307,7 @@ before
 
 링크 - [routes/CustomRoutes.tsx](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/routes/CustomRoutes.tsx)
 
-2. layout
+## 2. layout : 관련이슈는 여기 [[1 - 첫 리팩토링]](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/issues/1) / [[2 - layout]](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/issues/13)
 
 #### - darkmode, spinner
 
