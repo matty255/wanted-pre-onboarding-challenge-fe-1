@@ -1,78 +1,69 @@
 # wanted-pre-onboarding-challenge-fe-1
 
 원티드 프리온보딩 챌린지 프론트엔드
-- 열심히 리팩토링하는중
 
-- 과제 1주차
+- 작업기간 : 2022-08-01 ~ 2022-08-19
+
+- 과제 개요 : react-query와 clean code, typescript에 대해 배우고 프로젝트를 개선해보기
+
+---
+
+## 링크
+
+### - 과제 1주차
+
 - [리팩토링 과정 회고록 1](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80)
 - [리팩토링 과정 회고록 2 + 리액트쿼리 공부하기](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80-1%EC%A3%BC%EC%B0%A8-%EA%B3%BC%EC%A0%9C-22)
 - [리덕스 구현체 만들기](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80-1%EC%A3%BC%EC%B0%A8-%EC%84%A0%ED%83%9D%EA%B3%BC%EC%A0%9C)
 
-- 과제 2주차
-- [리팩토링 과정 회고록](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80-2%EC%A3%BC%EC%B0%A8-%EA%B3%BC%EC%A0%9C-13)
-- 리드미 작성 가이드(예정)
-- 면접 준비(예정)
-# 1) 클라이언트 구현 과제 안내
+### - 과제 2주차
 
-## Assignment 1 - Login / SignUp
+- [리팩토링 과정 회고록](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80-2%EC%A3%BC%EC%B0%A8-%EA%B3%BC%EC%A0%9C-13)
+- [리드미 작성 가이드](https://velog.io/@matt2550/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B1%8C%EB%A6%B0%EC%A7%80-2%EC%A3%BC%EC%B0%A8-%EA%B3%BC%EC%A0%9C-23)
+- 면접 준비(예정)
+
+---
+
+# Assignment 1 - Login / SignUp
 
 - /auth 경로에 로그인 / 회원가입 기능을 개발합니다
+
   - [✅] 로그인, 회원가입을 별도의 경로로 분리해도 무방합니다
-    - 주소만 분리하고 컴포넌트는 분리하지 않았습니다.
 
   - [✅] 최소한 이메일, 비밀번호 input, 제출 button을 갖도록 구성해주세요
-    - 로그인은 이메일, 비밀번호. 회원가입은 이메일, 비밀번호, 비밀번호 확인 인풋을 가지고 있습니다.
 
 - 이메일과 비밀번호의 유효성을 확인합니다
+
   - [✅] 이메일 조건 : 최소 `@`, `.` 포함
   - [✅] 비밀번호 조건 : 8자 이상 입력
   - [✅] 이메일과 비밀번호가 모두 입력되어 있고, 조건을 만족해야 제출 버튼이 활성화 되도록 해주세요
-    - 디바운스를 적용해서 조건에 모두 맞았을 경우만 버튼을 활성화하고, 각 에러에 대한 메시지를 인풋 하단에 띄워주었습니다.
 
 - 로그인 API를 호출하고, 올바른 응답을 받았을 때 루트 경로로 이동시켜주세요
+
   - [✅] 응답으로 받은 토큰은 로컬 스토리지에 저장해주세요
-    - 토큰을 로컬 스토리지에 저장하고, axios instance에 디폴트로 담아 보낼 수 있게 했습니다.
-
   - [✅] 다음 번에 로그인 시 토큰이 존재한다면 루트 경로로 리다이렉트 시켜주세요
-    - 각 페이지 컴포넌트 안에 토큰이 없거나 value가 ""인 경우 /sign으로 리다이렉트할 수 있게 && 연산자를 사용했습니다. 
-
   - [✅] 어떤 경우든 토큰이 유효하지 않다면 사용자에게 알리고 로그인 페이지로 리다이렉트 시켜주세요
-    - getToDos나 addToDo 요청 실패시 토큰을 비우고 로그인 페이지로 가도록 했습니다.
 
-
-## Assignment 2 - Todo List
+# Assignment 2 - Todo List
 
 - Todo List API를 호출하여 Todo List CRUD 기능을 구현해주세요
+
   - [✅] 목록 / 상세 영역으로 나누어 구현해주세요.
-    - 따로 따로 구현했다가 이후 내용을 더 읽고 한 화면에서 보여지게 했습니다.
-
   - [✅] Todo 목록을 볼 수 있습니다.
-    - axios와 react-query를 이용하여 리스트를 불러오고 있습니다.
-
   - [✅] Todo 추가 버튼을 클릭하면 할 일이 추가 됩니다.
-    - 상단에 todo를 추가할 수 있는 인풋을 만들었습니다.
-
   - [✅] Todo 수정 버튼을 클릭하면 수정 모드를 활성화하고, 수정 내용을 제출하거나 취소할 수 있습니다.
-    - components/toDo/Card.tsx에서 useState를 이용해 수정모드 진입시 해당 p태그가 인풋으로 변하게 구현했습니다.
-
   - [✅] Todo 삭제 버튼을 클릭하면 해당 Todo를 삭제할 수 있습니다.
-    - toDo 삭제시 react-query의 뮤테이션 기능을 이용해 반영이 실시간으로 되게 했습니다.
 
 - 한 화면 내에서 Todo List와 개별 Todo의 상세를 확인할 수 있도록 해주세요.
-    - 화면을 반으로 나누어 한쪽에는 리스트 카드들, 다른 한쪽에는 디테일 페이지가 보여지도록 했습니다.
 
   - [✅] 새로고침을 했을 때 현재 상태가 유지되어야 합니다.
-    - react-router-dom을 이용하여 쿼리스트링을 구현해서 디테일페이지의 상태를 보존했습니다.
-
   - [✅] 개별 Todo를 조회 순서에 따라 페이지 뒤로가기를 통하여 조회할 수 있도록 해주세요.
-    - react-router-dom을 이용하여 동적라우팅을 적용하여 주소만 바뀌고 컴포넌트는 그대로 있도록 해주었습니다.
 
 - 한 페이지 내에서 새로고침 없이 데이터가 정합성을 갖추도록 구현해주세요
   - [✅] 수정되는 Todo의 내용이 목록에서도 실시간으로 반영되어야 합니다
-    - 각 카드가 수정, 삭제된 경우에도 에러가 나지 않도록 recoil을 이용하여 클라이언트 측 데이터를 바꿔주었습니다.
 
+# 파일 실행법!
 
-# 2-1) 파일 실행법!
 작업편의를 위해 node.js와 react.js를 한 폴더에 담아 실행 가능하게 만들었습니다.
 
 ```
@@ -108,3 +99,182 @@ client 부분만 clone해서
 비밀번호 : aaaaaaaa
 ```
 
+# 기술 스택
+
+### 1. typescript
+
+- 과제 요구 조건인 typescript를 사용하여 제작하였습니다.
+
+### 2. react-query
+
+- 과제 요구 조건인 react-query를 사용하여 제작하였습니다.
+- 최초에는 recoil을 같이 사용하면 좋다는 추천에 따라 같이 사용하였는데, 워낙 제공하는 기능이 좋음 + 백엔드와 로컬스토리지가 있음 + 간단한 todo 프로젝트라 사용할만한 곳이 없어 최종 버전에서는 삭제후 관련 디펜던시를 제거하였습니다.
+
+### 3. tailwindCSS
+
+- 빠른 작업과 자유도를 위해 tailwindCSS를 선택했습니다.
+
+### 4. twin.macro
+
+- tailwindCSS는 인라인 클래스에 작성해야 해서 컴포넌트가 많아질 경우 한 눈에 보기 어려운데, 이를 해결하고 컴포넌트의 확장성, 재사용성을 높이기 위해 twin.macro를 도입했습니다.
+
+- tailwindCSS 3.1.8 버전은 현재 twin.macro의 공식버전과 호환테스트 중이라서 rc버전(Release Candidates)으로 사용하고 있습니다.
+
+### 5. emotion
+
+- twin.macro에 styled문법을 같이 사용하기 위해 선택했습니다.
+
+### 6. fullhuman/post-css-purgecss
+
+- node.js 백엔드와 연결되어 있는 프로젝트 특성상 빌드시 번들 크기를 줄이는게 좋겠다고 생각되어 선택했습니다.
+
+### 7. axios
+
+- 유지보수의 난이도를 줄이고 관리하기 편한 프로젝트를 위해 선택하였습니다.
+- api/instance.ts 에서 새 인스턴스를 생성할때 인터셉터로 토큰 관련한 코드를 전부 넘기고, 프로젝트 내에서는 직접적으로 토큰을 요청하지 않게 했습니다.
+
+### 8. date-fns
+
+- 백엔드 디비에서는 'created at'과 'updated at' Date 객체도 같이 보내주고 있는데 편리하게 몇분전 수정을 표시해주는 기능을 띄워주고 싶어서 사용하였습니다.
+
+### 9. react-error-boundary
+
+- 에러 바운더리 처리를 구현하기 위해 사용했습니다. 자체구현할까 생각했지만 일단은 실제로 사용해보면서 react-query에서의 전역 에러 핸들러라던지 지역 suspense를 써보고 싶었기 때문입니다.
+
+---
+
+# 폴더 구조
+
+before
+
+```
+📦src
+ ┣ 📂api
+ ┃ ┣ 📜httpRequest.ts
+ ┃ ┗ 📜instance.ts
+ ┣ 📂common
+ ┃ ┣ 📜Button.tsx
+ ┃ ┣ 📜Label.tsx
+ ┃ ┣ 📜Modal.tsx
+ ┃ ┗ 📜Text.tsx
+ ┣ 📂components
+ ┃ ┣ 📂layout
+ ┃ ┃ ┣ 📜Header.tsx
+ ┃ ┃ ┗ 📜Layout.tsx
+ ┃ ┣ 📂signUp
+ ┃ ┃ ┗ 📜Form.tsx
+ ┃ ┗ 📂toDo
+ ┃ ┃ ┣ 📜Card.tsx
+ ┃ ┃ ┣ 📜AddToDo.tsx
+ ┃ ┃ ┣ 📜Detail.tsx
+ ┃ ┃ ┗ 📜List.tsx
+ ┣ 📂hooks
+ ┃ ┣ 📜useDebounce.tsx
+ ┃ ┣ 📜useForm.tsx
+ ┃ ┣ 📜useFormValidations.tsx
+ ┃ ┣ 📜useModal.tsx
+ ┣ 📂page
+ ┃ ┣ 📜Home.tsx
+ ┃ ┗ 📜SignUp.tsx
+ ┣ 📂routes
+ ┃ ┗ 📜Routes.tsx
+ ┣ 📂static
+ ┃ ┗ 📂image
+ ┃ ┃ ┗ 📜background.png
+ ┣ 📂types
+ ┃ ┣ 📜toDos.d.ts
+ ┃ ┣ 📜twin.d.ts
+ ┃ ┣ 📜types.d.ts
+ ┃ ┗ 📜user.d.ts
+ ┣ 📜App.tsx
+ ┣ 📜index.css
+ ┣ 📜index.tsx
+ ┣ 📜react-app-env.d.ts
+ ┣ 📜setupProxy.js
+ ┣ 📜tailwind.css
+ ┗ 📜tailwind.generated.css
+```
+
+### - 구조적으로 바뀐 것
+
+- 이름을 더 자세하게 리네이밍
+- useForm의 유효성검사 하나하나를 분리하여 재사용성을 높임
+- common에서 공통으로 사용하는 컴포넌트의 종류와 수를 늘림
+- api에서 query를 분리하여 로직을 한곳에 모음
+- api에서 instance 관련 설정들을 추상화해서 유지보수를 쉽게 함
+- custom routes를 만들어 리다이렉트 설정을 라우트단에서 관리
+
+```
+📦src
+ ┣ 📂api
+ ┃ ┣ 📜httpRequest.ts
+ ┃ ┣ 📜instance.ts
+ ┃ ┣ 📜querys.ts
+ ┃ ┗ 📜storage.ts
+ ┣ 📂common
+ ┃ ┣ 📜Box.tsx
+ ┃ ┣ 📜Button.tsx
+ ┃ ┣ 📜HiddenBox.tsx
+ ┃ ┣ 📜index.ts
+ ┃ ┣ 📜Input.tsx
+ ┃ ┣ 📜Label.tsx
+ ┃ ┣ 📜Modal.tsx
+ ┃ ┣ 📜ModalContent.tsx
+ ┃ ┣ 📜Skeleton.tsx
+ ┃ ┣ 📜Spinner.tsx
+ ┃ ┗ 📜Text.tsx
+ ┣ 📂components
+ ┃ ┣ 📂layout
+ ┃ ┃ ┣ 📜Header.tsx
+ ┃ ┃ ┣ 📜Layout.tsx
+ ┃ ┃ ┗ 📜TopButton.tsx
+ ┃ ┣ 📂signUp
+ ┃ ┃ ┣ 📜Form.tsx
+ ┃ ┃ ┣ 📜LoginForm.tsx
+ ┃ ┃ ┗ 📜SignInForm.tsx
+ ┃ ┗ 📂toDo
+ ┃ ┃ ┣ 📜Card.tsx
+ ┃ ┃ ┣ 📜CreateToDoForm.tsx
+ ┃ ┃ ┣ 📜DetailPage.tsx
+ ┃ ┃ ┗ 📜List.tsx
+ ┣ 📂hooks
+ ┃ ┣ 📂validations
+ ┃ ┃ ┣ 📜email.ts
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜password.ts
+ ┃ ┃ ┗ 📜passwordConfirm.ts
+ ┃ ┣ 📜useDark.tsx
+ ┃ ┣ 📜useDebounce.tsx
+ ┃ ┣ 📜useForm.tsx
+ ┃ ┣ 📜useFormValidations.tsx
+ ┃ ┣ 📜useMediaQuery.tsx
+ ┃ ┣ 📜useModal.tsx
+ ┃ ┣ 📜usePreventLeave.tsx
+ ┃ ┗ 📜useThrottle.tsx
+ ┣ 📂page
+ ┃ ┣ 📜Home.tsx
+ ┃ ┣ 📜NotFound404.tsx
+ ┃ ┗ 📜SignUp.tsx
+ ┣ 📂routes
+ ┃ ┣ 📜CustomRoutes.tsx
+ ┃ ┗ 📜Routes.tsx
+ ┣ 📂static
+ ┃ ┣ 📂constant
+ ┃ ┃ ┣ 📜AuthInit.ts
+ ┃ ┃ ┗ 📜ToDoInit.ts
+ ┃ ┗ 📂image
+ ┃ ┃ ┣ 📜arrow.svg
+ ┃ ┃ ┗ 📜background.png
+ ┣ 📂types
+ ┃ ┣ 📜toDos.d.ts
+ ┃ ┣ 📜twin.d.ts
+ ┃ ┣ 📜types.d.ts
+ ┃ ┗ 📜user.d.ts
+ ┣ 📜App.tsx
+ ┣ 📜index.css
+ ┣ 📜index.tsx
+ ┣ 📜react-app-env.d.ts
+ ┣ 📜setupProxy.js
+ ┣ 📜tailwind.css
+ ┗ 📜tailwind.generated.css
+```

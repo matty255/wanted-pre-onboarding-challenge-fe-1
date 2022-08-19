@@ -85,7 +85,7 @@ const CreateToDoForm = () => {
           isTextArea={true}
           content={
             <el.TextArea
-              placeholder="컨텐츠를 입력하고 엔터를 누르세요"
+              placeholder="shift+enter = 줄바꿈 / enter = 등록"
               variant="submit"
               name="content"
               cols={30}

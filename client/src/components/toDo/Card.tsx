@@ -3,8 +3,6 @@ import React from "react";
 import tw from "twin.macro";
 import { ToDoProps, NewToDo } from "../../types/toDos";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { toDoDetail } from "../../store/global";
 import { useUpdateToDo, useDeleteToDo } from "../../api/querys";
 import * as el from "../../common";
 import { useModal } from "../../hooks/useModal";
@@ -12,7 +10,6 @@ import { Modal } from "../../common/Modal";
 
 const Card = (data: ToDoProps) => {
   const navigate = useNavigate();
-  const [cleanData, setCleanData] = useRecoilState(toDoDetail);
   const [modify, setModify] = React.useState(false);
   const [focus, setFocus] = React.useState(true);
   const [values, setValues] = React.useState<NewToDo>({

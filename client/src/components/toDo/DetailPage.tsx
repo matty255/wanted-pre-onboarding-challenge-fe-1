@@ -1,8 +1,6 @@
 import React from "react";
 /** @jsxImportSource @emotion/react */
 import tw from "twin.macro";
-import { toDoDetail } from "../../store/global";
-import { useRecoilState } from "recoil";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useGetToDoById } from "../../api/querys";
 import * as el from "../../common";
@@ -58,7 +56,9 @@ const DetailPage = () => {
           ) : (
             <>
               <el.Text variant="title">{data?.data.data.title}</el.Text>
-              <el.Text variant="text">{data?.data.data.content}</el.Text>
+              <div className="whitespace-pre-wrap tracking-wide">
+                {data?.data.data.content}
+              </div>
             </>
           )}
         </div>

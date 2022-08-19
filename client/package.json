@@ -27,7 +27,6 @@
     "react-error-boundary": "^3.1.4",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "recoil": "^0.7.4",
     "tailwindcss": "^3.1.8",
     "twin.macro": "^3.0.0-rc.3",
     "web-vitals": "^2.1.0"
