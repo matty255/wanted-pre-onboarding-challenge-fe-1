@@ -102,7 +102,7 @@ const CreateToDoForm = () => {
           추가하기
         </button>
       </form>
-      {isLoading && <el.Skeleton />}
+      {isLoading && <el.Spinner />}
     </>
   );
 };

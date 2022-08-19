@@ -9,7 +9,6 @@ const List = (data: ToDoList) => {
   return (
     <>
       <div className=" w-full flex flex-col">
-        <el.Skeleton />
         {data ? (
           data?.data.map((todos: ToDoProps, i: number) => (
             <div key={`${todos.id}-${i}`}>

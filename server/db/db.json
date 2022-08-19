@@ -1,11 +1,11 @@
 {
   "todos": [
     {
-      "title": "하루에 한번 자바스크립트 딥다이브 읽기",
+      "title": "독서를 하자 열심히 하자",
       "content": "Today : CH23",
       "id": "Z03Jw5GDptJiBp9UN0JMO",
       "createdAt": "2022-08-11T10:40:26.503Z",
-      "updatedAt": "2022-08-17T06:53:50.493Z"
+      "updatedAt": "2022-08-19T08:42:00.313Z"
     },
     {
       "title": "명언 메모",
@@ -26,14 +26,28 @@
       "content": "\"시간은 언제나 거기 있기 때문에 듣지 못하는 음악 같은 걸 거예요, 하지만 저는 그 음악을 이따금 들었던 것 같아요. 아주 나지막한 음악이었어요.\" \n- 모모",
       "id": "mUT3-q82t9Inh4QAfJUTY",
       "createdAt": "2022-08-17T07:02:59.090Z",
-      "updatedAt": "2022-08-19T06:36:33.500Z"
+      "updatedAt": "2022-08-19T09:09:44.068Z"
     },
     {
-      "title": "줄바꿈 적용",
-      "content": "줄바꿈\n해서 띄울수가\n있게 만들자",
-      "id": "cyAkA4D2CMj998vpBL7in",
-      "createdAt": "2022-08-19T06:35:27.691Z",
-      "updatedAt": "2022-08-19T06:35:27.691Z"
+      "title": "스터디하기",
+      "content": "1. 자바스크립트 스터디\n2. 리액트 스터디",
+      "id": "-2EthANZf4kj7F5EOQTSx",
+      "createdAt": "2022-08-19T09:00:58.304Z",
+      "updatedAt": "2022-08-19T09:09:14.893Z"
+    },
+    {
+      "title": "너무 우울할때는",
+      "content": "- 한숨 자고 일어나기\n- 동물의 숲에 놀러가기\n- 포켓몬을 잡으러 떠나기",
+      "id": "-EKyPuE0K5OPlASJqaNRC",
+      "createdAt": "2022-08-19T09:06:20.791Z",
+      "updatedAt": "2022-08-19T09:09:20.412Z"
+    },
+    {
+      "title": "커피를 마신다",
+      "content": "미지근하다",
+      "id": "W5-qEPKhHtqhQP1q8NQNO",
+      "createdAt": "2022-08-19T09:29:47.725Z",
+      "updatedAt": "2022-08-19T09:29:47.725Z"
     }
   ],
   "users": [

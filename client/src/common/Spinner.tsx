@@ -10,7 +10,7 @@ export const Spinner = (onClick: SpinnerType) => {
   return (
     <>
       <div className="fixed top-0 w-full h-screen z-50" onClick={() => onClick}>
-        <div className="flex justify-center items-center fixed top-1/2 left-1/2 animate-spin text-9xl">
+        <div className="flex justify-center items-center fixed top-[45%] left-[45%] animate-spin text-9xl">
           🐧
         </div>
       </div>
