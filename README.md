@@ -326,12 +326,30 @@ before
 
 #### - modal
 
-- 에러 바운더리에 모달을 달아서 에러시 팝업이 띄워지도록 했습니다.
+- 모달을 만들어 삭제시, 오류시 모달이 뜨도록 했습니다.
+
+링크 - [common/Modal.tsx](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/common/Modal.tsx)
+
+링크 - [common/ModalContent.tsx](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/common/ModalContent.tsx)
+
+링크 - [hooks/useModal.tsx](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/hooks/useModal.tsx)
 
 ![error-boundary](https://user-images.githubusercontent.com/89088205/185589418-902733c4-363c-49b9-8e90-13c177e3701d.gif)
+
+- 에러 바운더리에 모달을 달아서 에러시 팝업이 띄워지도록 했습니다.
+
+링크 - [page/SignUp.tsx](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/page/SignUp.tsx)
 
 #### - skeleton
 
 - card에 suspense를 달아서 스켈레톤 ui를 자체구현했습니다.
 
 ![skel](https://user-images.githubusercontent.com/89088205/185590108-fb54c889-7002-4517-87a5-bde6d79ba156.gif)
+
+# 더 하면 좋았을 것
+
+- JSDoc 어노테이션 : 공식문서에서 문법과 에디트하는 법을 배웠지만 문제는 뭘 쓸지 잘 모르겠다는것... type들은 대개 써있거나 types.d.ts에 정의되어 있고 내용에 대한 주석을 달려고 하니 이 주석 필요한가 하는 의문만 생기고 ㅜㅜ
+
+- 더 열심히 해야겠다...
+
+- 배포 : 사실 node.js 서버부분까지 가져와서 각을 맞춘건 배포를 하려는 마음도 있었는데... 그런데 예상치도 못하게 aws 프리티어가 끝나버려서 뭔가 어중간해졌다. 벌써 코딩을 시작한지 1년이 되었구나 싶은 마음이다. 나중에 대비를 하고 천천히 해봐야지.
