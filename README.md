@@ -289,9 +289,9 @@ before
 
   링크 - [api/instance.ts](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/api/instance.ts)
 
-### storage 관련 로직을 추상화하여 커스텀한 getToken, setToken, hasToken 함수를 지니도록 했습니다.
+### storage 관련 로직을 추상화하여 커스텀한 getToken, setToken, hasToken 메서드를 가진 객체로 만들었습니다.
 
-- 스토리지 저장소가 바뀌더라도 뷰단에는 영향이 없고 api/storage.ts에서 관련 로직만 변경하면 작동할 수 있습니다.
+- 스토리지 저장소가 세션스토리지, 혹은 다른 어떤 형식으로 바뀌더라도 뷰단에는 영향이 없고 api/storage.ts에서 관련 로직만 변경하면 작동할 수 있습니다.
 
   링크 - [api/storage.ts](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/api/storage.ts)
 
@@ -309,8 +309,29 @@ before
 
 2. layout
 
-- 반응형 웹
-- 스켈레톤
-- 모달
-- 토글
-- 다크모드
+#### - darkmode, spinner
+
+- 사용자의 설정에 맞춘 페이지로 진입 + 다크모드 여부를 전환할 수 있게 하고 테마에 맞는 css를 적용했습니다.
+- isFetching이나 isLoading, suspense fallback 시 스피너를 달았습니다.
+
+  ![darkmode-login](https://user-images.githubusercontent.com/89088205/185587353-ac5e4973-0ef4-41db-986c-161946a3f88c.gif)
+
+#### - responsive web / modal
+
+- 모바일과 데스크탑, 타블렛을 지원하는 반응형 웹을 제작하였습니다.
+- 상단 바는 스크롤을 일정 길이 이상 내렸을때만 접을 수 있습니다.
+- detail / create는 모바일 화면에서만 노출됩니다.
+
+![responsive-toggle](https://user-images.githubusercontent.com/89088205/185588055-08386945-e428-4f81-a288-02cc30928efa.gif)
+
+#### - modal
+
+- 에러 바운더리에 모달을 달아서 에러시 팝업이 띄워지도록 했습니다.
+
+![error-boundary](https://user-images.githubusercontent.com/89088205/185589418-902733c4-363c-49b9-8e90-13c177e3701d.gif)
+
+#### - skeleton
+
+- card에 suspense를 달아서 스켈레톤 ui를 자체구현했습니다.
+
+![skel](https://user-images.githubusercontent.com/89088205/185590108-fb54c889-7002-4517-87a5-bde6d79ba156.gif)
