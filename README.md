@@ -278,3 +278,39 @@ before
  ┣ 📜tailwind.css
  ┗ 📜tailwind.generated.css
 ```
+
+# 코드 설명
+
+## 1. api
+
+### token 담는 부분을 interceptor 처리하고 instance를 분리하여 한 곳에서만 관리하게 했습니다.
+
+- 토큰의 형태가 바뀌더라도 뷰단에는 영향이 없고 api/instance.ts에서 관련 로직만 변경하면 작동할 수 있습니다.
+
+  링크 - [api/instance.ts](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/api/instance.ts)
+
+### storage 관련 로직을 추상화하여 커스텀한 getToken, setToken, hasToken 함수를 지니도록 했습니다.
+
+- 스토리지 저장소가 바뀌더라도 뷰단에는 영향이 없고 api/storage.ts에서 관련 로직만 변경하면 작동할 수 있습니다.
+
+  링크 - [api/storage.ts](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/api/storage.ts)
+
+### todo query들을 custom hook처럼 만들어서 분리하고, 전역 에러 핸들러와 에러바운더리로 오류들을 관리하도록 했습니다.
+
+링크 - [api/querys.ts](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/api/querys.ts)
+
+링크 - [index.tsx](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/index.tsx)
+
+링크 - [page/SignUp.tsx](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/page/SignUp.tsx)
+
+### customRoute를 만들고 pathname과 token 여부를 판별해서 주소를 리다이렉트시켜주도록 했습니다.
+
+링크 - [routes/CustomRoutes.tsx](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/routes/CustomRoutes.tsx)
+
+2. layout
+
+- 반응형 웹
+- 스켈레톤
+- 모달
+- 토글
+- 다크모드
