@@ -307,7 +307,29 @@ before
 
 링크 - [routes/CustomRoutes.tsx](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/blob/main/client/src/routes/CustomRoutes.tsx)
 
+### 캐싱 처리
+- 느린 3G 설정에서 실험
+- 처음 소환하는 페이지는 느리게, 두번째로 소환하는 페이지는 바로 소환되는걸 볼수 있습니다.
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/89088205/185607322-cf0bcada-323e-47ec-b76a-2071e10ecc2c.gif)
+
+
 ## 2. layout : 관련이슈는 여기 [[1 - 첫 리팩토링]](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/issues/1) / [[2 - layout]](https://github.com/matty255/wanted-pre-onboarding-challenge-fe-1/issues/13)
+
+### - form
+
+todo form - 할일이나 타이틀 둘 다 입력해야만 넘어갈 수 있습니다.
+
+![todos1](https://user-images.githubusercontent.com/89088205/185606241-bf050c4b-df6b-4730-9e4b-2429430352d3.gif)
+![todos2](https://user-images.githubusercontent.com/89088205/185606236-f838c1fd-4f4c-4268-9130-06844c6c2d25.gif)
+
+login form - 아이디와 비밀번호를 맞게 입력해야만 버튼이 활성화됩니다.
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/89088205/185606608-c23e425d-471e-4aa9-8834-9518b606f54d.gif)
+
+edit form - 수정하면 실시간으로 반영됩니다. 줄바꿈도 가능합니다.
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/89088205/185607787-2021f222-61fc-47bf-a0a4-99a5badd59c9.gif)
+
+
 
 #### - darkmode, spinner
 
