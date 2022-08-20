@@ -71,27 +71,25 @@
 2. cd [folder name]
 3. cd client
 4. yarn install
-5. yarn start (리액트가 켜지길 기다립니다.)
-6. ctrl + c (터미널에서!)
+5. yarn start
+6. ctrl + c
 7. yarn build
-8. 빌드되는걸 기다립니다.
 9. cd ..
 10. cd server
 11. yarn install
-12. yarn start (노드가 켜지길 기다립니다.)
-13. ctrl + c (터미널에서!)
+12. yarn start
+13. ctrl + c
 14. cd ..
-15. 경로가 최상위 디렉토리인지 확인(client와 server가 보이는 그 위치!)
+15. 경로가 최상위 디렉토리인지 확인
 16. 최상위 디렉토리에서 yarn install
 17. 같은 디렉토리에서 yarn start!
 
-를 하면 이제 실행이 가능하지만 만약 api서버가 이미 켜져있고 다른 곳에 있다면
-client 부분만 clone해서
+를 하면 이제 실행이 가능하지만 만약 api서버가 이미 8080포트로 켜져있고 다른 곳에 있다면
+
 1. cd client
 2. yarn install
 3. yarn start
 
-도 가능합니다!
 ```
 
 ```
@@ -112,7 +110,10 @@ client 부분만 clone해서
 
 ### 3. tailwindCSS
 
-- 빠른 작업과 자유도를 위해 tailwindCSS를 선택했습니다.
+- 빠른 작업과 자유도의 중간지점을 타협하여 tailwindCSS를 선택했습니다. scss나 styled-component는 자유도가 높지만 바닥부터 전역변수와 테마를 설정해야 하기에 작업속도가 느린 것이 단점이고, mui나 antd는 물론 커스텀을 하려면 할순 있지만 기본 정해진 모양과 색을 바꾸기가 힘듭니다. ui 라이브러리이기 때문입니다.
+
+- 하지만 tailwindCSS는 utility-first CSS framework, 즉 프레임워크이면서 utility-first 특성을 가져 적당한 템플릿과 템플릿 만들기 쉬운 구조, 비교적 높은 자유도를 보장합니다.
+- 테일윈드의 단점이라면 utility-first의 특징 = 용량을 많이 먹는다는 건데 그건 밑에 나오는 purgecss로 빌드시 사용하지 않는 css를 날려줌으로써 보완하였습니다.
 
 ### 4. twin.macro
 
@@ -122,11 +123,13 @@ client 부분만 clone해서
 
 ### 5. emotion
 
-- twin.macro에 styled문법을 같이 사용하기 위해 선택했습니다.
+- twin.macro에 styled문법을 같이 사용하기 위해 선택했습니다. twin.macro는 styled-component와 emotion확장 2개를 지원하고 있습니다. 둘다 익숙하지만 보통 사용할때 styled-component는 단독으로 쓰고 emotion은 이렇게 익스텐션할때 썼어서 emotion으로 하였습니다.
 
 ### 6. fullhuman/post-css-purgecss
 
-- node.js 백엔드와 연결되어 있는 프로젝트 특성상 빌드시 번들 크기를 줄이는게 좋겠다고 생각되어 선택했습니다.
+- 빌드시 번들 크기를 줄이기 위해 사용했습니다.
+- before 
+- after 
 
 ### 7. axios
 
@@ -139,7 +142,9 @@ client 부분만 clone해서
 
 ### 9. react-error-boundary
 
-- 에러 바운더리 처리를 구현하기 위해 사용했습니다. 자체구현할까 생각했지만 일단은 실제로 사용해보면서 react-query에서의 전역 에러 핸들러라던지 지역 suspense를 써보고 싶었기 때문입니다.
+- 에러 바운더리 처리를 구현하기 위해 사용했습니다. 자체구현할까 생각했지만 일단은 실제로 사용해보면서 react-query에서의 전역 에러 핸들러라던지 지역 suspense를 써보고 싶었기 때문입니다. 에러바운더리는 리액트 16에서 등장했는데 그 때문에 공식 형태는 class형밖에 존재하지 않기 때문입니다. 현재 18버전으로 오면서부터는 공식적으로 모든 컴포넌트에 함수형의 사용을 권장하고 있습니다. 
+
+- 과제 요구사항이 함수형으로 구현할 것<-- 이었기에 다른 문서들을 보고 스스로 함수형으로 구현해볼까도 생각했지만... 지금의 최우선목표는 창조가 아니라 배움이라고 생각이 들었기에 과제 요구사항을 충족하며 개발하기 위해 react-query 공식문서에서 추천하는 react-error-boundary를 사용했습니다.
 
 ---
 
